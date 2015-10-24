@@ -3,6 +3,7 @@ class profile::icinga::web {
   class { 'apache': 
     default_vhost => false,
   } ->
+  class { 'apache::mod::php': } ->
   class { 'icingaweb2':
     manage_repo    => true,
     install_method => 'package',
