@@ -13,7 +13,7 @@ class profile::icinga::server {
   }->
 
   class { 'icinga2::server':
-    db_type => 'pgsql',
+    server_db_type => 'pgsql',
     db_host => 'localhost',
     db_port => '5432',
     db_name => 'icinga2_data',
