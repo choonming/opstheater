@@ -1,3 +1,4 @@
 class role::icingaserver {
-  include profile::icingaweb
+  include profile::icinga::server
+  include profile::icinga::web
 }
