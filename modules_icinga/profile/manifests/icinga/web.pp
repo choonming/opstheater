@@ -7,5 +7,6 @@ class profile::icinga::web {
     manage_repo    => true,
     install_method => 'package',
     manage_apache_vhost => true,
+    apache_vhost_name => 'icinga.olindata.com',
   }
 }
