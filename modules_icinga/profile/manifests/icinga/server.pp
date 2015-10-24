@@ -12,7 +12,7 @@ class profile::icinga::server {
     password => postgresql_password('icinga2', 'password'),
   }->
 
-  class { 'icinga2':
+  class { 'icinga2::server':
     db_type => 'pgsql',
     db_host => 'localhost',
     db_port => '5432',
