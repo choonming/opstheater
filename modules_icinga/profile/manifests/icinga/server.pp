@@ -18,7 +18,7 @@ class profile::icinga::server {
     db_port => '5432',
     db_name => 'icinga2_data',
     db_user => 'icinga2',
-    db_pass => 'password',
+    db_password => 'password',
   }->
   icinga2::object::idopgsqlconnection { 'postgres_connection':
      target_dir => '/etc/icinga2/features-enabled',
