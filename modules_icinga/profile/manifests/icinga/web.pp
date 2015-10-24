@@ -1,4 +1,4 @@
-class profile::icingaweb {
+class profile::icinga::web {
   class { 'epel': } ->
   class { 'icingaweb2':
     manage_repo    => true,
