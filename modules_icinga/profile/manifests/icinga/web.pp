@@ -1,9 +1,13 @@
 class profile::icinga::web {
-  class { 'epel': } ->
+  
+  class { 'epel': } 
+  
   class { 'apache': 
     default_vhost => false,
-  } ->
-  class { 'apache::mod::php': } ->
+  } 
+  
+  class { 'apache::mod::php': } 
+
   class { 'icingaweb2':
     manage_repo    => true,
     install_method => 'package',
