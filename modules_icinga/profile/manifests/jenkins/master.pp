@@ -7,5 +7,6 @@ class profile::jenkins::master {
   jenkins::plugin { 'git': 
   }
   jenkins::plugin { 'ws-cleanup': 
-  }
+  } ->
+  include ::jenkins::master
 }
