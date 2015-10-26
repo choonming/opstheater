@@ -1,5 +1,11 @@
 class profile::jenkins::jobs {
-  jenkins::job { 'puppet-module-syntax-jenkins':
-    config => template("profile/puppetmodule-syntax.xml.erb"),
+
+  profile::jenkins::job { 'jenkins':
+    modulename   => 'jenkins',
+    modulegiturl => 'https://github.com/jenkinsci/puppet-jenkins.git',
+  }
+  profile::jenkins::job { 'mysql':
+    modulename => 'mysql',
+    modulegiturl => 'https://github.com/puppetlabs/puppetlabs-mysql.git',
   }
 }
