@@ -1,7 +1,7 @@
 node 'first' {
-  include role::icingaserver
+  include role::jenkinsserver
 }
 
 node 'second' {
-  include role::testnode
+  include role::icingaserver
 }
