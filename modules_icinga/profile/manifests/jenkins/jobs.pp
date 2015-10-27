@@ -8,4 +8,10 @@ class profile::jenkins::jobs {
     modulename => 'mysql',
     modulegiturl => 'https://github.com/puppetlabs/puppetlabs-mysql.git',
   }
+  profile::jenkins::job { 'apache':
+    modulename => 'apache',
+    modulegiturl => 'https://github.com/puppetlabs/puppetlabs-apache.git',
+  }
+
+
 }
