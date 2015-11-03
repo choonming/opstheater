@@ -1,3 +1,7 @@
+node 'master' {
+  # include role::puppetmaster
+}
+
 node 'first' {
   include role::jenkinsserver
 }
