@@ -3,9 +3,10 @@ node 'first' {
 }
 
 node 'second' {
-  include role::icingaserver
+  include role::jenkinsslave
 }
 
 node 'third' {
-  include role::jenkinsslave
+  include role::icingaserver
 }
+
