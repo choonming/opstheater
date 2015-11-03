@@ -10,7 +10,8 @@ class profile::base {
   }
 
   # configure ssh
-  include ::ssh
+  include ::ssh::client
+  include ::ssh::server
 
   # depending on the OS, include apt or yum repos
   case $::osfamily {
