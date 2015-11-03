@@ -1,0 +1,20 @@
+---
+profile::base::packages:
+  screen:
+    ensure: present
+  mtr:
+    ensure: present
+  iperf:
+    ensure: present
+  curl:
+    ensure: present
+  bash:
+    ensure: latest
+  iotop:
+    ensure: present
+  ethtool:
+    ensure: present
+  tcpdump:
+    ensure: present
+  htop:
+    ensure: present
