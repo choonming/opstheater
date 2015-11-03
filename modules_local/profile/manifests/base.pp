@@ -6,7 +6,6 @@ class profile::base {
   # we use melbourne's firewall
   class { 'firewall':
     ensure => stopped,
-    enable => false,
   }
 
   # configure ssh
