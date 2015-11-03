@@ -1,0 +1,22 @@
+class profile::base {
+  
+  # configure ntp
+  include ::ntp
+
+  # we use melbourne's firewall
+  class { 'firewall':
+    ensure => stopped,
+    enable => false,
+  }
+
+  # configure ssh
+  include ::ssh
+
+  # depending on the OS, include apt or yum repos
+  case $::osfamily {
+    'debian' : { include profile::base::apt }
+    'redhat' : { include profile::base::yum }
+    default : fail("Unsupported Operating System family : ${::osfamily}")
+  }
+
+}
