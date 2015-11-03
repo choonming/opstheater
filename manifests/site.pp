@@ -1,16 +1,45 @@
 node 'master' {
-  # include role::puppetmaster
+  include role::puppet::master
 }
 
-node 'first' {
-  include role::jenkinsserver
+node 'jenkins' {
+  include role::jenkins::server
 }
 
-node 'second' {
-  include role::jenkinsslave
+node 'jenkinsslave' {
+  include role::jenkins::slave
 }
 
-node 'third' {
-  include role::icingaserver
+node 'icinga2' {
+  include role::icinga::server
 }
+
+node 'galera001' {
+  include role::galera::node
+}
+
+node 'galera002' {
+  include role::galera::node
+}
+
+node 'galera003' {
+  include role::galera::node
+}
+
+node 'icingaweb2' {
+  include role::icinga::web
+}
+
+node 'zulip' {
+  include role::zulip::server
+}
+
+node 'elasticsearch' {
+  include role::elastic::server
+}
+
+node 'gitlab' {
+  include role::gitlab::server
+}
+
 
