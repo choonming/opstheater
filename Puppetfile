@@ -7,9 +7,11 @@ mod 'icinga2',
 # forge modules should be listed with a specific version and stay in 
 # alphabetical order
 
+mod 'aptituz/ssh', '2.3.2'
 mod 'puppetlabs/apache', '1.6.0'
 mod 'puppetlabs/apt', '2.2.0'
 mod 'puppetlabs/concat', '1.2.4'
+mod 'puppetlabs/firewall', '1.7.1'
 mod 'puppetlabs/inifile', '1.4.2'
 mod 'puppetlabs/java', '1.4.2'
 mod 'puppetlabs/mysql', '3.6.1'
