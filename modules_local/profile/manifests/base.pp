@@ -16,7 +16,7 @@ class profile::base {
   case $::osfamily {
     'debian' : { include profile::base::apt }
     'redhat' : { include profile::base::yum }
-    default : fail("Unsupported Operating System family : ${::osfamily}")
+    default  : { fail("Unsupported Operating System family : ${::osfamily}") }
   }
 
   # load other network interfaces from hiera
