@@ -3,7 +3,7 @@ Control repository for an entire opscenter deployment
 
 ## Puppet
 
-Make sure to adjust your puppet master to have the `hiera_config` setting pointing at `/etc/puppetlabs/code/environments`
+Make sure to adjust your puppet master to have the `hiera_config` setting pointing at `/etc/puppetlabs/code/environments/production/hiera.yaml`
 
 ## List of needed vm's
 
