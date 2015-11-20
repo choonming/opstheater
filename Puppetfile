@@ -8,6 +8,8 @@ mod 'icinga2',
 # alphabetical order
 
 mod 'aptituz/ssh', '2.3.2'
+mod 'elasticsearch/elasticsearch', '0.9.9'
+mod 'lesaux/kibana4', '1.0.2'
 mod 'puppetlabs/apache', '1.6.0'
 mod 'puppetlabs/apt', '2.2.0'
 mod 'puppetlabs/concat', '1.2.4'
