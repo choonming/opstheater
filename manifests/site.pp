@@ -15,7 +15,7 @@ node 'icinga2' {
 }
 
 node 'galera001' {
-  include role::galera::node
+  include role::galera::masternode
 }
 
 node 'galera002' {
