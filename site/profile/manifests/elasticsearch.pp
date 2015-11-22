@@ -11,7 +11,7 @@ class profile::elasticsearch{
   if $instances {
     create_resources('elasticsearch::instance', $instances)
   } else {
-    fail('No elasticsearch instances found in hiera for class profile::elasticsearch.')
+    fail("No elasticsearch instances found in hiera for class profile::elasticsearch on ${::fqdn}.")
   }
   
 }
