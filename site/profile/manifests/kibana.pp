@@ -20,7 +20,6 @@ class profile::kibana {
     repo_version         => hiera('profile::kibana::repo_version'),
     install_dir          => hiera('profile::kibana::install_dir'),
     symlink              => hiera('profile::kibana::symlink'),
-    src_target           => hiera('profile::kibana::src_target'),
     package_provider     => hiera('profile::kibana::package_provider'),
     package_download_url => hiera('profile::kibana::package_download_url'),
     port                 => hiera('profile::kibana::port'),
