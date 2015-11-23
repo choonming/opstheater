@@ -4,10 +4,14 @@ mod 'icingaweb2',
 mod 'icinga2',
   :git => 'https://github.com/Icinga/puppet-icinga2.git' 
 
+mod 'archive',
+  :git => 'https://github.com/puppet-community/puppet-archive.git',
+  :commit => '26aa677604bf3febdb2b153be62bfa151e322a3d'
+  
 # forge modules should be listed with a specific version and stay in 
 # alphabetical order
 
-mod 'aptituz/ssh', '2.3.2'
+mod 'aptituz/ssh', '2.3.2' 
 mod 'elasticsearch/elasticsearch', '0.9.9'
 mod 'lesaux/kibana4', '1.0.2'
 mod 'puppetlabs/apache', '1.6.0'
