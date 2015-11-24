@@ -2,6 +2,7 @@
 ### Elasticserach :
 
 Let us start with understanding What is elasticsearch and why it is used for  ?
+
 ElasticSearch is an open source, RESTful java based search engine which is used for search and index document files in diverse formats. It performs near-real-time searches.
 
 ##### Installing and configuring Elasticsearch via Puppet :
