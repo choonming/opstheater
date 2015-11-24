@@ -3,7 +3,9 @@
 class profile::elasticsearch{  
   # resources required for elasticsearch
   include ::java
-  include ::elasticsearch
+  
+  class { '::elasticsearch':
+  }
   
   # load elasticsearch instance details fore hiera
   $instances = hiera_hash('profile::elasticsearch::instances', undef)
