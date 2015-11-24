@@ -4,9 +4,6 @@ mod 'icingaweb2',
 mod 'icinga2',
   :git => 'https://github.com/Icinga/puppet-icinga2.git' 
 
-# mod 'archive',
-#  :git => 'https://github.com/puppet-community/puppet-archive.git',
-#  :commit => '26aa677604bf3febdb2b153be62bfa151e322a3d'
   
 # forge modules should be listed with a specific version and stay in 
 # alphabetical order
@@ -26,5 +23,6 @@ mod 'puppetlabs/ntp', '4.1.0'
 mod 'puppetlabs/postgresql', '4.6.0'
 mod 'puppetlabs/stdlib', '4.9.0'
 mod 'puppetlabs/vcsrepo', '1.3.1'
+mod 'richardc/datacat', '0.6.2'
 mod 'rtyler/jenkins', '1.6.1'
 mod 'stahnma/epel', '1.1.1'
