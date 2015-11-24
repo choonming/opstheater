@@ -2,7 +2,6 @@
 ### Elasticserach :
 
 Let us start with understanding What is elasticsearch and why it is used for  ?
-
 ElasticSearch is an open source, RESTful java based search engine which is used for search and index document files in diverse formats. It performs near-real-time searches.
 
 ##### Installing and configuring Elasticsearch via Puppet :
@@ -50,7 +49,7 @@ class { 'kibana4':
 ```
 ### How to contribute code for Elasticsearch, Kibana & Filebeat :
 
-If you want to have a look at puppetised code for Elasticsearch, Kibana & Filebeat, you can check that on this git repository : *https://github.com/olindata/superwebs-puppet*
+If you want to have a look at puppetised code for Elasticsearch, Kibana & Filebeat, you can check that on this git repository : *https://github.com/olindata/opscenter-control*
 
 And if you think this excites you, then you can also contribute in the code.
 Please follow the below steps for the same :
