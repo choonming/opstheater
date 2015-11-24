@@ -3,9 +3,9 @@ elasticsearch::manage_repo: true
 elasticsearch::repo_version: '2.x'
 profile::elasticsearch::instances:
   elasticsearch:
+    ensure: present
+    status: enabled
     config:
-      ensure: present
-      status: enabled
       network.host: "%{::ipaddress_eth0}"
       http.port: '9200'
 profile::kibana::elasticsearch_url: 'http://elasticsearch:9200'
