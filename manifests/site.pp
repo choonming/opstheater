@@ -2,12 +2,8 @@ node 'master' {
   include role::puppet::master
 }
 
-node 'jenkins' {
-  include role::jenkins::server
 }
 
-node 'jenkinsslave' {
-  include role::jenkins::slave
 }
 
 node 'icinga2' {
