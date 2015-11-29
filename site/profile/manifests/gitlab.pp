@@ -9,6 +9,9 @@ class profile::gitlab {
     shell  => '/bin/false',
   } ->
 
+  file { '/var/opt/gitlab/nginx':
+    ensure => directory,
+  } ->
   file { '/var/opt/gitlab/nginx/conf':
     ensure => directory,
   } ->
