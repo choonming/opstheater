@@ -18,3 +18,5 @@ profile::base::packages:
     ensure: present
   htop:
     ensure: present
+  mlocate:
+    ensure: present
