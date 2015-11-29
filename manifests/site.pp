@@ -42,4 +42,6 @@ node 'gitlab' {
   include role::gitlab::server
 }
 
-
+node 'filebeat' {
+  include role::filebeat::log_shipper
+}
