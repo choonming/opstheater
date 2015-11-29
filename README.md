@@ -9,4 +9,3 @@ Make sure to adjust your puppet master to have the `hiera_config` setting pointi
 
 OpsCenter is currently buitl up of a number of virtual machines. Here's a list of them and their prerequisites.
 
-### galera001-galera003
