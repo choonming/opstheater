@@ -26,10 +26,6 @@ node 'icingaweb2' {
   include role::icinga::web
 }
 
-node 'zulip' {
-  include role::zulip::server
-}
-
 node 'elasticsearch' {
   include role::elastic::server
 }
