@@ -20,7 +20,13 @@ class profile::gitlab {
     external_url            => 'http://gitlab.olindata.vm',
     ci_external_url         => 'http://ci.olindata.vm',
     mattermost_external_url => 'http://chat.olindata.vm'
-  }
+  } ->
+
+  package { 'gitlab':
+     ensure   => installed,
+     provider => 'gem',
+     require  => Package['rubygems'],
+   } 
 
   host { ['gitlab.olindata.vm', 'ci.olindata.vm', 'chat.olindata.vm']:
     ensure => present,
