@@ -1,0 +1,11 @@
+---
+mlocate:
+  ensure: present
+ruby:
+  ensure: present
+ruby-devel:
+  ensure: present
+rubygems:
+  ensure: present
+vim-enhanced:
+  ensure: present
