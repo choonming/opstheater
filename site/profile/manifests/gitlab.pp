@@ -1,5 +1,10 @@
 class profile::gitlab {
 
+  host { ['gitlab.olindata.vm', 'ci.olindata.vm', 'chat.olindata.vm']:
+    ensure => present,
+    ip     => $facts['networking']['interfaces']['enp0s8']['ip'],
+  } ->
+
   # NOTE: it shouldn't be needed to define the user and file resources here, this should be 
   # fixed in the omnibus installer
   user { 'gitlab-ci':
@@ -28,9 +33,5 @@ class profile::gitlab {
      require  => [ Package['rubygems'], Package['ruby-devel'] ]
    } 
 
-  host { ['gitlab.olindata.vm', 'ci.olindata.vm', 'chat.olindata.vm']:
-    ensure => present,
-    ip     => $facts['networking']['interfaces']['enp0s8']['ip'],
-  }
 
 }
