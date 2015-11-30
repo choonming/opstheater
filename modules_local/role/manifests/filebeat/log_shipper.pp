@@ -1,6 +1,6 @@
 class role::filebeat::log_shipper {
 
-  include profile::filebeat
+  include profile::filebeat::filebeat
 
 
 }
