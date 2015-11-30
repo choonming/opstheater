@@ -4,7 +4,7 @@
   - yaml
 :logger: console
 :yaml:
-  :datadir: "/etc/puppet/environments/%{environment}/hieradata"
+  :datadir: "/etc/puppetlabs/code/environments/%{environment}/hieradata"
 :hierarchy:
   - "10.fqdn/%{fqdn}"
   - "20.application/1.type/%{application_type}"
