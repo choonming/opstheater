@@ -7,7 +7,7 @@ class profile::gitlab {
 
   host { ['gitlab.olindata.vm', 'ci.olindata.vm', 'chat.olindata.vm']:
     ensure => present,
-    ip     => $facts['networking']['interfaces']['enp0s8'],
+    ip     => $facts['networking']['interfaces']['enp0s8']['ip'],
   }
 
 }
