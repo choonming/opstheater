@@ -25,7 +25,7 @@ class profile::gitlab {
   package { 'gitlab':
      ensure   => installed,
      provider => 'gem',
-     require  => Package['rubygems'],
+     require  => [ Package['rubygems'], Package['ruby-devel'] ]
    } 
 
   host { ['gitlab.olindata.vm', 'ci.olindata.vm', 'chat.olindata.vm']:
