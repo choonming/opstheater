@@ -6,5 +6,5 @@ profile::elasticsearch::instances:
     ensure: present
     status: enabled
     config:
-      network.host: "%{::ipaddress_eth0}"
+      network.host: "%{::ipaddress_enp0s8}"
       http.port: '9200'
