@@ -9,3 +9,9 @@
   ensure: present
 'vim-enhanced':
   ensure: present
+iperf:
+    ensure: present
+    require: 'Yumrepo[epel]'
+  htop:
+    ensure: present
+    require: 'Yumrepo[epel]'
