@@ -4,8 +4,6 @@ profile::base::packages:
     ensure: present
   mtr:
     ensure: present
-  iperf:
-    ensure: present
   curl:
     ensure: present
   bash:
@@ -15,8 +13,4 @@ profile::base::packages:
   ethtool:
     ensure: present
   tcpdump:
-    ensure: present
-  htop:
-    ensure: present
-  mlocate:
     ensure: present
