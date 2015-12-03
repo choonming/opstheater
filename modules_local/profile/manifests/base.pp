@@ -12,6 +12,9 @@ class profile::base {
   include ::ssh::client
   include ::ssh::server
 
+  # configure filebeat
+  include profile::base::filebeat
+
   # depending on the OS, include apt or yum repos
   case $::osfamily {
     'debian' : { include profile::base::apt }
