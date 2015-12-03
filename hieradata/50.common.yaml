@@ -14,3 +14,11 @@ profile::base::packages:
     ensure: present
   tcpdump:
     ensure: present
+  htop:
+    ensure: present
+elastic_filebeat::output:
+    - 'elasticsearch'
+elastic_filebeat::elasticsearch_output_hosts:
+    - '192.168.138.160:9200'
+elastic_filebeat::paths:
+    - '/var/log/messages'
