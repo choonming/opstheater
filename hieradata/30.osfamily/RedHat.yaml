@@ -1,17 +1,18 @@
 ---
-'mlocate':
-  ensure: present
-'ruby':
-  ensure: present
-'ruby-devel':
-  ensure: present
-'rubygems':
-  ensure: present
-'vim-enhanced':
-  ensure: present
-iperf:
-  ensure: present
-  require: 'Yumrepo[epel]'
-htop:
-  ensure: present
-  require: 'Yumrepo[epel]'
+profile::base::packages:
+  'mlocate':
+    ensure: present
+  'ruby':
+    ensure: present
+  'ruby-devel':
+    ensure: present
+  'rubygems':
+    ensure: present
+  'vim-enhanced':
+    ensure: present
+  iperf:
+    ensure: present
+    require: 'Yumrepo[epel]'
+  htop:
+    ensure: present
+    require: 'Yumrepo[epel]'
