@@ -14,6 +14,9 @@ class profile::gitlab {
     shell  => '/bin/false',
   } ->
 
+  file { '/var/opt/gitlab':
+    ensure => directory,
+  } ->
   file { '/var/opt/gitlab/nginx':
     ensure => directory,
   } ->
@@ -24,7 +27,7 @@ class profile::gitlab {
   class { '::gitlab':
     external_url            => 'http://gitlab.olindata.vm',
     ci_external_url         => 'http://ci.olindata.vm',
-    mattermost_external_url => 'http://chat.olindata.vm'
+    mattermost_external_url => 'http://chat.olindata.vm',
   } ->
 
   package { 'gitlab':
