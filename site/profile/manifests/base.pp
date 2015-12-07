@@ -24,9 +24,4 @@ class profile::base {
   if $packages {
     create_resources('package', $packages)
   }
-
-  # some packages can not be loaded from hiera_hash because then we can't require them elsewhere
-  package { ['ruby-devel', 'rubygems']:
-    ensure => present,
-  }
 }
