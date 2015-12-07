@@ -48,11 +48,8 @@ class profile::gitlab {
     mattermost_external_url => 'http://chat.olindata.vm',
   } ->
 
-  # set up the gitlab gem to have gitlab cli support
-  package { 'gitlab':
-     ensure   => installed,
-     provider => 'gem',
-     require  => [ Package['rubygems'], Package['ruby-devel'] ]
-   } 
+  class { '::gitlab::cli':
+    
+  }
 
 }
