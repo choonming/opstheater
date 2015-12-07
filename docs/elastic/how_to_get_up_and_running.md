@@ -1,10 +1,10 @@
 # Log monitoring with Elasticsearch, Kibana & Filebeat
-### Elasticserach :
+## Elasticserach :
 
 Let us start with understanding What is elasticsearch and why it is used for  ?
 ElasticSearch is an open source, RESTful java based search engine which is used for search and index document files in diverse formats. It performs near-real-time searches.
 
-##### Installing and configuring Elasticsearch via Puppet :
+### Installing and configuring Elasticsearch via Puppet :
 
 As previously discussed elasticsearch is java based, so for making elasticsearch work we need to install java also. For installing java we are using [puppetlabs/java](https://forge.puppetlabs.com/puppetlabs/java) module from puppet forge.
 ```sh
@@ -26,11 +26,11 @@ network.host
 http.port
 ```
 
-### Kibana :
+## Kibana :
 
 Kibana 4 is an analytics and visualization platform that builds on Elasticsearch to give you a better understanding of your data.
 
-##### Installing and configuring kibana via Puppet :
+### Installing and configuring kibana via Puppet :
 
 For installing and configuring kibana through puppet we are using lesaux-kibana4 module from puppetforge.
 
