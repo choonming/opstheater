@@ -6,6 +6,9 @@ mod 'icinga2',
 
 mod 'kibana4',
   :git => 'https://github.com/walterheck/puppet-kibana4.git'
+
+mod 'gitlab',
+  :git => 'https://github.com/walterheck/puppet-gitlab.git'
   
 mod 'elastic_filebeat',
   :git => 'https://github.com/olindata/puppet-elastic_filebeat.git'
@@ -25,8 +28,8 @@ mod 'puppetlabs/java', '1.4.2'
 mod 'puppetlabs/mysql', '3.6.1'
 mod 'puppetlabs/ntp', '4.1.0'
 mod 'puppetlabs/postgresql', '4.6.0'
+mod 'puppetlabs/ruby', '0.4.0'
 mod 'puppetlabs/stdlib', '4.9.0'
 mod 'puppetlabs/vcsrepo', '1.3.1'
 mod 'richardc/datacat', '0.6.2'
 mod 'stahnma/epel', '1.1.1'
-mod 'vshn/gitlab', '1.7.0'
