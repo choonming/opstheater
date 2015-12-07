@@ -11,11 +11,28 @@ class profile::gitlab {
     comment => 'Gitlab CI user',
     home    => '/var/opt/gitlab/gitlab-ci',
     ensure  => present,
-    shell  => '/bin/false',
+    shell   => '/bin/false',
   } ->
 
+  # Some ssl keys for gitlab
+  file { ['/etc/gitlab', '/etc/gitlab/ssl'] :
+    ensure => directory,
+  } ->
+  file { "/etc/gitlab/ssl/${::fqdn}.key" :
+    ensure => file,
+    source => "puppet:///modules/profile/gitlab_ssl/gitlab.key",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+  file { "/etc/gitlab/ssl/${::fqdn}.crt" :
+    ensure => file,
+    source => "puppet:///modules/profile/gitlab_ssl/gitlab.crt",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+
+  # make sure some of the basic directories exist
   file { '/var/opt/gitlab':
     ensure => directory,
+    notify => Exec['gitlab_reconfigure']
   } ->
   file { '/var/opt/gitlab/nginx':
     ensure => directory,
@@ -24,12 +41,14 @@ class profile::gitlab {
     ensure => directory,
   } ->
 
+  # configure gitlab. The *_url attributes determine wether that subsystem should be configured
   class { '::gitlab':
-    external_url            => 'http://gitlab.olindata.vm',
+    external_url            => 'https://gitlab.olindata.vm',
     ci_external_url         => 'http://ci.olindata.vm',
     mattermost_external_url => 'http://chat.olindata.vm',
   } ->
 
+  # set up the gitlab gem to have gitlab cli support
   package { 'gitlab':
      ensure   => installed,
      provider => 'gem',
