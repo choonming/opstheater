@@ -14,7 +14,8 @@ profile::base::packages:
     ensure: present
   tcpdump:
     ensure: present
-elastic_filebeat::output:
+  jq:
+    ensure: presentelastic_filebeat::output:
     - 'elasticsearch'
 elastic_filebeat::elasticsearch_output_hosts:
     - 'elasticsearch:9200'
