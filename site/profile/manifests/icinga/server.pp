@@ -5,11 +5,15 @@ class profile::icinga::server {
     version             => '9.3',
   }->
   
-  class { 'postgresql::server': }->
+  class { 'postgresql::server':  listen_addresses => '*', }->
   
   postgresql::server::db { 'icinga2_data':
     user     => 'icinga2',
     password => postgresql_password('icinga2', 'password'),
+  }->
+  postgresql::server::db { 'icinga2_web':
+    user     => 'icingaweb',
+    password => postgresql_password('icingaweb', 'password'),
   }->
 
   class { 'icinga2::server':
