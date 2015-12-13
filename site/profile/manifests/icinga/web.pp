@@ -5,7 +5,6 @@ class profile::icinga::web {
   }
   
   class { 'apache': 
-    default_vhost => false,
   } 
   
   class { 'apache::mod::php': } 
