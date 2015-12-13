@@ -1,6 +1,8 @@
 class profile::icinga::web {
-  
-  class { 'epel': } 
+
+  if ! defined (Class['epel']) {
+    class { 'epel': }
+  }
   
   class { 'apache': 
     default_vhost => false,
