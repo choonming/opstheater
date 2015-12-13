@@ -27,5 +27,4 @@ class profile::icinga::web {
     web_db_pass => 'password',
     web_db_port => '5432',
   }
-
 }
