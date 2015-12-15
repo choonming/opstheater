@@ -14,5 +14,3 @@ profile::base::packages:
     ensure: present
   tcpdump:
     ensure: present
-  jq:
-    ensure: present
