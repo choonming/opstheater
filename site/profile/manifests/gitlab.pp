@@ -96,4 +96,5 @@ class profile::gitlab {
     fullname => 'Walter Heck',
   }
 
+
 }
