@@ -27,4 +27,5 @@ class profile::base {
   if $packages {
     create_resources('package', $packages)
   }
+
 }
