@@ -16,3 +16,6 @@ profile::base::packages:
   htop:
     ensure: present
     require: 'Yumrepo[epel]'
+  'jq':
+    ensure: present
+    require: 'Yumrepo[epel]'
