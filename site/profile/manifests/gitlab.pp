@@ -87,6 +87,14 @@ class profile::gitlab {
     gitlab_api_password     => $gitlab_api_password,
     gitlab_api_user         => $gitlab_api_user,
     manage_cli_dependencies => true,
+  } ->
+
+  gitlab::user { 'walter-test':
+    username => 'walterheck',
+    email    => 'walterheck@olindata.com',
+    password => 'alkgrcfnal',
+    fullname => 'Walter Heck',
   }
+
 
 }
