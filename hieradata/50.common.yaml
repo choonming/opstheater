@@ -17,6 +17,6 @@ profile::base::packages:
 elastic_filebeat::output:
     - 'elasticsearch'
 elastic_filebeat::elasticsearch_output_hosts:
-    - '192.168.138.160:9200'
+    - 'elasticsearch:9200'
 elastic_filebeat::paths:
     - '/var/log/messages'
