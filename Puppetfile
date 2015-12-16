@@ -7,6 +7,9 @@ mod 'icinga2',
 mod 'kibana4',
   :git => 'https://github.com/walterheck/puppet-kibana4.git'
   
+mod 'elastic_filebeat',
+  :git => 'https://github.com/olindata/puppet-elastic_filebeat.git'
+
 # forge modules should be listed with a specific version and stay in 
 # alphabetical order
 
