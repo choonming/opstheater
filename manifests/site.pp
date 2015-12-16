@@ -22,3 +22,7 @@ node 'icinga2' {
 node 'icingaweb2' {
   include role::icinga::web
 }
+
+node 'testclient' {
+  include role::testclient
+}
