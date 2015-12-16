@@ -14,9 +14,12 @@ profile::base::packages:
     ensure: present
   tcpdump:
     ensure: present
+<<<<<<< HEAD
 elastic_filebeat::output:
     - 'elasticsearch'
 elastic_filebeat::elasticsearch_output_hosts:
     - 'elasticsearch:9200'
 elastic_filebeat::paths:
     - '/var/log/messages'
+=======
+>>>>>>> 97df9742170475db57db06ab28cafaa65d94cf59
