@@ -61,4 +61,6 @@ class profile::icinga::server {
      database         => 'icinga2_data',
   }
 
+  Icinga2::Object::Host <<| |>> { }
+
 }
