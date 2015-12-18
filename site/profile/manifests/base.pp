@@ -28,4 +28,9 @@ class profile::base {
     create_resources('package', $packages)
   }
 
+  # apply basic icinga checks to servers
+  if $::hostname != 'icinga2' {
+    include profile::base::icinga
+  }
+
 }
