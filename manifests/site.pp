@@ -23,6 +23,6 @@ node 'icingaweb2' {
   include role::icinga::web
 }
 
-node 'testclient' {
+node default {
   include role::testclient
 }
