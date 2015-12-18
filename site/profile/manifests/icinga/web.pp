@@ -88,5 +88,6 @@ class profile::icinga::web {
     content => "[icinga2]\ntransport = \"local\"\npath = \"/var/run/icinga2/cmd/icinga2.cmd\"\n",
   }
 
+  Icinga2::Object::Host <<| |>> { }
 
 }
