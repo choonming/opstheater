@@ -17,9 +17,6 @@ node 'gitlab' {
 #### TODO: these machines haven't been puppetised yet
 node 'icinga2' {
   include role::icinga::server
-}
-
-node 'icingaweb2' {
   include role::icinga::web
 }
 
