@@ -1,4 +1,4 @@
-class role::icinga::server {
+class role::monitoring::backend {
   include profile::base
   include profile::icinga::server
 }

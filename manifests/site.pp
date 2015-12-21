@@ -13,14 +13,9 @@ node 'gitlab' {
   include role::gitlab::server
 }
 
-
-#### TODO: these machines haven't been puppetised yet
+# runs standalone monitoring setup with icinga2 and icinga web2
 node 'icinga2' {
-  include role::icinga::server
-}
-
-node 'icingaweb2' {
-  include role::icinga::web
+  include role::monitoring::standalone
 }
 
 node default {
