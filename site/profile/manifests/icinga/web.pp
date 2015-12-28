@@ -30,16 +30,16 @@ class profile::icinga::web {
     manage_repo    => true,
     install_method => 'package',
     manage_apache_vhost => true,
-    apache_vhost_name => 'icinga.olindata.com',
+    apache_vhost_name => 'icinga2.olindata.vm',
     ido_db  => 'mysql',
-    ido_db_host => 'icinga2',
+    ido_db_host => 'icinga2.olindata.vm',
     ido_db_name => 'icinga2_data',
     ido_db_user => 'icinga2',
     ido_db_pass => 'password',
     ido_db_port => '3306',
     web_db      => 'mysql',
     web_db_name => 'icinga2_web',
-    web_db_host => 'icinga2',
+    web_db_host => 'icinga2.olindata.vm',
     web_db_user => 'icinga2_web',
     web_db_pass => 'password',
     web_db_port => '3306',
@@ -47,8 +47,8 @@ class profile::icinga::web {
 
   exec { 'populate-icinga2_web-mysql-db':
     path  => '/bin:/usr/bin:/sbin:/usr/sbin',
-    unless    => 'mysql -h icinga2 -uicinga2_web -ppassword icinga2_web -e "SELECT * FROM icingaweb_user;" &> /dev/null',
-    command   => 'mysql -h icinga2 -uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h icinga2 -uicinga2_web -ppassword icinga2_web -e "INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\$1\$iQSrnmO9\$T3NVTu0zBkfuim4lWNRmH.\');"',
+    unless    => 'mysql -h icinga2.olindata.vm -uicinga2_web -ppassword icinga2_web -e "SELECT * FROM icingaweb_user;" &> /dev/null',
+    command   => 'mysql -h icinga2.olindata.vm -uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h icinga2 -uicinga2_web -ppassword icinga2_web -e "INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\$1\$iQSrnmO9\$T3NVTu0zBkfuim4lWNRmH.\');"',
     require   => [ Class['::mysql::client'], Package['icingaweb2'] ],
   } ->
 

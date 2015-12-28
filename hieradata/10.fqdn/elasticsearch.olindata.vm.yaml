@@ -6,5 +6,5 @@ profile::elasticsearch::instances:
     ensure: present
     status: enabled
     config:
-      network.host: "%{::ipaddress_enp0s8}"
+      network.host: "elasticsearch.olindata.vm"
       http.port: '9200'

@@ -15,8 +15,8 @@ profile::base::packages:
   tcpdump:
     ensure: present
 elastic_filebeat::output:
-    - 'elasticsearch'
+    - 'elasticsearch.olindata.vm'
 elastic_filebeat::elasticsearch_output_hosts:
-    - 'elasticsearch:9200'
+    - 'elasticsearch.olindata.vm:9200'
 elastic_filebeat::paths:
     - '/var/log/messages'
