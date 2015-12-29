@@ -56,16 +56,6 @@ class profile::icinga::web {
     before    => Class['icinga2::server'],
   } 
 
-  mysql::db { 'icinga2_web_localhost':
-    dbname    => 'icinga2_web',
-    user      => 'icinga2_web',
-    password  => 'password',
-    host      => 'localhost',
-    grant     => ['ALL'],
-    before    => Class['icinga2::server'],
-  } 
-
-
   exec { 'populate-icinga2_web-mysql-db':
     path  => '/bin:/usr/bin:/sbin:/usr/sbin',
     unless    => 'mysql -h ' + $icinga2_db_fqdn + '-uicinga2_web -ppassword icinga2_web -e "SELECT * FROM icingaweb_user;" &> /dev/null',

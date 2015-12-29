@@ -18,15 +18,6 @@ class profile::icinga::server {
     before    => Class['icinga2::server'],
   } 
 
-  mysql::db { 'icinga2_data_localhost':
-    dbname    => 'icinga2_data',
-    user      => 'icinga2',
-    password  => 'password',
-    host      => 'localhost',
-    grant     => ['ALL'],
-    before    => Class['icinga2::server'],
-  } 
-
   class { 'icinga2::server':
     server_db_type => 'mysql',
     db_host => $icinga2_db_fqdn,
