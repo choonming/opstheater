@@ -1,0 +1,30 @@
+---
+opstheater::domain: 'olindata.vm'
+
+## icinga related settings
+opstheater::icinga::fqdn: "icinga2.%{hiera('opstheater::domain')}"
+opstheater::icinga::ipaddress: '10.20.1.20'
+
+opstheater::icingaweb::fqdn: "%{hiera('opstheater::icinga::fqdn')}"
+opstheater::icingaweb::ipaddress: "%{hiera('opstheater::icinga::ipaddress')}"
+
+## ELK stack related settings
+opstheater::elasticsearch::fqdn: "elasticsearch.%{hiera('opstheater::domain')}"
+opstheater::elasticsearch::ipaddress: '10.20.1.30'
+
+opstheater::kibana::fqdn: "%{hiera('opstheater::elasticsearch::fqdn')}"
+opstheater::kibana::ipaddress: "%{hiera('opstheater::elasticsearch::ipaddress')}"
+
+opstheater::logstash::fqdn: "%{hiera('opstheater::elasticsearch::fqdn')}"
+opstheater::logstash::ipaddress: "%{hiera('opstheater::elasticsearch::ipaddress')}"
+
+## GitLab related settings
+opstheater::gitlab::fqdn: "gitlab.%{hiera('opstheater::domain')}"
+opstheater::gitlab::ipaddress: "10.20.1.50"
+
+## MySQL related settings
+opstheater::mysql::fqdn: "mysql.%{hiera('opstheater::domain')}"
+opstheater::mysql::ipaddress: '10.20.1.60'
+
+opstheater::mysql::fqdn::icinga: "%{hiera('opstheater::mysql::fqdn')}"
+opstheater::mysql::ipaddress::icinga: "%{hiera('opstheater::mysql::ipaddress')}"
