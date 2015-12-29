@@ -14,3 +14,4 @@
   - "30.osfamily/%{osfamily}"
   - "40.lsbdistcodename/%{lsbdistcodename}"
   - "50.common"
+  - "60.opstheater"
