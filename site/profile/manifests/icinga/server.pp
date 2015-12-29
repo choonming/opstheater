@@ -3,9 +3,11 @@ class profile::icinga::server {
   $icinga2_db_ipaddress = hiera('opstheater::icinga::mysql_ipaddress')
 
   class { '::mysql::server':
+    remove_default_accounts => true,
     override_options  => { 
       'mysqld' => {
-        'bind-address' => '0.0.0.0',
+        'bind-address'      => '0.0.0.0',
+        'skip-name-resolve' => true,
       }
     },
   }
