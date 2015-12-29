@@ -6,6 +6,7 @@ class profile::icinga::web {
   if ! defined (Class['epel']) {
     class { 'epel': }
   }
+  $icinga2_db_ipaddress = hiera('opstheater::icingaweb::mysql_ipaddress')
 
   class { '::mysql::client': }
 
@@ -35,14 +36,14 @@ class profile::icinga::web {
     manage_apache_vhost => true,
     apache_vhost_name => $icinga2_web_fqdn,
     ido_db  => 'mysql',
-    ido_db_host => $icinga2_db_fqdn,
+    ido_db_host => $icinga2_db_ipaddress,
     ido_db_name => 'icinga2_data',
     ido_db_user => 'icinga2',
     ido_db_pass => 'password',
     ido_db_port => '3306',
     web_db      => 'mysql',
     web_db_name => 'icinga2_web',
-    web_db_host => $icinga2_db_fqdn,
+    web_db_host => $icinga2_db_ipaddress,
     web_db_user => 'icinga2_web',
     web_db_pass => 'password',
     web_db_port => '3306',
@@ -58,8 +59,8 @@ class profile::icinga::web {
 
   exec { 'populate-icinga2_web-mysql-db':
     path  => '/bin:/usr/bin:/sbin:/usr/sbin',
-    unless    => 'mysql -h ' + $icinga2_db_fqdn + '-uicinga2_web -ppassword icinga2_web -e "SELECT * FROM icingaweb_user;" &> /dev/null',
-    command   => 'mysql -h ' + $icinga2_db_fqdn + '-uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ' + $icinga2_db_fqdn + ' -uicinga2_web -ppassword icinga2_web -e "INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\$1\$iQSrnmO9\$T3NVTu0zBkfuim4lWNRmH.\');"',
+    unless    => 'mysql -h ' + $icinga2_db_ipaddress + '-uicinga2_web -ppassword icinga2_web -e "SELECT * FROM icingaweb_user;" &> /dev/null',
+    command   => 'mysql -h ' + $icinga2_db_ipaddress + '-uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ' + $icinga2_db_ipaddress + ' -uicinga2_web -ppassword icinga2_web -e "INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\$1\$iQSrnmO9\$T3NVTu0zBkfuim4lWNRmH.\');"',
     require   => [ Class['::mysql::client'], Package['icingaweb2'] ],
   } ->
 

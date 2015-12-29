@@ -1,6 +1,6 @@
 class profile::icinga::server {
 
-  $icinga2_db_fqdn = hiera('opstheater::icinga::mysql_fqdn')
+  $icinga2_db_ipaddress = hiera('opstheater::icinga::mysql_ipaddress')
 
   class { '::mysql::server':
     override_options  => { 
@@ -20,7 +20,7 @@ class profile::icinga::server {
 
   class { 'icinga2::server':
     server_db_type => 'mysql',
-    db_host => $icinga2_db_fqdn,
+    db_host => $icinga2_db_ipaddress,
     db_port => '3306',
     db_name => 'icinga2_data',
     db_user => 'icinga2',
@@ -30,7 +30,7 @@ class profile::icinga::server {
   icinga2::object::idomysqlconnection { 'mysql_connection':
      target_dir => '/etc/icinga2/features-enabled',
      target_file_name => 'ido-mysql.conf',
-     host             => $icinga2_db_fqdn,
+     host             => $icinga2_db_ipaddress,
      port             => '3306',
      user             => 'icinga2',
      password         => 'password',
