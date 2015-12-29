@@ -5,8 +5,14 @@ opstheater::domain: 'olindata.vm'
 opstheater::icinga::fqdn: "icinga2.%{hiera('opstheater::domain')}"
 opstheater::icinga::ipaddress: '10.20.1.20'
 
+opstheater::icinga::mysql_fqdn: "%{hiera('opstheater::mysql::fqdn')}"
+opstheater::icinga::mysql_ipaddress: "%{hiera('opstheater::mysql::ipaddress')}"
+
 opstheater::icingaweb::fqdn: "%{hiera('opstheater::icinga::fqdn')}"
 opstheater::icingaweb::ipaddress: "%{hiera('opstheater::icinga::ipaddress')}"
+
+opstheater::icingaweb::mysql_fqdn: "%{hiera('opstheater::mysql::fqdn')}"
+opstheater::icingaweb::mysql_ipaddress: "%{hiera('opstheater::mysql::ipaddress')}"
 
 ## ELK stack related settings
 opstheater::elasticsearch::fqdn: "elasticsearch.%{hiera('opstheater::domain')}"
@@ -22,9 +28,12 @@ opstheater::logstash::ipaddress: "%{hiera('opstheater::elasticsearch::ipaddress'
 opstheater::gitlab::fqdn: "gitlab.%{hiera('opstheater::domain')}"
 opstheater::gitlab::ipaddress: "10.20.1.50"
 
+opstheater::gitlabci::fqdn: "ci.%{hiera('opstheater::domain')}"
+opstheater::gitlabci::ipaddress: "%{hiera('opstheater::gitlab::ipaddress')}"
+
+opstheater::mattermost::fqdn: "chat.%{hiera('opstheater::domain')}"
+opstheater::mattermost::ipaddress: "%{hiera('opstheater::gitlab::ipaddress')}"
+
 ## MySQL related settings
 opstheater::mysql::fqdn: "mysql.%{hiera('opstheater::domain')}"
 opstheater::mysql::ipaddress: '10.20.1.60'
-
-opstheater::mysql::fqdn::icinga: "%{hiera('opstheater::mysql::fqdn')}"
-opstheater::mysql::ipaddress::icinga: "%{hiera('opstheater::mysql::ipaddress')}"
