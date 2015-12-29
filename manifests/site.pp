@@ -18,6 +18,10 @@ node 'icinga2' {
   include role::monitoring::standalone
 }
 
+node 'mysql' {
+  include role::mysql
+}
+
 node default {
   include role::testclient
 }
