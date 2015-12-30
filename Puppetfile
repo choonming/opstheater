@@ -2,7 +2,7 @@ mod 'icingaweb2',
   :git => 'https://github.com/olindata/puppet-icingaweb2.git'
 
 mod 'icinga2',
-  :git => 'https://github.com/olindata/puppet-icinga2.git' 
+  :git => 'https://github.com/olindata/puppet-icinga2.git', 
   :branch => 'develop'
 
 mod 'kibana4',
