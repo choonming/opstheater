@@ -29,16 +29,6 @@ class profile::icinga::server {
     db_password => 'password',
   }->
 
-  icinga2::object::idomysqlconnection { 'mysql_connection':
-     target_dir => '/etc/icinga2/features-enabled',
-     target_file_name => 'ido-mysql.conf',
-     host             => $icinga2_db_ipaddress,
-     port             => '3306',
-     user             => 'icinga2',
-     password         => 'password',
-     database         => 'icinga2_data',
-  }
-
   Icinga2::Object::Host <<| |>> { }
 
 }
