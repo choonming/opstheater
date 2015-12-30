@@ -19,7 +19,7 @@ node 'icinga2' {
 }
 
 node 'mysql' {
-  include role::mysql
+  include role::database::standalone
 }
 
 node default {
