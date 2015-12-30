@@ -6,6 +6,6 @@ profile::elasticsearch::instances:
     ensure: present
     status: enabled
     config:
-      network.host: "elasticsearch.olindata.vm"
+      network.host: "%{hiera('opstheater::elasticsearch::fqdn')}"
       http.port: '9200'
       index.max_result_window: '2147483647'

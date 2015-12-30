@@ -15,8 +15,8 @@ profile::base::packages:
   tcpdump:
     ensure: present
 elastic_filebeat::output:
-    - 'elasticsearch.olindata.vm'
+    - "%{hiera('opstheater::elasticsearch::fqdn')}"
 elastic_filebeat::elasticsearch_output_hosts:
-    - 'elasticsearch.olindata.vm:9200'
+    - "%{hiera('opstheater::elasticsearch::fqdn')}:9200"
 elastic_filebeat::paths:
     - '/var/log/messages'
