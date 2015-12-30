@@ -17,6 +17,7 @@ class profile::mysql {
     ensure => 'file',
     owner  => 'root',
     group  => 'root',
+    mode   => '0755',
     source => "puppet:///modules/profile/mysql/RPM-GPG-KEY-percona.txt",
     before => [Package['mysql_client']],
   }
@@ -26,8 +27,8 @@ class profile::mysql {
     owner  => 'mysql',
     group  => 'mysql',
     mode   => '0755',
-    before => [Package['mysql_client']],
   }
 
 }
+
 
