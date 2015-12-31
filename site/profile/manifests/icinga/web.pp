@@ -11,6 +11,8 @@ class profile::icinga::web {
   class { '::mysql::client': }
 
   class { 'apache': } 
+
+  ::apache::listen { '80': }
   
   class { 'apache::mod::php': } 
 
