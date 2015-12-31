@@ -27,7 +27,7 @@ class profile::icinga::server {
     db_name => 'icinga2_data',
     db_user => 'icinga2',
     db_pass => 'password',
-  }->
+  }
 
   Icinga2::Object::Host <<| |>> { }
 
