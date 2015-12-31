@@ -12,24 +12,27 @@ class profile::icinga::web {
 
   class { 'apache': } 
 
-  ::apache::listen { '80': }
+  ::apache::listen { '80': 
+    before => Class['icingaweb2::config'],
+  }
   
   class { 'apache::mod::php': } 
 
   package { 'php-Icinga':
     ensure  => latest,
-    require   => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
+    require => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
     alias   => 'php-Icinga'
   }
 
   package { 'icingacli':
     ensure  => latest,
-    require   => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
+    require => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
     alias   => 'icingacli'
   }
 
   package { ['php-ZendFramework', 'php-ZendFramework-Db-Adapter-Pdo-Mysql']:
     ensure  => latest,
+    require => Class['epel']
   } ->
 
   class { 'icingaweb2':
