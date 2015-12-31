@@ -9,15 +9,12 @@ class profile::mysql {
       require          => [Package['mysql_client']]
   }
 
-  package { [ 'percona-toolkit', 'percona-xtrabackup' ]:
-    ensure => latest,
-  }
-
   file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-percona':
     ensure => 'file',
     owner  => 'root',
     group  => 'root',
-    source => "puppet:///modules/profile/mysql/RPM-GPG-KEY-percona.txt",
+    mode   => '0755',
+    source => "puppet:///modules/profile/mysql/RPM-GPG-KEY-percona",
     before => [Package['mysql_client']],
   }
 
@@ -26,7 +23,10 @@ class profile::mysql {
     owner  => 'mysql',
     group  => 'mysql',
     mode   => '0755',
-    before => [Package['mysql_client']],
+  }
+
+  package { [ 'percona-toolkit', 'percona-xtrabackup' ]:
+    ensure => latest,
   }
 
 }

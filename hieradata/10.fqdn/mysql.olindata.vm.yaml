@@ -1,10 +1,12 @@
 ---
-mysql::client::package_name: 'Percona-Server-client-57'
-mysql::server::package_name: 'Percona-Server-server-57'
+mysql::client::package_name: 'Percona-Server-client-56'
+mysql::server::package_name: 'Percona-Server-server-56'
 mysql::server::root_password: 'KL&%29^jjs*'
 mysql::server::service_enabled: 'true'
 mysql::server::service_name: 'mysqld'
 mysql::server::service_manage: 'true'
+mysql::server::config_file: '/etc/my.cnf'
+mysql::server::includedir: '/etc/my.cnf.d'
 
 profile::base::yum::repositories:
   'percona-release-$basearch':
@@ -77,4 +79,5 @@ profile::mysql::override_options:
     prompt: "'mysql[%{::hostname}] > '"
   mysqldump:
     max_allowed_packet: 64M 
+
 
