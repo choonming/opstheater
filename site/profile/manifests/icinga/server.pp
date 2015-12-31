@@ -20,7 +20,7 @@ class profile::icinga::server {
     before    => Class['icinga2::server'],
   } 
 
-  class { 'icinga2::server':
+  class { 'icinga2':
     server_db_type => 'mysql',
     db_host => $icinga2_db_ipaddress,
     db_port => '3306',
