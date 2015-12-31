@@ -21,7 +21,7 @@ class profile::icinga::server {
   } 
 
   class { 'icinga2':
-    server_db_type => 'mysql',
+    db_type => 'mysql',
     db_host => $icinga2_db_ipaddress,
     db_port => '3306',
     db_name => 'icinga2_data',
