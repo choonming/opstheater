@@ -54,7 +54,7 @@ class profile::icinga::web {
     password  => 'password',
     host      => '10.20.%',
     grant     => ['ALL'],
-    before    => Class['icinga2::server'],
+    before    => Class['icingaweb2'],
   } 
 
   exec { 'populate-icinga2_web-mysql-db':

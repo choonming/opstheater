@@ -17,7 +17,7 @@ class profile::icinga::server {
     password  => 'password',
     host      => '10.20.%',
     grant     => ['ALL'],
-    before    => Class['icinga2::server'],
+    before    => Class['icinga2'],
   } 
 
   class { 'icinga2':
