@@ -20,13 +20,13 @@ class profile::icinga::web {
 
   package { 'php-Icinga':
     ensure  => latest,
-    require => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
+    require => [ Class['icingaweb2::preinstall'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
     alias   => 'php-Icinga'
   }
 
   package { 'icingacli':
     ensure  => latest,
-    require => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
+    require => [ Class['icingaweb2::preinstall'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
     alias   => 'icingacli'
   }
 
