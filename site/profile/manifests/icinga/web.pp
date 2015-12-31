@@ -55,7 +55,7 @@ class profile::icinga::web {
     host      => '10.20.%',
     grant     => ['ALL'],
     before    => Class['icingaweb2'],
-  } 
+  } ->
 
   exec { 'populate-icinga2_web-mysql-db':
     path    => '/bin:/usr/bin:/sbin:/usr/sbin',
