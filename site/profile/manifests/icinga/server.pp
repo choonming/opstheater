@@ -12,13 +12,17 @@ class profile::icinga::server {
     },
   }
 
+
   mysql::db { 'icinga2_data':
     user      => 'icinga2',
     password  => 'password',
     host      => '10.20.%',
     grant     => ['ALL'],
     before    => Class['icinga2'],
-  } 
+  } ->
+
+  class { 'icinga2::database':
+  } -> 
 
   class { 'icinga2':
     db_type => 'mysql',
