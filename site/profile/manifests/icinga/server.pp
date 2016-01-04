@@ -21,16 +21,14 @@ class profile::icinga::server {
     before    => Class['icinga2'],
   } ->
 
-  class { 'icinga2::database':
-  } -> 
-
   class { 'icinga2':
-    db_type => 'mysql',
-    db_host => $icinga2_db_ipaddress,
-    db_port => '3306',
-    db_name => 'icinga2_data',
-    db_user => 'icinga2',
-    db_pass => 'password',
+    db_type         => 'mysql',
+    db_host         => $icinga2_db_ipaddress,
+    db_port         => '3306',
+    db_name         => 'icinga2_data',
+    db_user         => 'icinga2',
+    db_pass         => 'password',
+    manage_database => true,
   }
 
   Icinga2::Object::Host <<| |>> { }
