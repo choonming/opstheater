@@ -11,23 +11,28 @@ class profile::icinga::web {
   class { '::mysql::client': }
 
   class { 'apache': } 
+
+  ::apache::listen { '80': 
+    before => Class['icingaweb2::config'],
+  }
   
   class { 'apache::mod::php': } 
 
   package { 'php-Icinga':
     ensure  => latest,
-    require   => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
+    require => [ Class['icingaweb2::preinstall'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
     alias   => 'php-Icinga'
   }
 
   package { 'icingacli':
     ensure  => latest,
-    require   => [ Class['epel'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
+    require => [ Class['icingaweb2::preinstall'], Package['php-ZendFramework'], Package['php-ZendFramework-Db-Adapter-Pdo-Mysql'] ],
     alias   => 'icingacli'
   }
 
   package { ['php-ZendFramework', 'php-ZendFramework-Db-Adapter-Pdo-Mysql']:
     ensure  => latest,
+    require => Class['epel']
   } ->
 
   class { 'icingaweb2':
@@ -54,13 +59,13 @@ class profile::icinga::web {
     password  => 'password',
     host      => '10.20.%',
     grant     => ['ALL'],
-    before    => Class['icinga2::server'],
-  } 
+    before    => Class['icingaweb2'],
+  } ->
 
   exec { 'populate-icinga2_web-mysql-db':
-    path    => '/bin:/usr/bin:/sbin:/usr/sbin',
-    unless  => "mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web -e \"SELECT * FROM icingaweb_user;\" &> /dev/null",
-    command => "mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web -e \"INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\$1\$iQSrnmO9\$T3NVTu0zBkfuim4lWNRmH.\');\"",    
+    path    => '/bin:/usr/bin:/sbin:/usr/sbin', 
+    unless  => "[ `mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web -ABN -e 'select 1 from icingaweb_user'` -eq 1 ]",
+    command => "mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web -e \"INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\\\$1\\\$iQSrnmO9\\\$T3NVTu0zBkfuim4lWNRmH.\');\"",    
     require   => [ Class['::mysql::client'], Package['icingaweb2'] ],
   } ->
 
