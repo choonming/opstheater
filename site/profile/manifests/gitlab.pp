@@ -87,6 +87,25 @@ class profile::gitlab {
     gitlab_api_password     => $gitlab_api_password,
     gitlab_api_user         => $gitlab_api_user,
     manage_cli_dependencies => true,
+    mattermost              => {
+      team_site_name                        => 'OpsTheater Mattermost by OlinData',
+      log_enable_file                       => true, 
+      service_enable_incoming_webhooks      => true,
+      service_enable_post_username_override => true,
+      service_enable_post_icon_override     => true,
+      service_enable_outgoing_webhooks      => true,
+      },
+    gitlab_rails            => {
+      smtp_enable               => true,
+      smtp_address              => hiera('opstheater::smtp::fqdn'),
+      smtp_port                 => hiera('opstheater::smtp::port'),
+      smtp_user_name            => hiera('opstheater::smtp::username'),
+      smtp_password             => hiera('opstheater::smtp::password'),
+      smtp_domain               => hiera('opstheater::domain'),
+      smtp_authentication       => "login",
+      smtp_enable_starttls_auto => true,
+      smtp_tls                  => true,      
+    },
   } ->
 
   gitlab::user { 'walter-test':
