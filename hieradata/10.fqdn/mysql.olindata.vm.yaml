@@ -62,10 +62,10 @@ profile::mysql::override_options:
     myisam_recover: QUICK,BACKUP
     myisam_sort_buffer_size: 64M
     open-files-limit: 2000
-    pid-file: '/var/lib/mysql/mysql.olindata.vm.pid'
+    pid-file: "/var/lib/mysql/%{::hostname}.pid"
     query_cache_limit: 128K
     query_cache_size: 0
-    report-host: '%{hostname}'
+    report-host: '%{::hostname}'
     skip-name-resolve: 1
     slave_load_tmpdir: '/tmp'
     slow-query-log: 'ON'
