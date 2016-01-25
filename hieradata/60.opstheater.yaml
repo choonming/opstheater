@@ -11,6 +11,10 @@
 'opstheater::smtp::require_ssl': true
 'opstheater::smtp::require_auth': true
 
+# uncomment and adjust the following two values
+# 'opstheater::smtp::username': 'johndoe@example.com'
+# 'opstheater::smtp::password': 'abc123'
+
 ##########################
 ## icinga related settings
 ##########################
