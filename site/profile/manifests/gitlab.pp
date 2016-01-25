@@ -80,13 +80,6 @@ class profile::gitlab {
     external_url            => $gitlab_url,
     ci_external_url         => $gitlabci_url,
     mattermost_external_url => $mattermost_url,
-  } ->
-
-  class { '::gitlab::cli':
-    gitlab_api_endpoint     => $gitlab_api_endpoint,
-    gitlab_api_password     => $gitlab_api_password,
-    gitlab_api_user         => $gitlab_api_user,
-    manage_cli_dependencies => true,
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
       log_enable_file                       => true, 
@@ -106,6 +99,13 @@ class profile::gitlab {
       smtp_enable_starttls_auto => true,
       smtp_tls                  => true,      
     },
+  } ->
+
+  class { '::gitlab::cli':
+    gitlab_api_endpoint     => $gitlab_api_endpoint,
+    gitlab_api_password     => $gitlab_api_password,
+    gitlab_api_user         => $gitlab_api_user,
+    manage_cli_dependencies => true,
   } ->
 
   gitlab::user { 'walter-test':
