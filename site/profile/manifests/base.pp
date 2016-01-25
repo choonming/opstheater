@@ -3,7 +3,7 @@ class profile::base {
   # configure ntp
   include ::ntp
 
-  # we use melbourne's firewall
+  # TODO: this needs to be enabled
   class { 'firewall':
     ensure => stopped,
   }
