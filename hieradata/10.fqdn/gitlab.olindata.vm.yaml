@@ -1,6 +1,7 @@
 ---
 profile::gitlab::gitlab_fqdn: "%{hiera('opstheater::gitlab::fqdn')}"
 profile::gitlab::gitlab_url: "http://%{hiera('opstheater::gitlab::fqdn')}"
+profile::gitlab::gitlab_ipaddress: "%{hiera('opstheater::gitlab::ipaddress')}"
 
 profile::gitlab::gitlabci_fqdn: "%{hiera('opstheater::gitlabci::fqdn')}"
 profile::gitlab::gitlabci_url: "http://%{hiera('opstheater::gitlabci::fqdn')}"
