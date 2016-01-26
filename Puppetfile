@@ -19,6 +19,7 @@ mod 'elastic_filebeat',
 
 mod 'aptituz/ssh', '2.3.2' 
 mod 'elasticsearch/elasticsearch', '0.9.9'
+mod 'elasticsearch/logstash', '0.5.1'
 mod 'camptocamp/archive', '0.8.1'
 mod 'jfryman/nginx', '0.3.0'
 mod 'puppetlabs/apache', '1.6.0'

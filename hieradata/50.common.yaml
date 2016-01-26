@@ -23,8 +23,8 @@ profile::base::packages:
   lsof:
     ensure: present
 elastic_filebeat::output:
-    - "elasticsearch"
-elastic_filebeat::elasticsearch_output_hosts:
-    - "%{hiera('opstheater::elasticsearch::fqdn')}:9200"
+    - "logstash"
+elastic_filebeat::logstash_output_hosts:
+    - "testclient.olindata.vm:5044"
 elastic_filebeat::paths:
     - '/var/log/messages'
