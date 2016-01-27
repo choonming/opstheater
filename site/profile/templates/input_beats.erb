@@ -2,8 +2,8 @@ input{
   
   beats {
 
-    port => 5044
-    type => "logs"
+     <% unless @input_beats_port.nil? %>port => <%= @input_beats_port%><% end %>
+     <% unless @input_beats_type.nil? %>type => "<%= @input_beats_type%>"<% end %>     
 
   }
 

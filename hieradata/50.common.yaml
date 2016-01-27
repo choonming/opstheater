@@ -25,6 +25,6 @@ profile::base::packages:
 elastic_filebeat::output:
     - "logstash"
 elastic_filebeat::logstash_output_hosts:
-    - "testclient.olindata.vm:5044"
+    - "logstash.olindata.vm:5044"
 elastic_filebeat::paths:
     - '/var/log/messages'

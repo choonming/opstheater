@@ -1,19 +1,26 @@
 class profile::logstash{
 
+$package_url = hiera('profile::logstash::package_url')
+$input_beats_port = hiera('profile::logstash::input_beats_port')
+$input_beats_type = hiera('profile::logstash::input_beats_type')
+$output_elasicsearch_hosts = hiera_array('profile::logstash::output_elasicsearch_hosts', undef)
+$output_codec = hiera('profile::logstash::output_codec')
+
+
+$plugins = hiera_hash('profile::logstash::plugins', undef)
+
+
 class { 'logstash':
-  package_url => 'https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.1.1-1.noarch.rpm',
+  package_url => $package_url,
   java_install => true,
 }
+
 
 logstash::configfile { 'input_beats':
   content => template('profile/input_beats.erb'),
   order   => 1
 }
 
-#logstash::configfile { 'filter_apache':
-#  source => 'puppet:///path/to/filter_apache',
-#  order  => 2
-#}
 
 logstash::configfile { 'output_elasticsearch':
   content => template('profile/output_elasticsearch.erb'),
@@ -26,17 +33,9 @@ logstash::configfile { 'output_stdout':
 }
 
 
-logstash::plugin { 'beats':
-  ensure => 'present',
-  type   => 'input',
-  source => 'puppet:///modules/profile/logstash/beats.rb',
-}
+if $plugins {
 
-logstash::plugin { 'elasticsearch':
-  ensure   => 'present',
-  type     => 'output',
-  source   => 'puppet:///modules/profile/logstash/elasticsearch.rb',
-  filename => 'elasticsearch.rb',
+    create_resources('logstash::plugin', $plugins)
 }
 
 }
