@@ -29,8 +29,9 @@ class profile::base {
   }
 
   # apply basic icinga checks to servers
-  if $::hostname != 'icinga2' {
+  if $::fqdn != $hiera('opstheater::icingaweb::fqdn') {
     include profile::base::icinga
+    include profile::icinga::client
   }
 
   user { 'opstheater':
