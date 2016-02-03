@@ -15,7 +15,7 @@ profile::base::packages:
   tcpdump:
     ensure: present
 elastic_filebeat::output:
-    - "%{hiera('opstheater::elasticsearch::fqdn')}"
+    - "elasticsearch"
 elastic_filebeat::elasticsearch_output_hosts:
     - "%{hiera('opstheater::elasticsearch::fqdn')}:9200"
 elastic_filebeat::paths:

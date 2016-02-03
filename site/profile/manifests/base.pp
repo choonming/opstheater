@@ -33,4 +33,26 @@ class profile::base {
     include profile::base::icinga
   }
 
+  user { 'opstheater':
+    ensure      => present,
+    comment     => 'OpsTheater Infra',
+    shell       => '/bin/bash',
+    managehome  => true,
+  }
+
+  ssh_authorized_key { 'opstheater':
+    user  => 'opstheater',
+    type  => 'ssh-rsa',
+    key   => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDBgMhKw6sIw50udszZbrtqO6svbrvjzjLGtURpfk52IWXqOib5tNC8HJtSUOyu4euY0QlpoLxGdnE5wDhfG8dWgFo9DAhONJ4alQkq7RxBLY3FF+W01PWVLV4lwdumCQ9XgrcXdG4MiVtWVyZdbabqltgNZILlEvtpCGpAiptEdSTek5eSV5wVF/mHyVMa/DLBTh2CNhxeG0//8vMurxFRgLGhg7u7bj3lqcPwMoiCaX9cnalPqQ3WryoobwfykHqvCLUhM0fpbkNAB+K5j3qK5SOlRxs9JMxcMjPNGqkcfQ3hCpnfhDwQLfjFliaG0yACxQTujg6jrqNdk4FW0FEx',
+  }
+
+  $rand1 = fqdn_rand(30)
+  $rand2 = $rand1 + 30
+
+  cron { 'Puppet agent run':
+    command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize',
+    user    => 'root',
+    minute  => [ $rand1, $rand2],
+  }
+
 }
