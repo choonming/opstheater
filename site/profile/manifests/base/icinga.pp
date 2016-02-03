@@ -15,18 +15,41 @@ class profile::base::icinga {
   @@icinga2::object::host { $::fqdn:
     ipv4_address => $::ipaddress,
     vars => {
-      os      => 'Linux',
-      "disks" => {
-        '"disks"'   => { },
-        '"disk /"'  => { '"disk_partitions"' => '"/"' }
+      "disk" => {
+        '" "'   => { },
+        '" /"'  => { '"disk_partitions"' => '"/"' }
       },
+      os      => 'Linux',
       remote   => true,
       remote_endpoint => $::fqdn
     },
   }
 
-  @@icinga2::object::apply_service { "check_user":
+  @@icinga2::object::apply_service { "user":
     check_command => 'users',
+  }
+
+  @@icinga2::object::apply_service { "ssh":
+    check_command => 'ssh',
+  }
+
+  @@icinga2::object::apply_service { "load":
+    check_command => 'load',
+  }
+
+  @@icinga2::object::apply_service { "process":
+    check_command => 'procs',
+  }
+
+  @@icinga2::object::apply_service { "swap":
+    check_command => 'swap',
+  }
+
+  @@icinga2::object::apply_service { "disk":
+    check_command => 'disk',
+    display_name  => undef,
+    apply => 'for (disk => config in host.vars.disk)',
+    vars => 'config',
   }
 
 }
