@@ -1,6 +1,7 @@
 class profile::icinga::server {
 
   $icinga2_db_ipaddress = hiera('opstheater::icinga::mysql_ipaddress')
+  $icinga2_web_fqdn = hiera('opstheater::icingaweb::fqdn')
 
   class { '::mysql::server':
     remove_default_accounts => true,
@@ -31,6 +32,28 @@ class profile::icinga::server {
     manage_database => true,
   }
 
-  Icinga2::Object::Host <<| |>> { }
+  include ::icinga2::pki::puppet
+  include ::icinga2::feature::command
+
+  icinga2::object::zone { 'global-templates':
+    global  => true,
+  }
+
+  icinga2::object::zone { 'master':
+    endpoints => {
+      $icinga2_web_fqdn => {
+        host  => $icinga2_web_fqdn,
+      },
+    },
+  }
+
+  class { '::icinga2::feature::api':
+    manage_zone => false,
+  }
+
+  Icinga2::Object::Host <<| |>>
+  Icinga2::Object::Service <<| |>>
+  Icinga2::Object::Apply_service <<| |>>
+  Icinga2::Object::Zone <<| |>>
 
 }
