@@ -27,6 +27,10 @@ node 'logstash' {
   include opstheater::role::logstash::server
 }
 
+node 'grafanatest.olindata.vm' {
+  include role::grafana
+}
+
 node default {
   include opstheater::role::testclient
 }
