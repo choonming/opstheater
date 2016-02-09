@@ -29,7 +29,7 @@ class profile::base {
   }
 
   # apply basic icinga checks to servers
-  if $::fqdn != $hiera('opstheater::icingaweb::fqdn') {
+  if $::fqdn != hiera('opstheater::icingaweb::fqdn') {
     include profile::base::icinga
     include profile::icinga::client
   }
