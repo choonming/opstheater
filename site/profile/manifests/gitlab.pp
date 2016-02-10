@@ -20,7 +20,7 @@ class profile::gitlab {
   $gitlab_api_user     = hiera('profile::gitlab::api_user')
   $gitlab_api_password = hiera('profile::gitlab::api_password')
 
-  $gitlab_ssl_cert = "/etc/gitlab/ssl/${$gitlab_fqdn}.crt";
+  $gitlab_ssl_cert = "/etc/gitlab/ssl/${gitlab_fqdn}.crt";
   $mattermost_ssl_cert = "/etc/gitlab/ssl/${mattermost_fqdn}.crt";
 
 

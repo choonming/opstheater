@@ -32,6 +32,13 @@
 'opstheater::smtp::password': 'abc123'
 
 ##########################
+## puppet/foreman related settings
+##########################
+'opstheater::foreman::fqdn': "master.%{hiera('opstheater::domain')}"
+'opstheater::foreman::url': "%{hiera('opstheater::http_mode')}://%{hiera('opstheater::foreman::fqdn')}"
+
+
+##########################
 ## icinga related settings
 ##########################
 
