@@ -18,8 +18,6 @@ profile::base::packages:
     ensure: present
   nano:
     ensure: present
-  vim-enhanced:
-    ensure: present
   telnet:
     ensure: present
   sysstat:
