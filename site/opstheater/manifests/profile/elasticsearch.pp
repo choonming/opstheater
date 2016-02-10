@@ -1,6 +1,6 @@
 #class profile::elasticsearch inherits profile::base{
 
-class opstheater::profile::elasticsearch{  
+class opstheater::profile::elasticsearch{
   # resources required for elasticsearch
   include ::java
   

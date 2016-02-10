@@ -13,7 +13,7 @@ class opstheater::profile::mysql {
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => "puppet:///modules/opstheater/mysql/RPM-GPG-KEY-percona",
+    source => 'puppet:///modules/opstheater/mysql/RPM-GPG-KEY-percona',
     before => [Package['mysql_client']],
   }
 

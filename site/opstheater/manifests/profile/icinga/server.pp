@@ -23,7 +23,7 @@ class opstheater::profile::icinga::server {
   @@icinga2::object::zone { 'master':
     endpoints => {
       $icinga2_web_fqdn => {
-        host  => $icinga2_web_fqdn,
+        host => $icinga2_web_fqdn,
       },
     },
   }

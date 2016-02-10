@@ -33,34 +33,34 @@ class opstheater::profile::gitlab {
   } ->
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/opstheater/gitlab_ssl/gitlab.key",
+    source => 'puppet:///modules/opstheater/gitlab_ssl/gitlab.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.crt" :
     ensure => file,
-    source => "puppet:///modules/opstheater/gitlab_ssl/gitlab.crt",
+    source => 'puppet:///modules/opstheater/gitlab_ssl/gitlab.crt',
     notify => Exec['gitlab_reconfigure'],
   } ->
 
   file { "/etc/gitlab/ssl/${gitlabci_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/opstheater/gitlab_ssl/gitlabci.key",
+    source => 'puppet:///modules/opstheater/gitlab_ssl/gitlabci.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
   file { "/etc/gitlab/ssl/${gitlabci_fqdn}.crt" :
     ensure => file,
-    source => "puppet:///modules/opstheater/gitlab_ssl/gitlabci.crt",
+    source => 'puppet:///modules/opstheater/gitlab_ssl/gitlabci.crt',
     notify => Exec['gitlab_reconfigure'],
   } ->
 
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/opstheater/gitlab_ssl/mattermost.key",
+    source => 'puppet:///modules/opstheater/gitlab_ssl/mattermost.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.crt" :
     ensure => file,
-    source => "puppet:///modules/opstheater/gitlab_ssl/mattermost.crt",
+    source => 'puppet:///modules/opstheater/gitlab_ssl/mattermost.crt',
     notify => Exec['gitlab_reconfigure'],
   } ->
 
@@ -83,7 +83,7 @@ class opstheater::profile::gitlab {
     mattermost_external_url => $mattermost_url,
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
-      log_enable_file                       => true, 
+      log_enable_file                       => true,
       service_enable_incoming_webhooks      => true,
       service_enable_post_username_override => true,
       service_enable_post_icon_override     => true,
@@ -96,9 +96,9 @@ class opstheater::profile::gitlab {
       smtp_user_name            => hiera('opstheater::smtp::username'),
       smtp_password             => hiera('opstheater::smtp::password'),
       smtp_domain               => hiera('opstheater::domain'),
-      smtp_authentication       => "login",
+      smtp_authentication       => 'login',
       smtp_enable_starttls_auto => true,
-      smtp_tls                  => true,      
+      smtp_tls                  => true,
     },
   } ->
 

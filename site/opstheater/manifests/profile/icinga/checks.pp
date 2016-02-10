@@ -5,31 +5,31 @@ class opstheater::profile::icinga::checks {
     command_endpoint => 'host.vars.remote_endpoint',
   }
 
-  icinga2::object::apply_service { "user":
+  icinga2::object::apply_service { 'user':
     check_command => 'users',
   }
 
-  icinga2::object::apply_service { "ssh":
+  icinga2::object::apply_service { 'ssh':
     check_command => 'ssh',
   }
 
-  icinga2::object::apply_service { "load":
+  icinga2::object::apply_service { 'load':
     check_command => 'load',
   }
 
-  icinga2::object::apply_service { "process":
+  icinga2::object::apply_service { 'process':
     check_command => 'procs',
   }
 
-  icinga2::object::apply_service { "swap":
+  icinga2::object::apply_service { 'swap':
     check_command => 'swap',
   }
 
-  icinga2::object::apply_service { "disk":
+  icinga2::object::apply_service { 'disk':
     check_command => 'disk',
     display_name  => undef,
-    apply => 'for (disk => config in host.vars.disk)',
-    vars => 'config',
+    apply         => 'for (disk => config in host.vars.disk)',
+    vars          => 'config',
   }
 
 }
