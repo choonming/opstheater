@@ -1,0 +1,120 @@
+class opstheater::profile::gitlab {
+
+  $gitlab_url      = hiera('opstheater::profile::gitlab::gitlab_url')
+  $gitlab_fqdn     = hiera('opstheater::profile::gitlab::gitlab_fqdn')
+  $gitlab_ipaddress= hiera('opstheater::profile::gitlab::gitlab_ipaddress')
+  $gitlabci_url    = hiera('opstheater::profile::gitlab::gitlabci_url')
+  $gitlabci_fqdn   = hiera('opstheater::profile::gitlab::gitlabci_fqdn')
+  $mattermost_url  = hiera('opstheater::profile::gitlab::mattermost_url')
+  $mattermost_fqdn = hiera('opstheater::profile::gitlab::mattermost_fqdn')
+
+  $gitlab_api_endpoint = hiera('opstheater::profile::gitlab::api_endpoint')
+  $gitlab_api_user     = hiera('opstheater::profile::gitlab::api_user')
+  $gitlab_api_password = hiera('opstheater::profile::gitlab::api_password')
+
+  host { [$gitlabci_fqdn, $mattermost_fqdn]:
+    ensure => present,
+    ip     => $gitlab_ipaddress,
+  } ->
+
+  # NOTE: it shouldn't be needed to define the user and file resources here, this should be 
+  # fixed in the omnibus installer
+  user { 'gitlab-ci':
+    comment => 'Gitlab CI user',
+    home    => '/var/opt/gitlab/gitlab-ci',
+    ensure  => present,
+    shell   => '/bin/false',
+  } ->
+
+  # Some ssl keys for gitlab
+  file { ['/etc/gitlab', '/etc/gitlab/ssl'] :
+    ensure => directory,
+    mode   => '0700',
+  } ->
+  file { "/etc/gitlab/ssl/${gitlab_fqdn}.key" :
+    ensure => file,
+    source => "puppet:///modules/opstheater/gitlab_ssl/gitlab.key",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+  file { "/etc/gitlab/ssl/${gitlab_fqdn}.crt" :
+    ensure => file,
+    source => "puppet:///modules/opstheater/gitlab_ssl/gitlab.crt",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+
+  file { "/etc/gitlab/ssl/${gitlabci_fqdn}.key" :
+    ensure => file,
+    source => "puppet:///modules/opstheater/gitlab_ssl/gitlabci.key",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+  file { "/etc/gitlab/ssl/${gitlabci_fqdn}.crt" :
+    ensure => file,
+    source => "puppet:///modules/opstheater/gitlab_ssl/gitlabci.crt",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+
+  file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
+    ensure => file,
+    source => "puppet:///modules/opstheater/gitlab_ssl/mattermost.key",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+  file { "/etc/gitlab/ssl/${mattermost_fqdn}.crt" :
+    ensure => file,
+    source => "puppet:///modules/opstheater/gitlab_ssl/mattermost.crt",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+
+  # make sure some of the basic directories exist
+  file { '/var/opt/gitlab':
+    ensure => directory,
+    notify => Exec['gitlab_reconfigure']
+  } ->
+  file { '/var/opt/gitlab/nginx':
+    ensure => directory,
+  } ->
+  file { '/var/opt/gitlab/nginx/conf':
+    ensure => directory,
+  } ->
+
+  # configure gitlab. The *_url attributes determine wether that subsystem should be configured
+  class { '::gitlab':
+    external_url            => $gitlab_url,
+    ci_external_url         => $gitlabci_url,
+    mattermost_external_url => $mattermost_url,
+    mattermost              => {
+      team_site_name                        => 'OpsTheater Mattermost by OlinData',
+      log_enable_file                       => true, 
+      service_enable_incoming_webhooks      => true,
+      service_enable_post_username_override => true,
+      service_enable_post_icon_override     => true,
+      service_enable_outgoing_webhooks      => true,
+      },
+    gitlab_rails            => {
+      smtp_enable               => true,
+      smtp_address              => hiera('opstheater::smtp::fqdn'),
+      smtp_port                 => hiera('opstheater::smtp::port'),
+      smtp_user_name            => hiera('opstheater::smtp::username'),
+      smtp_password             => hiera('opstheater::smtp::password'),
+      smtp_domain               => hiera('opstheater::domain'),
+      smtp_authentication       => "login",
+      smtp_enable_starttls_auto => true,
+      smtp_tls                  => true,      
+    },
+  } ->
+
+  class { '::gitlab::cli':
+    gitlab_api_endpoint     => $gitlab_api_endpoint,
+    gitlab_api_password     => $gitlab_api_password,
+    gitlab_api_user         => $gitlab_api_user,
+    manage_cli_dependencies => true,
+  } ->
+
+  gitlab::user { 'walter-test':
+    username => 'walterheck',
+    email    => 'walterheck@olindata.com',
+    password => 'alkgrcfnal',
+    fullname => 'Walter Heck',
+  }
+
+
+}
