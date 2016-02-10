@@ -54,7 +54,7 @@ class profile::gitlab {
   concat{ $gitlab_ssl_cert:
         owner => root,
         group => root,
-        mode  => "0755",
+        mode  => "0644",
         notify => Exec['gitlab_reconfigure'],
   }
   concat::fragment{"gitlab_ssl_cert_data":
@@ -80,7 +80,7 @@ class profile::gitlab {
   concat{ $mattermost_ssl_cert:
         owner => root,
         group => root,
-        mode  => "0755",
+        mode  => "0644",
         notify => Exec['gitlab_reconfigure'],
   }
   concat::fragment{"mattermost_ssl_cert_data":
