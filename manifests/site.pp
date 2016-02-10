@@ -1,27 +1,27 @@
 # runs puppet enterprise for now
 node 'master.olindata.vm' {
-  include role::puppet::master
+  include opstheater::role::puppet::master
 }
 
 # runs elasticsearch and kibana
 node 'elasticsearch.olindata.vm' {
-  include role::elastic::server
+  include opstheater::role::elastic::server
 }
 
 # runs gitlab, gitlab CI and mattermost
 node 'gitlab.olindata.vm' {
-  include role::gitlab::server
+  include opstheater::role::gitlab::server
 }
 
 # runs standalone monitoring setup with icinga2 and icinga web2
 node 'icinga2.olindata.vm' {
-  include role::monitoring::standalone
+  include opstheater::role::monitoring::standalone
 }
 
 node 'mysql.olindata.vm' {
-  include role::database::standalone
+  include opstheater::role::database::standalone
 }
 
 node default {
-  include role::testclient
+  include opstheater::role::testclient
 }
