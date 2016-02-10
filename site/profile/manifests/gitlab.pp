@@ -75,7 +75,20 @@ class profile::gitlab {
       service_enable_post_username_override => true,
       service_enable_post_icon_override     => true,
       service_enable_outgoing_webhooks      => true,
-      },
+      email_enable_sign_up_with_email       => false,
+      email_smtp_server                     => hiera('opstheater::smtp::fqdn'),    
+      email_smtp_username                   => ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::username') } else {''} ),
+      email_smtp_password                   => ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::password') } else {''} ),
+      email_smtp_port                       => hiera('opstheater::smtp::port'),
+      email_connection_security             => ( if hiera('opstheater::smtp::require_ssl') == true { 'TLS' } else {''}),  # Must be '' or 'TLS' or 'STARTTLS', we only put TLS here though for now
+      email_feedback_name                   => 'OpsTheater Mattermost',
+      email_enable_sign_up_with_email       => false,
+      email_feedback_email                  => join(['mattermost@',$mattermost_fqdn]),
+      team_enable_team_listing              => true,
+      team_enable_team_creation             => false,  #NOTE: This must be TRUE for the initial team to setup mattermost then its always false afterwards
+      team_enable_user_creation             => true,
+      email_send_email_notifications        => true,
+    },
     gitlab_rails            => {
       smtp_enable               => true,
       smtp_address              => hiera('opstheater::smtp::fqdn'),
@@ -83,9 +96,9 @@ class profile::gitlab {
       smtp_user_name            => hiera('opstheater::smtp::username'),
       smtp_password             => hiera('opstheater::smtp::password'),
       smtp_domain               => hiera('opstheater::domain'),
-      smtp_authentication       => "login",
-      smtp_enable_starttls_auto => true,
-      smtp_tls                  => true,      
+      smtp_authentication       => ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::authtype', 'login') } else { 'false' } ),
+      smtp_enable_starttls_auto => ( if hiera('opstheater::smtp::require_ssl') == true { true } else { '' }),
+      smtp_tls                  => ( if hiera('opstheater::smtp::require_ssl') == true { true } else { '' }),
     },
   } ->
 
