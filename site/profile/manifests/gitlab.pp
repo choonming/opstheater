@@ -4,15 +4,16 @@ class profile::gitlab {
   $gitlab_fqdn                = hiera('profile::gitlab::gitlab_fqdn')
   $gitlab_ipaddress           = hiera('profile::gitlab::gitlab_ipaddress')
   $gitlabci_url               = hiera('profile::gitlab::gitlab_url')
-  $gitlab_smtp_authentication = ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::authtype', 'login') } else { 'false' } )
-  $gitlab_enable_tls          = ( if hiera('opstheater::smtp::require_ssl') == true { true } else { '' })
+  $gitlab_smtp_authentication = ( if hiera('opstheater::smtp::auth_type') in (['none','login','plain']) { hiera('opstheater::smtp::auth_type') } else { 'none' } )
+  $gitlab_enable_tls          = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) == true { true } else { false })
+  $gitlab_starttls_auto       = ( if hiera('opstheater::smtp::ssl_type') == 'STARTTLS' { true } else { false } )
 
   $mattermost_url                 = hiera('profile::gitlab::mattermost_url')
   $mattermost_fqdn                = hiera('profile::gitlab::mattermost_fqdn')
-  $mattermost_connection_security = ( if hiera('opstheater::smtp::require_ssl') == true { 'TLS' } else {''})  # Must be '' or 'TLS' or 'STARTTLS', we only put TLS here though for now
+  $mattermost_connection_security = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) { hiera('opstheater::smtp::ssl_type') } else { false } )
 
-  $email_smtp_username = ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::username') } else {''} )
-  $email_smtp_password = ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::password') } else {''} )
+  $email_smtp_username = ( if hiera('opstheater::smtp::auth_type') != false { hiera('opstheater::smtp::username') } else {''} )
+  $email_smtp_password = ( if hiera('opstheater::smtp::auth_type') != false { hiera('opstheater::smtp::password') } else {''} )
 
   $gitlab_api_endpoint = hiera('profile::gitlab::api_endpoint')
   $gitlab_api_user     = hiera('profile::gitlab::api_user')
@@ -72,6 +73,7 @@ class profile::gitlab {
   } ->
 
   # configure gitlab. The *_url attributes determine wether that subsystem should be configured
+  # For SMTP Stuff: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
   class { '::gitlab':
     external_url            => $gitlab_url,
     mattermost_external_url => $mattermost_url,
@@ -104,8 +106,9 @@ class profile::gitlab {
       smtp_password             => hiera('opstheater::smtp::password'),
       smtp_domain               => hiera('opstheater::domain'),
       smtp_authentication       => $gitlab_smtp_authentication,
-      smtp_enable_starttls_auto => $gitlab_enable_tls,
+      smtp_enable_starttls_auto => $gitlab_starttls_auto,
       smtp_tls                  => $gitlab_enable_tls,
+      smtp_openssl_verify_mode  => hiera('opstheater::smtp::openssl_verify_mode'),
     },
   } ->
 

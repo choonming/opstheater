@@ -8,8 +8,15 @@
 
 'opstheater::smtp::fqdn': 'smtp.gmail.com'
 'opstheater::smtp::port': 587
-'opstheater::smtp::require_ssl': true
-'opstheater::smtp::require_auth': true
+# This can be 'none', 'TLS' and 'STARTTLS'
+'opstheater::smtp::ssl_type': 'none'
+# This can be 'none' for no authentication, 'login' or 'plain'
+# To know Login or Plain to use, please see examples at: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
+'opstheater::smtp::auth_type': 'login'
+# This can be 'none', 'peer', 'client_once', 'fail_if_no_peer_cert'
+# Please see examples at: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
+#                     and http://api.rubyonrails.org/classes/ActionMailer/Base.html
+'opstheater::smtp::openssl_verify_mode': 'none'
 
 # uncomment and adjust the following two values
 # 'opstheater::smtp::username': 'johndoe@example.com'
