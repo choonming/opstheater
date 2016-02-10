@@ -115,16 +115,6 @@
 # Default value: "10.20.1.50"
 'opstheater::gitlab::ipaddress': "10.20.1.50"
 
-# Variable: opstheater::gitlabci::fqdn
-# Description: 
-# Default value: "ci.%{hiera('opstheater::domain')}"
-'opstheater::gitlabci::fqdn': "ci.%{hiera('opstheater::domain')}"
-
-# Variable: opstheater::gitlabci::ipaddress
-# Description: 
-# Default value: "%{hiera('opstheater::gitlab::ipaddress')}"
-'opstheater::gitlabci::ipaddress': "%{hiera('opstheater::gitlab::ipaddress')}"
-
 ##########################
 ## mattermost related settings
 ##########################
