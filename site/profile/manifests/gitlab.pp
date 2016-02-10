@@ -1,5 +1,5 @@
 class profile::gitlab {
-
+  
   $gitlab_use_ssl             = ( if hiera('opstheater::http_mode') == 'https' { true } else { false } )
   $gitlab_url                 = hiera('profile::gitlab::gitlab_url')
   $gitlab_fqdn                = hiera('profile::gitlab::gitlab_fqdn')
@@ -19,6 +19,10 @@ class profile::gitlab {
   $gitlab_api_endpoint = hiera('profile::gitlab::api_endpoint')
   $gitlab_api_user     = hiera('profile::gitlab::api_user')
   $gitlab_api_password = hiera('profile::gitlab::api_password')
+
+  $gitlab_ssl_cert = "/etc/gitlab/ssl/${$gitlab_fqdn}.crt";
+  $mattermost_ssl_cert = "/etc/gitlab/ssl/${mattermost_fqdn}.crt";
+
 
   host { [$mattermost_fqdn]:
     ensure => present,
@@ -44,32 +48,51 @@ class profile::gitlab {
     source => "puppet:///modules/profile/ssl/gitlab.key",
     notify => Exec['gitlab_reconfigure'],
   } ->
-  file { "/etc/gitlab/ssl/${gitlab_fqdn}.crt" :
-    ensure => file,
-    source => "puppet:///modules/profile/ssl/gitlab.crt",
-    notify => Exec['gitlab_reconfigure'],
-  } ->
-  file { "/etc/gitlab/ssl/${gitlab_fqdn}-cabundle.crt" :
-    ensure => file,
-    source => "puppet:///modules/profile/ssl/gitlab-cabundle.crt",
-    notify => Exec['gitlab_reconfigure'],
-  } ->
+  
+
+  # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
+  concat{ $gitlab_ssl_cert:
+        owner => root,
+        group => root,
+        mode  => "0755",
+        notify => Exec['gitlab_reconfigure'],
+  }
+  concat::fragment{"gitlab_ssl_cert_data":
+     target => $gitlab_ssl_cert,
+     source => "puppet:///modules/profile/ssl/gitlab.crt",
+     order  => 10,
+  }
+  concat::fragment{"gitlab_ssl_cacert_data":
+     target => $gitlab_ssl_cert,
+     source => "puppet:///modules/profile/ssl/gitlab-cabundle.crt",
+     order  => 20,
+  }
+  
 
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
     source => "puppet:///modules/profile/ssl/mattermost.key",
     notify => Exec['gitlab_reconfigure'],
   } ->
-  file { "/etc/gitlab/ssl/${mattermost_fqdn}.crt" :
-    ensure => file,
-    source => "puppet:///modules/profile/ssl/mattermost.crt",
-    notify => Exec['gitlab_reconfigure'],
-  } ->
-  file { "/etc/gitlab/ssl/${mattermost_fqdn}-cabundle.crt" :
-    ensure => file,
-    source => "puppet:///modules/profile/ssl/mattermost-cabundle.crt",
-    notify => Exec['gitlab_reconfigure'],
-  } ->
+  
+  
+  # Create our SSL Cert for Mattermost Nginx specifically for Nginx with the CACert combined with the cert
+  concat{ $mattermost_ssl_cert:
+        owner => root,
+        group => root,
+        mode  => "0755",
+        notify => Exec['gitlab_reconfigure'],
+  }
+  concat::fragment{"mattermost_ssl_cert_data":
+     target => $mattermost_ssl_cert,
+     source => "puppet:///modules/profile/ssl/mattermost.crt",
+     order  => 10,
+  }
+  concat::fragment{"mattermost_ssl_cacert_data":
+     target => $mattermost_ssl_cert,
+     source => "puppet:///modules/profile/ssl/mattermost-cabundle.crt",
+     order  => 20,
+  }
 
   # make sure some of the basic directories exist
   file { '/var/opt/gitlab':
