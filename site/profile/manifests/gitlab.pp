@@ -3,8 +3,7 @@ class profile::gitlab {
   $gitlab_url      = hiera('profile::gitlab::gitlab_url')
   $gitlab_fqdn     = hiera('profile::gitlab::gitlab_fqdn')
   $gitlab_ipaddress= hiera('profile::gitlab::gitlab_ipaddress')
-  $gitlabci_url    = hiera('profile::gitlab::gitlabci_url')
-  $gitlabci_fqdn   = hiera('profile::gitlab::gitlabci_fqdn')
+  $gitlabci_url    = hiera('profile::gitlab::gitlab_url')
   $mattermost_url  = hiera('profile::gitlab::mattermost_url')
   $mattermost_fqdn = hiera('profile::gitlab::mattermost_fqdn')
 
@@ -12,7 +11,7 @@ class profile::gitlab {
   $gitlab_api_user     = hiera('profile::gitlab::api_user')
   $gitlab_api_password = hiera('profile::gitlab::api_password')
 
-  host { [$gitlabci_fqdn, $mattermost_fqdn]:
+  host { [$mattermost_fqdn]:
     ensure => present,
     ip     => $gitlab_ipaddress,
   } ->
@@ -42,17 +41,6 @@ class profile::gitlab {
     notify => Exec['gitlab_reconfigure'],
   } ->
 
-  file { "/etc/gitlab/ssl/${gitlabci_fqdn}.key" :
-    ensure => file,
-    source => "puppet:///modules/profile/gitlab_ssl/gitlabci.key",
-    notify => Exec['gitlab_reconfigure'],
-  } ->
-  file { "/etc/gitlab/ssl/${gitlabci_fqdn}.crt" :
-    ensure => file,
-    source => "puppet:///modules/profile/gitlab_ssl/gitlabci.crt",
-    notify => Exec['gitlab_reconfigure'],
-  } ->
-
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
     source => "puppet:///modules/profile/gitlab_ssl/mattermost.key",
@@ -79,7 +67,6 @@ class profile::gitlab {
   # configure gitlab. The *_url attributes determine wether that subsystem should be configured
   class { '::gitlab':
     external_url            => $gitlab_url,
-    ci_external_url         => $gitlabci_url,
     mattermost_external_url => $mattermost_url,
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
