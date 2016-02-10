@@ -6,7 +6,6 @@ class opstheater::profile::mysql {
   class { '::mysql::server':
       package_ensure   => 'present',
       override_options => $override_options,
-      require          => [Package['mysql_client']]
   }
 
   file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-percona':
