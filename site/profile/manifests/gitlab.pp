@@ -1,5 +1,6 @@
 class profile::gitlab {
 
+  $gitlab_use_ssl             = ( if hiera('opstheater::http_mode') == 'https' { true } else { false } )
   $gitlab_url                 = hiera('profile::gitlab::gitlab_url')
   $gitlab_fqdn                = hiera('profile::gitlab::gitlab_fqdn')
   $gitlab_ipaddress           = hiera('profile::gitlab::gitlab_ipaddress')
@@ -10,7 +11,7 @@ class profile::gitlab {
 
   $mattermost_url                 = hiera('profile::gitlab::mattermost_url')
   $mattermost_fqdn                = hiera('profile::gitlab::mattermost_fqdn')
-  $mattermost_connection_security = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) { hiera('opstheater::smtp::ssl_type') } else { false } )
+  $mattermost_connection_security = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) { hiera('opstheater::smtp::ssl_type') } else { '' } )
 
   $email_smtp_username = ( if hiera('opstheater::smtp::auth_type') != false { hiera('opstheater::smtp::username') } else {''} )
   $email_smtp_password = ( if hiera('opstheater::smtp::auth_type') != false { hiera('opstheater::smtp::password') } else {''} )
@@ -40,23 +41,33 @@ class profile::gitlab {
   } ->
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/profile/gitlab_ssl/gitlab.key",
+    source => "puppet:///modules/profile/ssl/gitlab.key",
     notify => Exec['gitlab_reconfigure'],
   } ->
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.crt" :
     ensure => file,
-    source => "puppet:///modules/profile/gitlab_ssl/gitlab.crt",
+    source => "puppet:///modules/profile/ssl/gitlab.crt",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+  file { "/etc/gitlab/ssl/${gitlab_fqdn}-cabundle.crt" :
+    ensure => file,
+    source => "puppet:///modules/profile/ssl/gitlab-cabundle.crt",
     notify => Exec['gitlab_reconfigure'],
   } ->
 
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/profile/gitlab_ssl/mattermost.key",
+    source => "puppet:///modules/profile/ssl/mattermost.key",
     notify => Exec['gitlab_reconfigure'],
   } ->
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.crt" :
     ensure => file,
-    source => "puppet:///modules/profile/gitlab_ssl/mattermost.crt",
+    source => "puppet:///modules/profile/ssl/mattermost.crt",
+    notify => Exec['gitlab_reconfigure'],
+  } ->
+  file { "/etc/gitlab/ssl/${mattermost_fqdn}-cabundle.crt" :
+    ensure => file,
+    source => "puppet:///modules/profile/ssl/mattermost-cabundle.crt",
     notify => Exec['gitlab_reconfigure'],
   } ->
 
@@ -77,6 +88,7 @@ class profile::gitlab {
   class { '::gitlab':
     external_url            => $gitlab_url,
     mattermost_external_url => $mattermost_url,
+    
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
       log_enable_file                       => true, 
@@ -97,7 +109,15 @@ class profile::gitlab {
       team_enable_team_creation             => false,  #NOTE: This must be TRUE for the initial team to setup mattermost then its always false afterwards
       team_enable_user_creation             => true,
       email_send_email_notifications        => true,
+      service_use_ssl                       => $gitlab_use_ssl,
     },
+    
+    mattermost_nginx        => {
+      redirect_http_to_https => $gitlab_use_ssl,
+      ssl_certificate        => "/etc/gitlab/ssl/${mattermost_fqdn}.crt",
+      ssl_certificate_key    => "/etc/gitlab/ssl/${mattermost_fqdn}.key",
+    },
+    
     gitlab_rails            => {
       smtp_enable               => true,
       smtp_address              => hiera('opstheater::smtp::fqdn'),
@@ -110,6 +130,11 @@ class profile::gitlab {
       smtp_tls                  => $gitlab_enable_tls,
       smtp_openssl_verify_mode  => hiera('opstheater::smtp::openssl_verify_mode'),
     },
+    
+    nginx        => {
+      redirect_http_to_https => $gitlab_use_ssl,
+    },
+    
   } ->
 
   class { '::gitlab::cli':
