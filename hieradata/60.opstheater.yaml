@@ -4,23 +4,32 @@
 ## general settings
 ##########################
 
+# The domain that everything in opstheater will become subdomains of...
 'opstheater::domain': 'olindata.vm'
 
-'opstheater::smtp::fqdn': 'smtp.gmail.com'
+# Enable HTTPS Platform-wide (or not)
+# Default value (for development): 'http'
+# Default value (for production): 'https'
+'opstheater::http_mode': 'https'
+
+# SMTP Settings
+# FQDN of SMTP server (eg: smtp.gmail.com)
+'opstheater::smtp::fqdn': 'localhost'
+# Port of SMTP server
 'opstheater::smtp::port': 587
-# This can be 'none', 'TLS' and 'STARTTLS'
+# Type Of SSL: this can be 'none', 'TLS' and 'STARTTLS'
 'opstheater::smtp::ssl_type': 'none'
-# This can be 'none' for no authentication, 'login' or 'plain'
+# Authentication type, this can be 'none' for no authentication, 'login' or 'plain'
 # To know Login or Plain to use, please see examples at: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
 'opstheater::smtp::auth_type': 'login'
-# This can be 'none', 'peer', 'client_once', 'fail_if_no_peer_cert'
+# OpenSSL Verify Mode, this can be 'none', 'peer', 'client_once', 'fail_if_no_peer_cert'
 # Please see examples at: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
 #                     and http://api.rubyonrails.org/classes/ActionMailer/Base.html
 'opstheater::smtp::openssl_verify_mode': 'none'
 
-# uncomment and adjust the following two values
-# 'opstheater::smtp::username': 'johndoe@example.com'
-# 'opstheater::smtp::password': 'abc123'
+# The SMTP username and password, which is only used if auth_type above is set to login or plain
+'opstheater::smtp::username': 'johndoe@example.com'
+'opstheater::smtp::password': 'abc123'
 
 ##########################
 ## icinga related settings
@@ -133,8 +142,8 @@
 
 # Variable: opstheater::mattermost::url
 # Description: 
-# Default value: "http://chat.%{hiera('opstheater::domain')}"
-'opstheater::mattermost::url': "http://chat.%{hiera('opstheater::domain')}"
+# Default value: "%{hiera('opstheater::http_mode')}://chat.%{hiera('opstheater::domain')}"
+'opstheater::mattermost::url': "%{hiera('opstheater::http_mode')}://chat.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::mattermost::ipaddress
 # Description: 
