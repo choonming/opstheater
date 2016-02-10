@@ -1,7 +1,7 @@
 ---
 elasticsearch::manage_repo: true
 elasticsearch::repo_version: '2.x'
-profile::elasticsearch::instances:
+opstheater::profile::elasticsearch::instances:
   elasticsearch:
     ensure: present
     status: enabled

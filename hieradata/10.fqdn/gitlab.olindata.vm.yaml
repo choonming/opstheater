@@ -1,14 +1,14 @@
 ---
-profile::gitlab::gitlab_fqdn: "%{hiera('opstheater::gitlab::fqdn')}"
-profile::gitlab::gitlab_url: "http://%{hiera('opstheater::gitlab::fqdn')}"
-profile::gitlab::gitlab_ipaddress: "%{hiera('opstheater::gitlab::ipaddress')}"
+opstheater::profile::gitlab::gitlab_fqdn: "%{hiera('opstheater::gitlab::fqdn')}"
+opstheater::profile::gitlab::gitlab_url: "http://%{hiera('opstheater::gitlab::fqdn')}"
+opstheater::profile::gitlab::gitlab_ipaddress: "%{hiera('opstheater::gitlab::ipaddress')}"
 
-profile::gitlab::gitlabci_fqdn: "%{hiera('opstheater::gitlabci::fqdn')}"
-profile::gitlab::gitlabci_url: "http://%{hiera('opstheater::gitlabci::fqdn')}"
+opstheater::profile::gitlab::gitlabci_fqdn: "%{hiera('opstheater::gitlabci::fqdn')}"
+opstheater::profile::gitlab::gitlabci_url: "http://%{hiera('opstheater::gitlabci::fqdn')}"
 
-profile::gitlab::mattermost_fqdn: "%{hiera('opstheater::mattermost::fqdn')}"
-profile::gitlab::mattermost_url: "http://%{hiera('opstheater::mattermost::fqdn')}"
+opstheater::profile::gitlab::mattermost_fqdn: "%{hiera('opstheater::mattermost::fqdn')}"
+opstheater::profile::gitlab::mattermost_url: "http://%{hiera('opstheater::mattermost::fqdn')}"
 
-profile::gitlab::api_endpoint: "http://%{hiera('opstheater::gitlab::fqdn')}/api/v3"
-profile::gitlab::api_user: 'root'
-profile::gitlab::api_password: '5iveL!fe'
+opstheater::profile::gitlab::api_endpoint: "http://%{hiera('opstheater::gitlab::fqdn')}/api/v3"
+opstheater::profile::gitlab::api_user: 'root'
+opstheater::profile::gitlab::api_password: '5iveL!fe'
