@@ -19,5 +19,3 @@ opstheater::profile::base::packages:
   htop:
     ensure: present
     require: 'Yumrepo[epel]'
-  'vim-enhanced':
-    ensure: present
