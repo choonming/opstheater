@@ -4,13 +4,14 @@ class profile::icinga::client {
 
   include ::icinga2
   include ::icinga2::feature::command
-  include ::icinga2::pki::puppet
 
   class { '::icinga2::feature::api':
     accept_commands => true,
     accept_config   => true,
     manage_zone     => false,
   }
+
+  include ::icinga2::pki::puppet
 
   @@icinga::object::zone { $::fqdn:
     endpoints => {
