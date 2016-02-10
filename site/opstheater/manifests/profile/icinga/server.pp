@@ -3,25 +3,6 @@ class opstheater::profile::icinga::server {
   $icinga2_db_ipaddress = hiera('opstheater::icinga::mysql_ipaddress')
   $icinga2_web_fqdn = hiera('opstheater::icingaweb::fqdn')
 
-  class { '::mysql::server':
-    remove_default_accounts => true,
-    override_options  => { 
-      'mysqld' => {
-        'bind-address'      => '0.0.0.0',
-        'skip-name-resolve' => true,
-      }
-    },
-  }
-
-
-  mysql::db { 'icinga2_data':
-    user      => 'icinga2',
-    password  => 'password',
-    host      => '10.20.%',
-    grant     => ['ALL'],
-    before    => Class['icinga2'],
-  } ->
-
   class { 'icinga2':
     db_type         => 'mysql',
     db_host         => $icinga2_db_ipaddress,

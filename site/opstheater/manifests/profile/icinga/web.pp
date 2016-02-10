@@ -6,7 +6,10 @@ class opstheater::profile::icinga::web {
   if ! defined (Class['epel']) {
     class { 'epel': }
   }
+
   $icinga2_db_ipaddress = hiera('opstheater::icingaweb::mysql_ipaddress')
+  $icinga2_webdb_password = hiera('opstheater::icingaweb::webdb_password')
+  $icinga2_ido_password = hiera('opstheater::icinga::ido_password')
 
   class { '::mysql::client': }
 
@@ -44,28 +47,20 @@ class opstheater::profile::icinga::web {
     ido_db_host => $icinga2_db_ipaddress,
     ido_db_name => 'icinga2_data',
     ido_db_user => 'icinga2',
-    ido_db_pass => 'password',
+    ido_db_pass => $icinga2_ido_password,
     ido_db_port => '3306',
     web_db      => 'mysql',
     web_db_name => 'icinga2_web',
     web_db_host => $icinga2_db_ipaddress,
     web_db_user => 'icinga2_web',
-    web_db_pass => 'password',
+    web_db_pass => $icinga2_webdb_password,
     web_db_port => '3306',
   }
 
-  mysql::db { 'icinga2_web':
-    user      => 'icinga2_web',
-    password  => 'password',
-    host      => '10.20.%',
-    grant     => ['ALL'],
-    before    => Class['icingaweb2'],
-  } ->
-
   exec { 'populate-icinga2_web-mysql-db':
     path    => '/bin:/usr/bin:/sbin:/usr/sbin', 
-    unless  => "[ `mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web -ABN -e 'select 1 from icingaweb_user'` -eq 1 ]",
-    command => "mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ${icinga2_db_ipaddress} -uicinga2_web -ppassword icinga2_web -e \"INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\\\$1\\\$iQSrnmO9\\\$T3NVTu0zBkfuim4lWNRmH.\');\"",    
+    unless  => "[ `mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web -ABN -e 'select 1 from icingaweb_user'` -eq 1 ]",
+    command => "mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web -e \"INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\\\$1\\\$iQSrnmO9\\\$T3NVTu0zBkfuim4lWNRmH.\');\"",
     require   => [ Class['::mysql::client'], Package['icingaweb2'] ],
   } ->
 
