@@ -14,6 +14,16 @@ profile::base::packages:
     ensure: present
   tcpdump:
     ensure: present
+  joe:
+    ensure: present
+  nano:
+    ensure: present
+  telnet:
+    ensure: present
+  sysstat:
+    ensure: present
+  lsof:
+    ensure: present
 elastic_filebeat::output:
     - "elasticsearch"
 elastic_filebeat::elasticsearch_output_hosts:
