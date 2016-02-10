@@ -13,7 +13,6 @@ class profile::icinga::server {
     },
   }
 
-
   mysql::db { 'icinga2_data':
     user      => 'icinga2',
     password  => 'password',
@@ -32,7 +31,6 @@ class profile::icinga::server {
     manage_database => true,
   }
 
-  include ::icinga2::pki::puppet
   include ::icinga2::feature::command
 
   icinga2::object::zone { 'global-templates':
@@ -50,6 +48,12 @@ class profile::icinga::server {
   class { '::icinga2::feature::api':
     manage_zone => false,
   }
+
+  # icinga2::pki::puppet class needs to be declared
+  # after the icinga2::feature::api class in order
+  # to avoid resource duplication
+
+  contain ::icinga2::pki::puppet
 
   Icinga2::Object::Host <<| |>>
   Icinga2::Object::Service <<| |>>
