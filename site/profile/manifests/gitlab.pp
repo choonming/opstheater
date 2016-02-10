@@ -1,11 +1,18 @@
 class profile::gitlab {
 
-  $gitlab_url      = hiera('profile::gitlab::gitlab_url')
-  $gitlab_fqdn     = hiera('profile::gitlab::gitlab_fqdn')
-  $gitlab_ipaddress= hiera('profile::gitlab::gitlab_ipaddress')
-  $gitlabci_url    = hiera('profile::gitlab::gitlab_url')
-  $mattermost_url  = hiera('profile::gitlab::mattermost_url')
-  $mattermost_fqdn = hiera('profile::gitlab::mattermost_fqdn')
+  $gitlab_url                 = hiera('profile::gitlab::gitlab_url')
+  $gitlab_fqdn                = hiera('profile::gitlab::gitlab_fqdn')
+  $gitlab_ipaddress           = hiera('profile::gitlab::gitlab_ipaddress')
+  $gitlabci_url               = hiera('profile::gitlab::gitlab_url')
+  $gitlab_smtp_authentication = ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::authtype', 'login') } else { 'false' } )
+  $gitlab_enable_tls          = ( if hiera('opstheater::smtp::require_ssl') == true { true } else { '' })
+
+  $mattermost_url                 = hiera('profile::gitlab::mattermost_url')
+  $mattermost_fqdn                = hiera('profile::gitlab::mattermost_fqdn')
+  $mattermost_connection_security = ( if hiera('opstheater::smtp::require_ssl') == true { 'TLS' } else {''})  # Must be '' or 'TLS' or 'STARTTLS', we only put TLS here though for now
+
+  $email_smtp_username = ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::username') } else {''} )
+  $email_smtp_password = ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::password') } else {''} )
 
   $gitlab_api_endpoint = hiera('profile::gitlab::api_endpoint')
   $gitlab_api_user     = hiera('profile::gitlab::api_user')
@@ -77,13 +84,13 @@ class profile::gitlab {
       service_enable_outgoing_webhooks      => true,
       email_enable_sign_up_with_email       => false,
       email_smtp_server                     => hiera('opstheater::smtp::fqdn'),    
-      email_smtp_username                   => ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::username') } else {''} ),
-      email_smtp_password                   => ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::password') } else {''} ),
+      email_smtp_username                   => $email_smtp_username,
+      email_smtp_password                   => $email_smtp_password,
       email_smtp_port                       => hiera('opstheater::smtp::port'),
-      email_connection_security             => ( if hiera('opstheater::smtp::require_ssl') == true { 'TLS' } else {''}),  # Must be '' or 'TLS' or 'STARTTLS', we only put TLS here though for now
+      email_connection_security             => $mattermost_connection_security,
       email_feedback_name                   => 'OpsTheater Mattermost',
       email_enable_sign_up_with_email       => false,
-      email_feedback_email                  => join(['mattermost@',$mattermost_fqdn]),
+      email_feedback_email                  => "mattermost@${mattermost_fqdn}",
       team_enable_team_listing              => true,
       team_enable_team_creation             => false,  #NOTE: This must be TRUE for the initial team to setup mattermost then its always false afterwards
       team_enable_user_creation             => true,
@@ -96,9 +103,9 @@ class profile::gitlab {
       smtp_user_name            => hiera('opstheater::smtp::username'),
       smtp_password             => hiera('opstheater::smtp::password'),
       smtp_domain               => hiera('opstheater::domain'),
-      smtp_authentication       => ( if hiera('opstheater::smtp::require_auth') == true { hiera('opstheater::smtp::authtype', 'login') } else { 'false' } ),
-      smtp_enable_starttls_auto => ( if hiera('opstheater::smtp::require_ssl') == true { true } else { '' }),
-      smtp_tls                  => ( if hiera('opstheater::smtp::require_ssl') == true { true } else { '' }),
+      smtp_authentication       => $gitlab_smtp_authentication,
+      smtp_enable_starttls_auto => $gitlab_enable_tls,
+      smtp_tls                  => $gitlab_enable_tls,
     },
   } ->
 
