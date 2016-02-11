@@ -17,7 +17,7 @@ class profile::icinga::client {
 
   contain ::icinga2::pki::puppet
 
-  @@icinga::object::zone { $::fqdn:
+  @@icinga2::object::zone { $::fqdn:
     endpoints => {
       $::fqdn => {
         host  => $::fqdn,
