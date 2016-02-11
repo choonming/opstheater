@@ -19,10 +19,10 @@ class profile::icinga::server {
     global  => true,
   }
 
-  icinga2::object::zone { 'master':
+  @@icinga2::object::zone { 'master':
     endpoints => {
       $icinga2_web_fqdn => {
-        host  => $icinga2_web_fqdn,
+        host => $icinga2_web_fqdn,
       },
     },
   }
