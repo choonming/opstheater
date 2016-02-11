@@ -171,3 +171,8 @@
 # Description: 
 # Default value: '10.20.1.60'
 'opstheater::mysql::ipaddress': '10.20.1.60'
+
+# Variable: opstheater::mysql::whitelist_range
+# Description: 
+# Default value: '10.20.1.%'
+'opstheater::mysql::whitelist_range': '10.20.1.%'
