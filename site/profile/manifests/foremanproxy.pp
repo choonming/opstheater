@@ -48,6 +48,8 @@ class profile::foremanproxy {
   if hiera('opstheater::http_mode') == 'https' { 
 
     # Setup a port-80 forwarding to HTTPS
+    # NOTE: Nginx vhost Puppet module requires you to specify either a proxy or a www_root, so the www_root is set 
+    #       to an intentionally invalid path which will never be actually used to bypass this unnecessary check
     nginx::resource::vhost { "${foreman_fqdn}.forward":
       ensure               => present,
       rewrite_to_https     => true,
