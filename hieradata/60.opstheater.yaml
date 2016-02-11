@@ -55,12 +55,12 @@
 # Variable: opstheater::icinga::mysql_fqdn
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::fqdn')}"
-'opstheater::icinga::mysql_fqdn': "%{hiera('opstheater::icinga::fqdn')}"
+'opstheater::icinga::mysql_fqdn': "%{hiera('opstheater::mysql::fqdn')}"
 
 # Variable: opstheater::icinga::mysql_ipaddress
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
-'opstheater::icinga::mysql_ipaddress': "%{hiera('opstheater::icinga::ipaddress')}"
+'opstheater::icinga::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
 # Variable: opstheater::icingaweb::fqdn
 # Description: 
@@ -75,12 +75,12 @@
 # Variable: opstheater::icingaweb::mysql_fqdn
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::fqdn')}"
-'opstheater::icingaweb::mysql_fqdn': "%{hiera('opstheater::icinga::fqdn')}"
+'opstheater::icingaweb::mysql_fqdn': "%{hiera('opstheater::mysql::fqdn')}"
 
 # Variable: opstheater::icingaweb::mysql_ipaddress
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
-'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::icinga::ipaddress')}"
+'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
 ##########################
 ## elasticsearch stack related settings
