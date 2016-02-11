@@ -1,3 +1,6 @@
 class role::puppet::master {
-  include profile::base  
+  # Include our standard base packages
+  include profile::base
+  # Add our secure (if specified) foreman proxy via Nginx
+  include profile::foremanproxy
 }
