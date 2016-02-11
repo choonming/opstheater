@@ -37,7 +37,7 @@
 # Variable: opstheater::icinga::mysql_ipaddress
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
-'opstheater::icinga::mysql_ipaddress': "%{hiera('opstheater::icinga::ipaddress')}"
+'opstheater::icinga::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
 # Variable: opstheater::icinga::ido_password
 # Description: 
@@ -62,7 +62,7 @@
 # Variable: opstheater::icingaweb::mysql_ipaddress
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
-'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::icinga::ipaddress')}"
+'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
 # Variable: opstheater::icingaweb::webdb_password
 # Description: 
