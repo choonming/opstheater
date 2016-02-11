@@ -9,10 +9,6 @@ class opstheater::profile::icinga::checks {
     check_command => 'users',
   }
 
-  icinga2::object::apply_service { 'ssh':
-    check_command => 'ssh',
-  }
-
   icinga2::object::apply_service { 'load':
     check_command => 'load',
   }
