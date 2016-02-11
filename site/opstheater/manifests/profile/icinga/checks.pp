@@ -23,9 +23,6 @@ class opstheater::profile::icinga::checks {
 
   icinga2::object::apply_service { 'disk':
     check_command => 'disk',
-    display_name  => undef,
-    apply         => 'for (disk => config in host.vars.disk)',
-    vars          => 'config',
   }
 
 }

@@ -10,12 +10,6 @@ class opstheater::profile::base::icinga {
   @@icinga2::object::host { $::fqdn:
     ipv4_address => $::ipaddress,
     vars         => {
-      'disk'          => {
-        '" "'  => { },
-        '" /"' => {
-          '"disk_partitions"' => '"/"'
-        }
-      },
       os              => 'Linux',
       remote          => true,
       remote_endpoint => $::fqdn
