@@ -24,7 +24,7 @@ class profile::gitlab {
   $mattermost_ssl_cert = "/etc/gitlab/ssl/${mattermost_fqdn}.crt";
 
 
-  host { [$mattermost_fqdn]:
+  host { $mattermost_fqdn:
     ensure => present,
     ip     => $gitlab_ipaddress,
   } ->
