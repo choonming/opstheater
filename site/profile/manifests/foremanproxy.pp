@@ -20,28 +20,28 @@ class profile::foremanproxy {
   # Create our SSL Key
   file { $nginx_ssl_key :
     ensure   => file,
-    source   => "puppet:///modules/profile/ssl/master.key",
+    source   => 'puppet:///modules/profile/ssl/master.key',
     notify   => Class['nginx::service'],
     require  => File['/etc/nginx/ssl'],
   }
     
   # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $nginx_ssl_cert:
-        owner => nginx,
-        group => nginx,
-        mode  => "0600",
-        notify => Class['nginx::service'],
-        require  => File['/etc/nginx/ssl'],
+    owner   => nginx,
+    group   => nginx,
+    mode    => '0600',
+    notify  => Class['nginx::service'],
+    require => File['/etc/nginx/ssl'],
   }
-  concat::fragment{"nginx_ssl_cert_data":
-     target => $nginx_ssl_cert,
-     source => "puppet:///modules/profile/ssl/master.crt",
-     order  => 10,
+  concat::fragment{'nginx_ssl_cert_data':
+    target => $nginx_ssl_cert,
+    source => 'puppet:///modules/profile/ssl/master.crt',
+    order  => 10,
   }
-  concat::fragment{"nginx_ssl_cacert_data":
-     target => $nginx_ssl_cert,
-     source => "puppet:///modules/profile/ssl/master-cabundle.crt",
-     order  => 20,
+  concat::fragment{'nginx_ssl_cacert_data':
+    target => $nginx_ssl_cert,
+    source => 'puppet:///modules/profile/ssl/master-cabundle.crt',
+    order  => 20,
   }
   
   # If we want to run HTTPS...
@@ -49,10 +49,10 @@ class profile::foremanproxy {
 
     # Setup a port-80 forwarding to HTTPS
     nginx::resource::vhost { "${foreman_fqdn}.forward":
-        ensure               => present,
-        rewrite_to_https     => true,
-        server_name          => [$foreman_fqdn],
-        www_root             => "/invalid_path_but_must_put_something",
+      ensure               => present,
+      rewrite_to_https     => true,
+      server_name          => [$foreman_fqdn],
+      www_root             => '/invalid_path_but_must_put_something',
     }
 
     # Setup a secure proxy to foreman
