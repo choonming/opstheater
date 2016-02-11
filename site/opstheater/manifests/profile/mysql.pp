@@ -14,7 +14,7 @@ class opstheater::profile::mysql {
     group  => 'root',
     mode   => '0755',
     source => 'puppet:///modules/opstheater/mysql/RPM-GPG-KEY-percona',
-    before => [Package['mysql_client']],
+    before => [ Package['mysql_client'], Class['::mysql::server'] ],
   }
 
   file { '/var/log/mysql':
