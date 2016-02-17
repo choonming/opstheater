@@ -11,7 +11,6 @@ class profile::elasticsearch{
   
   # load elasticsearch instance details fore hiera
   $instances = hiera_hash('profile::elasticsearch::instances', undef)
-#  $elasticlogs= hiera_hash('profile::elasticsearch::filebeat_prospector', undef) 
  
   if $instances {
     create_resources('elasticsearch::instance', $instances)
