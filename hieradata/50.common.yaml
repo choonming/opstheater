@@ -28,3 +28,8 @@ elastic_filebeat::logstash_output_hosts:
     - "logstash.olindata.vm:5044"
 elastic_filebeat::paths:
     - '/var/log/messages'
+profile::common::filebeat_prospector:
+  syslogs:
+    paths:
+      - '/var/log/messages'
+    log_type: 'syslogs-beat'

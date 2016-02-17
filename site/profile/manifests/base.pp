@@ -1,7 +1,10 @@
 class profile::base {
   
   # configure ntp
-  include ::ntp
+  #include ::ntp
+  #class {'ntp':
+  #  autoupdate => true,
+  #}
 
   # TODO: this needs to be enabled
   class { 'firewall':

@@ -11,3 +11,15 @@ profile::gitlab::mattermost_url: "%{hiera('opstheater::http_mode')}://%{hiera('o
 profile::gitlab::api_endpoint: "%{hiera('opstheater::http_mode')}://%{hiera('opstheater::gitlab::fqdn')}/api/v3"
 profile::gitlab::api_user: 'root'
 profile::gitlab::api_password: '5iveL!fe'
+
+profile::gitlab::filebeat_prospector:
+  gitlablogs:
+    paths:
+      - '/var/log/gitlab/nginx/gitlab_access.log'
+      - '/var/log/gitlab/nginx/gitlab_error.log'
+      - '/var/log/gitlab/nginx/gitlab_ci_access.log'
+      - '/var/log/gitlab/nginx/gitlab_ci_error.log'
+      - '/var/log/gitlab/gitlab-rails/production.log'
+      - '/var/log/gitlab/unicorn/unicorn_stdout.log'
+      - '/var/log/gitlab/unicorn/unicorn_stderr.log'
+    log_type: 'gitlablogs-beat'

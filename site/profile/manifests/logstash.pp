@@ -1,5 +1,7 @@
 class profile::logstash{
 
+include profile::filebeat::logstash
+
 $package_url = hiera('profile::logstash::package_url')
 $input_beats_port = hiera('profile::logstash::input_beats_port')
 $input_beats_type = hiera('profile::logstash::input_beats_type')
@@ -21,6 +23,10 @@ logstash::configfile { 'input_beats':
   order   => 1
 }
 
+logstash::configfile { 'filter':
+  content => template('profile/filter.erb'),
+  order   => 2
+}
 
 logstash::configfile { 'output_elasticsearch':
   content => template('profile/output_elasticsearch.erb'),

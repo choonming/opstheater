@@ -80,4 +80,14 @@ profile::mysql::override_options:
   mysqldump:
     max_allowed_packet: 64M 
 
+profile::mysql::filebeat_prospector:
+  mysqllogs:
+    paths:
+      - '/var/log/mariadb/mariadb.log'
+      - '/var/log/mysql/mysqld.log'
+      - '/var/log/mysql/mysqld.err'
+      - '/var/log/mysql/error.log'
+      - '/var/log/mysqld.log'
+    log_type: 'mysqllogs-beat'
+
 
