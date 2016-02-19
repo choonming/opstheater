@@ -1,4 +1,5 @@
-profile::puppetmaster::filebeat_prospector:
+---
+profile::filebeat::puppetmaster::prospector:  
   puppetserverlogs:
     paths:
       - '/var/log/puppetlabs/puppetserver/puppetserver.log'

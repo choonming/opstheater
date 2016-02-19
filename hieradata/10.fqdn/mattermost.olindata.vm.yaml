@@ -1,5 +1,5 @@
 ---
-profile::mattermost::filebeat_prospector:
+profile::filebeat::mattermost::prospector:
   mattermostlogs:
     paths:
       - '/var/log/gitlab/mattermost/mattermost.log'

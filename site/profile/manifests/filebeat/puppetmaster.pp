@@ -1,11 +1,11 @@
 class profile::filebeat::puppetmaster{
 
- $puppetmasterlogs = hiera_hash('profile::puppetmaster::filebeat_prospector', undef)
+ $puppetmasterlogs = hiera_hash('profile::filebeat::puppetmaster::prospector', undef)
 
   if $puppetmasterlogs {
      create_resources('filebeat::prospector', $puppetmasterlogs)
   } else {
-     warning("No puppet logs configured in filebeat for puppet master instance ${::fqdn}.")
+      notify {"No puppet logs configured in filebeat for puppet master instance ${::fqdn}.":}
   }
 
 

@@ -12,5 +12,5 @@ class profile::base::apt {
   $repositories = hiera_hash('profile::base::apt::repositories', undef)
   if $repositories {
     create_resources('apt::source', $repositories)
-  }  
+  }
 }

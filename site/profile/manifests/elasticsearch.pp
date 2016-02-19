@@ -1,10 +1,8 @@
-#class profile::elasticsearch inherits profile::base{
-
-class profile::elasticsearch{  
+class profile::elasticsearch{
   # resources required for elasticsearch
   include ::java
   include profile::filebeat::elasticsearch
-  include profile::filebeat::kibana 
+  include profile::filebeat::kibana
   
   class { '::elasticsearch':
   }

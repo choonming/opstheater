@@ -2,12 +2,12 @@ class profile::base::filebeat{
 
 class { 'filebeat':
   outputs => {
-    'logstash'     => {
-     'hosts' => [
+   'logstash' => {
+     'hosts'       => [
        'logstash.olindata.vm:5044',
      ],
      'loadbalance' => true,
-     'enabled' => true,
+     'enabled'     => true,
     },
   },
 }

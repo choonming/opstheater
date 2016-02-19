@@ -15,7 +15,7 @@ profile::logstash::input_beats_type: 'logs'
 profile::logstash::output_codec: 'rubydebug'
 profile::logstash::output_elasicsearch_hosts:
     - "elasticsearch:9200"
-profile::logstash::filebeat_prospector:
+profile::filebeat::logstash::prospector:
   logstashlogs:
     paths:
       - '/var/log/logstash/logstash.log'

@@ -12,7 +12,7 @@ profile::gitlab::api_endpoint: "%{hiera('opstheater::http_mode')}://%{hiera('ops
 profile::gitlab::api_user: 'root'
 profile::gitlab::api_password: '5iveL!fe'
 
-profile::gitlab::filebeat_prospector:
+profile::filebeat::gitlab::prospector:
   gitlablogs:
     paths:
       - '/var/log/gitlab/nginx/gitlab_access.log'
