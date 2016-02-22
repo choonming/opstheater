@@ -1,8 +1,1 @@
 ---
-profile::filebeat::mattermost::prospector:
-  mattermostlogs:
-    paths:
-      - '/var/log/gitlab/mattermost/mattermost.log'
-      - '/var/log/gitlab/nginx/gitlab_mattermost_access.log'
-      - '/var/log/gitlab/nginx/gitlab_mattermost_error.log'
-    log_type: 'mattermostlogs-beat'

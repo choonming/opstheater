@@ -1,11 +1,13 @@
 class profile::filebeat::mattermost{
 
- $mattermostlogs = hiera_hash('profile::filebeat::mattermost::prospector', undef)
-
-  if $mattermostlogs {
-     create_resources('filebeat::prospector', $mattermostlogs)
-  } else {
-     notify {"No mattermost log path configured in filebeat for instance ${::fqdn}.":}
+  filebeat::prospector { 'mattermostlogs':
+    paths => [
+      '/var/log/gitlab/mattermost/current',
+      '/var/log/gitlab/mattermost/mattermost.log',
+      '/var/log/gitlab/nginx/gitlab_mattermost_access.log',
+      '/var/log/gitlab/nginx/gitlab_mattermost_error.log',
+    ],
+    log_type => 'mattermostlogs-beat',
   }
 
 
