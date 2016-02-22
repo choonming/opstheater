@@ -62,6 +62,11 @@
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
 'opstheater::icinga::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
+# Variable: opstheater::icinga::ido_password
+# Description:
+# Default value: "password"
+'opstheater::icinga::ido_password': "password"
+
 # Variable: opstheater::icingaweb::fqdn
 # Description: 
 # Default value: "%{hiera('opstheater::icinga::fqdn')}"
@@ -81,6 +86,11 @@
 # Description: 
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
 'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
+
+# Variable: opstheater::icingaweb::webdb_password
+# Description:
+# Default value: "password"
+'opstheater::icingaweb::webdb_password': "password"
 
 ##########################
 ## elasticsearch stack related settings
