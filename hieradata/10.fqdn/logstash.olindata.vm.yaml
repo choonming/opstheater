@@ -13,7 +13,7 @@ profile::logstash::package_url: 'https://download.elastic.co/logstash/logstash/p
 profile::logstash::input_beats_port: '5044'
 profile::logstash::input_beats_type: 'logs'
 profile::logstash::output_codec: 'rubydebug'
-profile::logstash::output_elasicsearch_hosts:
+profile::logstash::output_elasticsearch_hosts:
     - "elasticsearch:9200"
 profile::filebeat::logstash::prospector:
   logstashlogs:
