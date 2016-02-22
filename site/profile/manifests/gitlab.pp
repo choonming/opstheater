@@ -174,5 +174,8 @@ class profile::gitlab {
     fullname => 'Walter Heck',
   }
 
+  include profile::filebeat::gitlab
+  include profile::filebeat::mattermost
+
 
 }
