@@ -1,7 +1,2 @@
 filter {
-  if [type] == "syslogs" {
-    grok {
-      match => { "message" => "%{COMBINEDSYSLOG}" }
-    }
-  }
 }
