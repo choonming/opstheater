@@ -28,5 +28,7 @@ class profile::mysql {
     ensure => latest,
   }
 
+  include profile::filebeat::mysql
+
 }
 
