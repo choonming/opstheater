@@ -1,3 +1,6 @@
 class opstheater::role::puppet::master {
-  include opstheater::profile::base  
+  # Include our standard base packages
+  include opstheater::profile::base
+  # Add our secure (if specified) foreman proxy via Nginx
+  include opstheater::profile::foremanproxy
 }

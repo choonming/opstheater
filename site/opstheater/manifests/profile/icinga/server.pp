@@ -2,6 +2,7 @@ class opstheater::profile::icinga::server {
 
   $icinga2_db_ipaddress = hiera('opstheater::icinga::mysql_ipaddress')
   $icinga2_web_fqdn = hiera('opstheater::icingaweb::fqdn')
+  $icinga2_ido_password = hiera('opstheater::icinga::ido_password')
 
   class { 'icinga2':
     db_type         => 'mysql',
@@ -9,7 +10,7 @@ class opstheater::profile::icinga::server {
     db_port         => '3306',
     db_name         => 'icinga2_data',
     db_user         => 'icinga2',
-    db_pass         => 'password',
+    db_pass         => $icinga2_ido_password,
     manage_database => true,
   }
 
