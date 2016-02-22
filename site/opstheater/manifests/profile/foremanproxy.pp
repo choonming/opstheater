@@ -1,4 +1,4 @@
-class profile::foremanproxy {
+class opstheater::profile::foremanproxy {
   
   # Class Defines
   $foreman_fqdn = hiera('opstheater::foreman::fqdn')
@@ -20,7 +20,7 @@ class profile::foremanproxy {
   # Create our SSL Key
   file { $nginx_ssl_key :
     ensure   => file,
-    source   => 'puppet:///modules/profile/ssl/master.key',
+    source   => 'puppet:///modules/opstheater/ssl/master.key',
     notify   => Class['nginx::service'],
     require  => File['/etc/nginx/ssl'],
   }
@@ -35,12 +35,12 @@ class profile::foremanproxy {
   }
   concat::fragment{'nginx_ssl_cert_data':
     target => $nginx_ssl_cert,
-    source => 'puppet:///modules/profile/ssl/master.crt',
+    source => 'puppet:///modules/opstheater/ssl/master.crt',
     order  => 10,
   }
   concat::fragment{'nginx_ssl_cacert_data':
     target => $nginx_ssl_cert,
-    source => 'puppet:///modules/profile/ssl/master-cabundle.crt',
+    source => 'puppet:///modules/opstheater/ssl/master-cabundle.crt',
     order  => 20,
   }
   
