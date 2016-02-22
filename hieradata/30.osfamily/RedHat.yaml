@@ -13,6 +13,9 @@ profile::base::packages:
   'jq':
     ensure: present
     require: 'Yumrepo[epel]'
+  joe:
+    ensure: present
+    require: 'Yumrepo[epel]'
   iperf:
     ensure: present
     require: 'Yumrepo[epel]'
