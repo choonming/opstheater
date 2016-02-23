@@ -126,7 +126,6 @@ class opstheater::profile::gitlab {
       email_smtp_port                       => hiera('opstheater::smtp::port'),
       email_connection_security             => $mattermost_connection_security,
       email_feedback_name                   => 'OpsTheater Mattermost',
-      email_enable_sign_up_with_email       => false,
       email_feedback_email                  => "mattermost@${mattermost_fqdn}",
       team_enable_team_listing              => true,
       team_enable_team_creation             => false,  #NOTE: This must be TRUE for the initial team to setup mattermost then its always false afterwards
