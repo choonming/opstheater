@@ -1,13 +1,15 @@
 class profile::filebeat::mysql{
 
-  $mysqllogs = hiera_hash('profile::filebeat::mysql::prospector', undef)
-
-  if $kibanalogs {
-     create_resources('filebeat::prospector', $mysqllogs)
-  } else {
-     notify {"No mysql log path configured in filebeat for instance ${::fqdn}.":}
+  filebeat::prospector { 'mysqllogs':
+    paths => [
+      '/var/log/mariadb/mariadb.log',
+      '/var/log/mysql/mysqld.log',
+      '/var/log/mysql/mysqld.err',
+      '/var/log/mysql/error.log',
+      '/var/log/mysqld.log',
+    ],
+    log_type => 'mysqllogs-beat',
   }
-
 
 }
 
