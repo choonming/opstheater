@@ -78,16 +78,4 @@ profile::mysql::override_options:
   mysql:
     prompt: "'mysql[%{::hostname}] > '"
   mysqldump:
-    max_allowed_packet: 64M 
-
-profile::filebeat::mysql::prospector:  
-  mysqllogs:
-    paths:
-      - '/var/log/mariadb/mariadb.log'
-      - '/var/log/mysql/mysqld.log'
-      - '/var/log/mysql/mysqld.err'
-      - '/var/log/mysql/error.log'
-      - '/var/log/mysqld.log'
-    log_type: 'mysqllogs-beat'
-
-
+    max_allowed_packet: 64M

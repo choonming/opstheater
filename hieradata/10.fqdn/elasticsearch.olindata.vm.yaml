@@ -9,14 +9,3 @@ profile::elasticsearch::instances:
       network.host: "%{hiera('opstheater::elasticsearch::fqdn')}"
       http.port: '9200'
       index.max_result_window: '2147483647'
-profile::filebeat::elasticsearch::prospector:
-  elasticsearchlogs:
-    paths:
-      - '/var/log/elasticsearch/elasticsearch/elasticsearch/elasticsearch.log'
-    log_type: 'elasticlogs-beat'
-profile::filebeat::kibana::prospector:
-  kibanalogs:
-    paths:
-      - '/var/log/kibana4.log'
-      - '/var/log/kibana4.err'
-    log_type: 'kibanalogs-beat' 
