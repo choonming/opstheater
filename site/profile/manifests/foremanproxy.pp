@@ -53,14 +53,14 @@ class profile::foremanproxy {
     nginx::resource::vhost { "${foreman_fqdn}.forward":
       ensure           => present,
       rewrite_to_https => true,
-      server_name      => $foreman_fqdn,
+      server_name      => [ $foreman_fqdn ],
       www_root         => '/invalid_path_but_must_put_something',
     }
 
     # Setup a secure proxy to foreman
     nginx::resource::vhost { $foreman_fqdn:
       ensure      => present,
-      server_name => $foreman_fqdn,
+      server_name => [ $foreman_fqdn ],
       listen_port => 443,
       proxy       => 'http://localhost:3000/',
       ssl         => true,
@@ -74,7 +74,7 @@ class profile::foremanproxy {
     # Setup a insecure proxy to foreman (for dev envs usually)
     nginx::resource::vhost { $foreman_fqdn:
       ensure      => present,
-      server_name => $foreman_fqdn,
+      server_name => [ $foreman_fqdn ],
       listen_port => 80,
       proxy       => 'http://localhost:3000/',
     }
