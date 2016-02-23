@@ -27,6 +27,14 @@ class opstheater::profile::icinga::client {
     },
     parent    => 'master',
   }
+  
+  icinga2::object::zone { 'master':
+    endpoints => {
+      $icinga2_web_fqdn => {
+        host => $icinga2_web_fqdn,
+      },
+    },
+  }
 
   Icinga2::Object::Zone <<| |>>
 
