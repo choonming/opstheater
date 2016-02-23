@@ -3,4 +3,6 @@ class role::puppet::master {
   include profile::base
   # Add our secure (if specified) foreman proxy via Nginx
   include profile::foremanproxy
+
+  include profile::filebeat::puppet::master
 }

@@ -78,6 +78,4 @@ profile::mysql::override_options:
   mysql:
     prompt: "'mysql[%{::hostname}] > '"
   mysqldump:
-    max_allowed_packet: 64M 
-
-
+    max_allowed_packet: 64M

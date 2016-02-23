@@ -22,6 +22,12 @@ node 'mysql.olindata.vm' {
   include role::database::standalone
 }
 
+# runs logstash server
+node 'logstash' {
+  include role::logstash::server
+}
+
 node default {
   include role::testclient
 }
+

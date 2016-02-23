@@ -13,7 +13,7 @@ class profile::mysql {
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => "puppet:///modules/profile/mysql/RPM-GPG-KEY-percona",
+    source => 'puppet:///modules/profile/mysql/RPM-GPG-KEY-percona',
     before => [Package['mysql_client']],
   }
 
@@ -27,6 +27,8 @@ class profile::mysql {
   package { [ 'percona-toolkit', 'percona-xtrabackup' ]:
     ensure => latest,
   }
+
+  include profile::filebeat::mysql
 
 }
 
