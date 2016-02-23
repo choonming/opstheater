@@ -1,10 +1,12 @@
 class profile::base::filebeat{
 
+  $logstash_fqdn = hiera('opstheater::logstash::fqdn')
+
   class { 'filebeat':
     outputs => {
      'logstash' => {
        'hosts'       => [
-         'logstash.olindata.vm:5044',
+         "${logstash_fqdn}:5044",
        ],
        'loadbalance' => true,
        'enabled'     => true,

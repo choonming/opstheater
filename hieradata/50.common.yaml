@@ -25,7 +25,7 @@ profile::base::packages:
 elastic_filebeat::output:
     - "logstash"
 elastic_filebeat::logstash_output_hosts:
-    - "logstash.olindata.vm:5044"
+    - "%{hiera('opstheater::logstash::fqdn')}:5044"
 elastic_filebeat::paths:
     - '/var/log/messages'
 profile::common::filebeat_prospector:
