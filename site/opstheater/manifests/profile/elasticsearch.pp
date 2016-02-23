@@ -3,7 +3,7 @@
 class opstheater::profile::elasticsearch{
   # resources required for elasticsearch
   include ::java
-  include profile::filebeat::elasticsearch
+  include opstheater::profile::filebeat::elasticsearch
   
   class { '::elasticsearch':
   }

@@ -44,8 +44,6 @@ class opstheater::profile::icinga::web {
     group   => apache,
   }
 
-
-
   if ! defined (Class['epel']) {
     class { 'epel': }
   }

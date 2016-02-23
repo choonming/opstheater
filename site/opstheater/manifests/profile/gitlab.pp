@@ -174,8 +174,8 @@ class opstheater::profile::gitlab {
     fullname => 'Walter Heck',
   }
 
-  include profile::filebeat::gitlab
-  include profile::filebeat::mattermost
+  include opstheater::profile::filebeat::gitlab
+  include opstheater::profile::filebeat::mattermost
 
 
 }

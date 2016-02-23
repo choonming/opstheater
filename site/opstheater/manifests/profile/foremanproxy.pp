@@ -17,7 +17,7 @@ class opstheater::profile::foremanproxy {
     group  => nginx,
   }
 
-  include profile::filebeat::foreman::proxy
+  include opstheater::profile::filebeat::foreman::proxy
   
   # Create our SSL Key
   file { $nginx_ssl_key :

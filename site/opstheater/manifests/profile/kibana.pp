@@ -7,6 +7,6 @@ class opstheater::profile::kibana {
     elasticsearch_url => "http://${elasticsearch}:9200",
   }
 
-  include profile::filebeat::kibana
+  include opstheater::profile::filebeat::kibana
 
 }
