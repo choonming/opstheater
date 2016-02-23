@@ -11,6 +11,8 @@ class profile::icinga::client {
     manage_zone     => false,
   }
 
+  include profile::filebeat::icinga::client
+
   # icinga2::pki::puppet class needs to be declared
   # after the icinga2::feature::api class in order
   # to avoid resource duplication
