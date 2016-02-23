@@ -1,7 +1,7 @@
 class opstheater::profile::filebeat::puppet::puppetdb {
 
   filebeat::prospector { 'puppetdb':
-    paths => [
+    paths    => [
       '/var/log/puppetlabs/puppetdb/puppetdb.log',
       '/var/log/puppetlabs/puppetdb/puppetdb-access.log',
     ],

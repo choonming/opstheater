@@ -1,7 +1,7 @@
 class opstheater::profile::filebeat::gitlab {
 
   filebeat::prospector { 'gitlablogs':
-    paths => [
+    paths    => [
       '/var/log/gitlab/nginx/gitlab_access.log',
       '/var/log/gitlab/nginx/gitlab_error.log',
       '/var/log/gitlab/nginx/gitlab_ci_access.log',

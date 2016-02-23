@@ -1,7 +1,7 @@
 class opstheater::profile::filebeat::logstash {
 
   filebeat::prospector { 'logstashlogs':
-    paths => [
+    paths    => [
       '/var/log/logstash/logstash.log',
       '/var/log/logstash/logstash.err'
     ],

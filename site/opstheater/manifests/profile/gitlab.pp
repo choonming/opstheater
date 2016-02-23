@@ -32,9 +32,9 @@ class opstheater::profile::gitlab {
   # NOTE: it shouldn't be needed to define the user and file resources here, this should be 
   # fixed in the omnibus installer
   user { 'gitlab-ci':
+    ensure  => present,
     comment => 'Gitlab CI user',
     home    => '/var/opt/gitlab/gitlab-ci',
-    ensure  => present,
     shell   => '/bin/false',
   } ->
 
@@ -52,20 +52,20 @@ class opstheater::profile::gitlab {
 
   # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $gitlab_ssl_cert:
-        owner  => root,
-        group  => root,
-        mode   => '0644',
-        notify => Exec['gitlab_reconfigure'],
+    owner  => root,
+    group  => root,
+    mode   => '0644',
+    notify => Exec['gitlab_reconfigure'],
   }
   concat::fragment{'gitlab_ssl_cert_data':
-     target => $gitlab_ssl_cert,
-     source => 'puppet:///modules/profile/ssl/gitlab.crt',
-     order  => 10,
+    target => $gitlab_ssl_cert,
+    source => 'puppet:///modules/profile/ssl/gitlab.crt',
+    order  => 10,
   }
   concat::fragment{'gitlab_ssl_cacert_data':
-     target => $gitlab_ssl_cert,
-     source => 'puppet:///modules/profile/ssl/gitlab-cabundle.crt',
-     order  => 20,
+    target => $gitlab_ssl_cert,
+    source => 'puppet:///modules/profile/ssl/gitlab-cabundle.crt',
+    order  => 20,
   }
   
 
@@ -78,20 +78,20 @@ class opstheater::profile::gitlab {
   
   # Create our SSL Cert for Mattermost Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $mattermost_ssl_cert:
-        owner  => root,
-        group  => root,
-        mode   => '0644',
-        notify => Exec['gitlab_reconfigure'],
+    owner  => root,
+    group  => root,
+    mode   => '0644',
+    notify => Exec['gitlab_reconfigure'],
   }
   concat::fragment{'mattermost_ssl_cert_data':
-     target => $mattermost_ssl_cert,
-     source => 'puppet:///modules/profile/ssl/mattermost.crt',
-     order  => 10,
+    target => $mattermost_ssl_cert,
+    source => 'puppet:///modules/profile/ssl/mattermost.crt',
+    order  => 10,
   }
   concat::fragment{'mattermost_ssl_cacert_data':
-     target => $mattermost_ssl_cert,
-     source => 'puppet:///modules/profile/ssl/mattermost-cabundle.crt',
-     order  => 20,
+    target => $mattermost_ssl_cert,
+    source => 'puppet:///modules/profile/ssl/mattermost-cabundle.crt',
+    order  => 20,
   }
 
   # make sure some of the basic directories exist
@@ -175,6 +175,5 @@ class opstheater::profile::gitlab {
 
   include opstheater::profile::filebeat::gitlab
   include opstheater::profile::filebeat::mattermost
-
 
 }

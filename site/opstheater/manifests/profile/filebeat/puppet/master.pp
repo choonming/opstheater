@@ -1,7 +1,7 @@
 class opstheater::profile::filebeat::puppet::master{
 
   filebeat::prospector { 'puppetserver':
-    paths => [
+    paths    => [
       '/var/log/puppetlabs/puppetserver/puppetserver.log',
       '/var/log/puppetlabs/puppetserver/puppetserver-access.log',
     ],
@@ -9,7 +9,7 @@ class opstheater::profile::filebeat::puppet::master{
   }
 
   filebeat::prospector { 'puppetcs':
-    paths => [
+    paths    => [
       '/var/log/puppetlabs/console-services/console-services.log',
       '/var/log/puppetlabs/console-services/console-services-access.log',
     ],
@@ -17,7 +17,7 @@ class opstheater::profile::filebeat::puppet::master{
   }
 
   filebeat::prospector { 'nginxlogs':
-    paths => [
+    paths    => [
       '/var/log/puppetlabs/nginx/access.log',
       '/var/log/puppetlabs/nginx/error.log',
     ],

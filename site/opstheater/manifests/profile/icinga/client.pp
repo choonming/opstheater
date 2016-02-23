@@ -22,7 +22,7 @@ class opstheater::profile::icinga::client {
   @@icinga2::object::zone { $::fqdn:
     endpoints => {
       $::fqdn => {
-         host => $::fqdn,
+        host => $::fqdn,
       },
     },
     parent    => 'master',

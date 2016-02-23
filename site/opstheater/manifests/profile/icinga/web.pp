@@ -65,24 +65,25 @@ class opstheater::profile::icinga::web {
   }
   
   if hiera('opstheater::http_mode') == 'https' {
-     ::apache::listen { '443':
-       before => Class['icingaweb2::config'],
-     }
-     
-     apache::vhost { "${icinga2_web_fqdn} non-ssl":
-       servername      => $icinga2_web_fqdn,
-       port            => '80',
-       docroot         => '/var/www/redirect',
-       redirect_status => 'permanent',
-       redirect_dest   => "https://${icinga2_web_fqdn}/"
-     }
+    
+    ::apache::listen { '443':
+      before => Class['icingaweb2::config'],
+    }
 
-     apache::vhost { "${icinga2_web_fqdn} ssl":
-       servername => $icinga2_web_fqdn,
-       port       => '443',
-       docroot    => '/var/www/redirect',
-       ssl        => true,
-     }
+    apache::vhost { "${icinga2_web_fqdn} non-ssl":
+      servername      => $icinga2_web_fqdn,
+      port            => '80',
+      docroot         => '/var/www/redirect',
+      redirect_status => 'permanent',
+      redirect_dest   => "https://${icinga2_web_fqdn}/"
+    }
+
+    apache::vhost { "${icinga2_web_fqdn} ssl":
+      servername => $icinga2_web_fqdn,
+      port       => '443',
+      docroot    => '/var/www/redirect',
+      ssl        => true,
+    }
   }
 
   class { 'apache::mod::php': }

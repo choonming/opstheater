@@ -1,7 +1,7 @@
 class opstheater::profile::filebeat::mysql {
 
   filebeat::prospector { 'mysqllogs':
-    paths => [
+    paths    => [
       '/var/log/mariadb/mariadb.log',
       '/var/log/mysql/mysqld.log',
       '/var/log/mysql/mysqld.err',

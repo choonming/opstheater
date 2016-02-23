@@ -1,7 +1,7 @@
-class profile::filebeat::kibana {
+class opstheater::profile::filebeat::kibana {
 
   filebeat::prospector { 'kibanalogs':
-    paths => [
+    paths    => [
       '/var/log/kibana/kibana4.log',
       '/var/log/kibana4.log',
       '/var/log/kibana4.err',
