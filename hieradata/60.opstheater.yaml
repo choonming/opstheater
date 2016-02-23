@@ -127,12 +127,12 @@
 # Variable: opstheater::logstash::fqdn
 # Description: 
 # Default value: "%{hiera('opstheater::elasticsearch::fqdn')}"
-'opstheater::logstash::fqdn': "%{hiera('opstheater::elasticsearch::fqdn')}"
+'opstheater::logstash::fqdn': "logstash.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::logstash::ipaddress
 # Description: 
 # Default value: "%{hiera('opstheater::elasticsearch::ipaddress')}"
-'opstheater::logstash::ipaddress': "%{hiera('opstheater::elasticsearch::ipaddress')}"
+'opstheater::logstash::ipaddress': '10.20.1.70'
 
 ##########################
 ## GitLab related settings
