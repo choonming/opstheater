@@ -45,52 +45,52 @@ class opstheater::profile::gitlab {
   } ->
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/profile/ssl/gitlab.key",
+    source => 'puppet:///modules/profile/ssl/gitlab.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
   
 
   # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $gitlab_ssl_cert:
-        owner => root,
-        group => root,
-        mode  => "0644",
+        owner  => root,
+        group  => root,
+        mode   => '0644',
         notify => Exec['gitlab_reconfigure'],
   }
-  concat::fragment{"gitlab_ssl_cert_data":
+  concat::fragment{'gitlab_ssl_cert_data':
      target => $gitlab_ssl_cert,
-     source => "puppet:///modules/profile/ssl/gitlab.crt",
+     source => 'puppet:///modules/profile/ssl/gitlab.crt',
      order  => 10,
   }
-  concat::fragment{"gitlab_ssl_cacert_data":
+  concat::fragment{'gitlab_ssl_cacert_data':
      target => $gitlab_ssl_cert,
-     source => "puppet:///modules/profile/ssl/gitlab-cabundle.crt",
+     source => 'puppet:///modules/profile/ssl/gitlab-cabundle.crt',
      order  => 20,
   }
   
 
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
-    source => "puppet:///modules/profile/ssl/mattermost.key",
+    source => 'puppet:///modules/profile/ssl/mattermost.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
   
   
   # Create our SSL Cert for Mattermost Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $mattermost_ssl_cert:
-        owner => root,
-        group => root,
-        mode  => "0644",
+        owner  => root,
+        group  => root,
+        mode   => '0644',
         notify => Exec['gitlab_reconfigure'],
   }
-  concat::fragment{"mattermost_ssl_cert_data":
+  concat::fragment{'mattermost_ssl_cert_data':
      target => $mattermost_ssl_cert,
-     source => "puppet:///modules/profile/ssl/mattermost.crt",
+     source => 'puppet:///modules/profile/ssl/mattermost.crt',
      order  => 10,
   }
-  concat::fragment{"mattermost_ssl_cacert_data":
+  concat::fragment{'mattermost_ssl_cacert_data':
      target => $mattermost_ssl_cert,
-     source => "puppet:///modules/profile/ssl/mattermost-cabundle.crt",
+     source => 'puppet:///modules/profile/ssl/mattermost-cabundle.crt',
      order  => 20,
   }
 
@@ -114,13 +114,13 @@ class opstheater::profile::gitlab {
     
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
-      log_enable_file                       => true, 
+      log_enable_file                       => true,
       service_enable_incoming_webhooks      => true,
       service_enable_post_username_override => true,
       service_enable_post_icon_override     => true,
       service_enable_outgoing_webhooks      => true,
       email_enable_sign_up_with_email       => false,
-      email_smtp_server                     => hiera('opstheater::smtp::fqdn'),    
+      email_smtp_server                     => hiera('opstheater::smtp::fqdn'),
       email_smtp_username                   => $email_smtp_username,
       email_smtp_password                   => $email_smtp_password,
       email_smtp_port                       => hiera('opstheater::smtp::port'),
@@ -154,7 +154,7 @@ class opstheater::profile::gitlab {
       smtp_openssl_verify_mode  => hiera('opstheater::smtp::openssl_verify_mode'),
     },
     
-    nginx        => {
+    nginx                   => {
       redirect_http_to_https => $gitlab_use_ssl,
     },
     
@@ -173,6 +173,9 @@ class opstheater::profile::gitlab {
     password => 'alkgrcfnal',
     fullname => 'Walter Heck',
   }
+
+  include profile::filebeat::gitlab
+  include profile::filebeat::mattermost
 
 
 }

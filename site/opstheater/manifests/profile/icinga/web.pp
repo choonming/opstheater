@@ -9,40 +9,39 @@ class opstheater::profile::icinga::web {
   
   # Make our Apache ssl directory
   file { ['/etc/httpd/ssl'] :
-    ensure  => directory,
-    mode    => '0755',
-    owner   => apache,
-    group   => apache,
+    ensure => directory,
+    mode   => '0755',
+    owner  => apache,
+    group  => apache,
   }
   
   # Create our Icinga2 Apache SSL Key
   file { $icinga2_ssl_key :
-    ensure   => file,
-    source   => "puppet:///modules/opstheater/ssl/icinga.key",
-    require  => File['/etc/httpd/ssl'],
-    mode     => '0644',
-    owner    => apache,
-    group    => apache,
+    ensure  => file,
+    source  => 'puppet:///modules/opstheater/ssl/icinga.key',
+    require => File['/etc/httpd/ssl'],
+    mode    => '0644',
+    owner   => apache,
   }
 
   # Create our Icinga2 Apache SSL Cert
   file { $icinga2_ssl_cert :
-    ensure   => file,
-    source   => "puppet:///modules/opstheater/ssl/icinga.crt",
-    require  => File['/etc/httpd/ssl'],
-    mode     => '0644',
-    owner    => apache,
-    group    => apache,
+    ensure  => file,
+    source  => 'puppet:///modules/opstheater/ssl/icinga.crt',
+    require => File['/etc/httpd/ssl'],
+    mode    => '0644',
+    owner   => apache,
+    group   => apache,
   }
 
   # Create our Icinga2 Apache SSL Key
   file { $icinga2_ssl_bundle :
-    ensure   => file,
-    source   => "puppet:///modules/opstheater/ssl/icinga-cabundle.crt",
-    require  => File['/etc/httpd/ssl'],
-    mode     => '0644',
-    owner    => apache,
-    group    => apache,
+    ensure  => file,
+    source  => 'puppet:///modules/opstheater/ssl/icinga-cabundle.crt',
+    require => File['/etc/httpd/ssl'],
+    mode    => '0644',
+    owner   => apache,
+    group   => apache,
   }
 
 
@@ -57,18 +56,18 @@ class opstheater::profile::icinga::web {
 
   class { '::mysql::client': }
 
-  class { 'apache': 
+  class { 'apache':
     default_ssl_key   => $icinga2_ssl_key,
     default_ssl_cert  => $icinga2_ssl_cert,
     default_ssl_chain => $icinga2_ssl_bundle,
-  } 
+  }
 
-  ::apache::listen { '80': 
+  ::apache::listen { '80':
     before => Class['icingaweb2::config'],
   }
   
-  if hiera('opstheater::http_mode') == 'https' { 
-     ::apache::listen { '443': 
+  if hiera('opstheater::http_mode') == 'https' {
+     ::apache::listen { '443':
        before => Class['icingaweb2::config'],
      }
      
@@ -88,7 +87,7 @@ class opstheater::profile::icinga::web {
      }
   }
 
-  class { 'apache::mod::php': } 
+  class { 'apache::mod::php': }
 
   package { 'php-Icinga':
     ensure  => latest,
@@ -134,38 +133,38 @@ class opstheater::profile::icinga::web {
   } ->
 
   file { '/etc/icingaweb2/enabledModules/monitoring':
-    ensure  => 'link',
-    target  => '/usr/share/icingaweb2/modules/monitoring',
+    ensure => 'link',
+    target => '/usr/share/icingaweb2/modules/monitoring',
   }
 
-  file { "/etc/icingaweb2/modules/monitoring":
-    ensure=> 'directory',
-    mode  => '2770',
-    owner => 'root',
-    group => 'icingaweb2',
+  file { '/etc/icingaweb2/modules/monitoring':
+    ensure => 'directory',
+    mode   => '2770',
+    owner  => 'root',
+    group  => 'icingaweb2',
   }
 
-  file { "/etc/icingaweb2/modules/monitoring/backends.ini":
-    ensure=> 'file',
-    mode  => '0770',
-    owner => 'root',
-    group => 'icingaweb2',
-    content   => "[icinga2]\ntype = \"ido\"\nresource = \"icinga_ido\"\n",
+  file { '/etc/icingaweb2/modules/monitoring/backends.ini':
+    ensure  => 'file',
+    mode    => '0770',
+    owner   => 'root',
+    group   => 'icingaweb2',
+    content => "[icinga2]\ntype = \"ido\"\nresource = \"icinga_ido\"\n",
   }
 
-  file { "/etc/icingaweb2/modules/monitoring/config.ini":
-    ensure=> "file",
-    mode  => "0770",
-    owner => "root",
-    group => "icingaweb2",
-    content   => "[security]\nprotected_customvars = \"*pw*,*pass*,community\"\n",
+  file { '/etc/icingaweb2/modules/monitoring/config.ini':
+    ensure  => 'file',
+    mode    => '0770',
+    owner   => 'root',
+    group   => 'icingaweb2',
+    content => "[security]\nprotected_customvars = \"*pw*,*pass*,community\"\n",
   }
 
-  file { "/etc/icingaweb2/modules/monitoring/commandtransports.ini":
-    ensure=> "file",
-    mode  => "0770",
-    owner => "root",
-    group => "icingaweb2",
+  file { '/etc/icingaweb2/modules/monitoring/commandtransports.ini':
+    ensure  => 'file',
+    mode    => '0770',
+    owner   => 'root',
+    group   => 'icingaweb2',
     content => "[icinga2]\ntransport = \"local\"\npath = \"/var/run/icinga2/cmd/icinga2.cmd\"\n",
   }
 

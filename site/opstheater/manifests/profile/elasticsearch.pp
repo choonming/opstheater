@@ -3,6 +3,7 @@
 class opstheater::profile::elasticsearch{
   # resources required for elasticsearch
   include ::java
+  include profile::filebeat::elasticsearch
   
   class { '::elasticsearch':
   }
@@ -15,5 +16,5 @@ class opstheater::profile::elasticsearch{
   } else {
     fail("No elasticsearch instances found in hiera for class opstheater::profile::elasticsearch on ${::fqdn}.")
   }
-  
+    
 }
