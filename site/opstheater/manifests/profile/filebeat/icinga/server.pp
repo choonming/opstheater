@@ -1,4 +1,4 @@
-class profile::filebeat::icinga::server {
+class opstheater::profile::filebeat::icinga::server {
 
   filebeat::prospector { 'icingalogs':
     paths => [

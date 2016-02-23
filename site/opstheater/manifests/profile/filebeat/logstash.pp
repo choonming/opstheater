@@ -1,4 +1,4 @@
-class profile::filebeat::logstash{
+class opstheater::profile::filebeat::logstash {
 
   filebeat::prospector { 'logstashlogs':
     paths => [

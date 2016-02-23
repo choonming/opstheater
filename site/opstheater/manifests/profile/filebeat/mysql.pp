@@ -1,4 +1,4 @@
-class profile::filebeat::mysql{
+class opstheater::profile::filebeat::mysql {
 
   filebeat::prospector { 'mysqllogs':
     paths => [

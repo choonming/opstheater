@@ -1,4 +1,4 @@
-class profile::filebeat::foreman{
+class opstheater::profile::filebeat::foreman {
 
   filebeat::prospector { 'foremanlogs':
     paths => [

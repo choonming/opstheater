@@ -1,4 +1,4 @@
-class profile::filebeat::gitlab{
+class opstheater::profile::filebeat::gitlab {
 
   filebeat::prospector { 'gitlablogs':
     paths => [

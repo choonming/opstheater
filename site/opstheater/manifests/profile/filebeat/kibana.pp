@@ -1,4 +1,4 @@
-class profile::filebeat::kibana{
+class profile::filebeat::kibana {
 
   filebeat::prospector { 'kibanalogs':
     paths => [

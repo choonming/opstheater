@@ -1,4 +1,4 @@
-class profile::filebeat::puppet::puppetdb {
+class opstheater::profile::filebeat::puppet::puppetdb {
 
   filebeat::prospector { 'puppetdb':
     paths => [

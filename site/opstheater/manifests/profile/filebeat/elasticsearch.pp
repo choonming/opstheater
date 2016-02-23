@@ -1,4 +1,4 @@
-class profile::filebeat::elasticsearch{
+class opstheater::profile::filebeat::elasticsearch {
 
   filebeat::prospector { 'elasticsearchlogs':
     paths => [

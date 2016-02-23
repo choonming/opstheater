@@ -1,4 +1,4 @@
-class profile::filebeat::foreman::proxy {
+class opstheater::profile::filebeat::foreman::proxy {
 
   filebeat::prospector { 'foremanproxylogs':
     paths => [

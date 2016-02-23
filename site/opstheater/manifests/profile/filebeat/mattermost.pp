@@ -1,4 +1,4 @@
-class profile::filebeat::mattermost{
+class opstheater::profile::filebeat::mattermost {
 
   filebeat::prospector { 'mattermostlogs':
     paths => [

@@ -1,4 +1,4 @@
-class profile::filebeat::icinga::web {
+class opstheater::profile::filebeat::icinga::web {
 
   filebeat::prospector { 'icingaweblogs':
     paths => [

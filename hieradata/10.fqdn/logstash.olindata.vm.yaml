@@ -3,15 +3,15 @@ profile::logstash::plugins:
   'beats':
     ensure: 'present'
     type: 'input'
-    source: 'puppet:///modules/profile/logstash/beats.rb'
+    source: 'puppet:///modules/opstheater/logstash/beats.rb'
   'elasticsearch':
     ensure: 'present'
     type: 'output'
-    source: 'puppet:///modules/profile/logstash/elasticsearch.rb'
+    source: 'puppet:///modules/opstheater/logstash/elasticsearch.rb'
     filename: 'elasticsearch.rb'
-profile::logstash::package_url: 'https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.1.1-1.noarch.rpm'
-profile::logstash::input_beats_port: '5044'
-profile::logstash::input_beats_type: 'logs'
-profile::logstash::output_codec: 'rubydebug'
-profile::logstash::output_elasticsearch_hosts:
+opstheater::profile::logstash::package_url: 'https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.1.1-1.noarch.rpm'
+opstheater::profile::logstash::input_beats_port: '5044'
+opstheater::profile::logstash::input_beats_type: 'logs'
+opstheater::profile::logstash::output_codec: 'rubydebug'
+opstheater::profile::logstash::output_elasticsearch_hosts:
     - "elasticsearch:9200"

@@ -1,4 +1,4 @@
-class profile::filebeat::puppet::master{
+class opstheater::profile::filebeat::puppet::master{
 
   filebeat::prospector { 'puppetserver':
     paths => [
