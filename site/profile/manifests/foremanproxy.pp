@@ -16,6 +16,8 @@ class profile::foremanproxy {
     owner  => nginx,
     group  => nginx,
   }
+
+  include profile::filebeat::foreman::proxy
   
   # Create our SSL Key
   file { $nginx_ssl_key :
