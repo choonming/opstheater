@@ -2,7 +2,7 @@ class profile::base {
   
   # configure ntp
   class {'ntp':
-   autoupdate => true,
+   package_ensure => 'latest',
   }
 
   # TODO: this needs to be enabled
