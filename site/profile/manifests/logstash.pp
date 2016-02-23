@@ -32,11 +32,6 @@ class profile::logstash{
     order   => 3
   }
 
-  logstash::configfile { 'output_stdout':
-    content => template('profile/output_stdout.erb'),
-    order   => 4
-  }
-
   if $plugins {
     create_resources('logstash::plugin', $plugins)
   }
