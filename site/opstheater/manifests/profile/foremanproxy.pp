@@ -13,8 +13,8 @@ class opstheater::profile::foremanproxy {
   file { ['/etc/nginx/ssl'] :
     ensure => directory,
     mode   => '0755',
-    owner  => nginx,
-    group  => nginx,
+    owner  => 'nginx',
+    group  => 'nginx',
   }
 
   include opstheater::profile::filebeat::foreman::proxy
@@ -29,8 +29,8 @@ class opstheater::profile::foremanproxy {
     
   # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $nginx_ssl_cert:
-    owner   => nginx,
-    group   => nginx,
+    owner   => 'nginx',
+    group   => 'nginx',
     mode    => '0600',
     notify  => Class['nginx::service'],
     require => File['/etc/nginx/ssl'],

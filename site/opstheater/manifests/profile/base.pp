@@ -1,7 +1,9 @@
 class opstheater::profile::base {
   
   # configure ntp
-  include ::ntp
+  class {'ntp':
+   package_ensure => 'latest',
+  }
 
   # TODO: this needs to be enabled
   class { 'firewall':

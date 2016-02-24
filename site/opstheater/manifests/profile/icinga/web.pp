@@ -2,17 +2,21 @@ class opstheater::profile::icinga::web {
 
   $icinga2_web_fqdn = hiera('opstheater::icingaweb::fqdn')
   $icinga2_db_fqdn = hiera('opstheater::icingaweb::mysql_fqdn')
-  
+
   $icinga2_ssl_cert = "/etc/httpd/ssl/${icinga2_web_fqdn}.crt";
   $icinga2_ssl_bundle = "/etc/httpd/ssl/${icinga2_web_fqdn}-cabundle.crt";
   $icinga2_ssl_key = "/etc/httpd/ssl/${icinga2_web_fqdn}.key";
-  
+
+  $icinga2_db_ipaddress = hiera('opstheater::icingaweb::mysql_ipaddress')
+  $icinga2_webdb_password = hiera('opstheater::icingaweb::webdb_password')
+  $icinga2_ido_password = hiera('opstheater::icinga::ido_password')
+
   # Make our Apache ssl directory
   file { ['/etc/httpd/ssl'] :
     ensure => directory,
     mode   => '0755',
-    owner  => apache,
-    group  => apache,
+    owner  => 'apache',
+    group  => 'apache',
   }
   
   # Create our Icinga2 Apache SSL Key
@@ -21,7 +25,7 @@ class opstheater::profile::icinga::web {
     source  => 'puppet:///modules/opstheater/ssl/icinga.key',
     require => File['/etc/httpd/ssl'],
     mode    => '0644',
-    owner   => apache,
+    owner   => 'apache',
   }
 
   # Create our Icinga2 Apache SSL Cert
@@ -30,8 +34,8 @@ class opstheater::profile::icinga::web {
     source  => 'puppet:///modules/opstheater/ssl/icinga.crt',
     require => File['/etc/httpd/ssl'],
     mode    => '0644',
-    owner   => apache,
-    group   => apache,
+    owner   => 'apache',
+    group   => 'apache',
   }
 
   # Create our Icinga2 Apache SSL Key
@@ -40,18 +44,14 @@ class opstheater::profile::icinga::web {
     source  => 'puppet:///modules/opstheater/ssl/icinga-cabundle.crt',
     require => File['/etc/httpd/ssl'],
     mode    => '0644',
-    owner   => apache,
-    group   => apache,
+    owner   => 'apache',
+    group   => 'apache',
   }
 
   if ! defined (Class['epel']) {
     class { 'epel': }
   }
   
-  $icinga2_db_ipaddress = hiera('opstheater::icingaweb::mysql_ipaddress')
-  $icinga2_webdb_password = hiera('opstheater::icingaweb::webdb_password')
-  $icinga2_ido_password = hiera('opstheater::icinga::ido_password')
-
   class { '::mysql::client': }
 
   class { 'apache':

@@ -23,7 +23,6 @@ class opstheater::profile::gitlab {
   $gitlab_ssl_cert = "/etc/gitlab/ssl/${gitlab_fqdn}.crt";
   $mattermost_ssl_cert = "/etc/gitlab/ssl/${mattermost_fqdn}.crt";
 
-
   host { $mattermost_fqdn:
     ensure => present,
     ip     => $gitlab_ipaddress,
@@ -43,51 +42,53 @@ class opstheater::profile::gitlab {
     ensure => directory,
     mode   => '0700',
   } ->
+
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.key" :
     ensure => file,
     source => 'puppet:///modules/profile/ssl/gitlab.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
-  
 
   # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $gitlab_ssl_cert:
-    owner  => root,
-    group  => root,
+    owner  => 'root',
+    group  => 'root',
     mode   => '0644',
     notify => Exec['gitlab_reconfigure'],
   }
+
   concat::fragment{'gitlab_ssl_cert_data':
     target => $gitlab_ssl_cert,
     source => 'puppet:///modules/profile/ssl/gitlab.crt',
     order  => 10,
   }
+
   concat::fragment{'gitlab_ssl_cacert_data':
     target => $gitlab_ssl_cert,
     source => 'puppet:///modules/profile/ssl/gitlab-cabundle.crt',
     order  => 20,
   }
-  
 
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
     source => 'puppet:///modules/profile/ssl/mattermost.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
-  
-  
+ 
   # Create our SSL Cert for Mattermost Nginx specifically for Nginx with the CACert combined with the cert
   concat{ $mattermost_ssl_cert:
-    owner  => root,
-    group  => root,
+    owner  => 'root',
+    group  => 'root',
     mode   => '0644',
     notify => Exec['gitlab_reconfigure'],
   }
+
   concat::fragment{'mattermost_ssl_cert_data':
     target => $mattermost_ssl_cert,
     source => 'puppet:///modules/profile/ssl/mattermost.crt',
     order  => 10,
   }
+
   concat::fragment{'mattermost_ssl_cacert_data':
     target => $mattermost_ssl_cert,
     source => 'puppet:///modules/profile/ssl/mattermost-cabundle.crt',
@@ -99,9 +100,11 @@ class opstheater::profile::gitlab {
     ensure => directory,
     notify => Exec['gitlab_reconfigure']
   } ->
+
   file { '/var/opt/gitlab/nginx':
     ensure => directory,
   } ->
+
   file { '/var/opt/gitlab/nginx/conf':
     ensure => directory,
   } ->
@@ -110,8 +113,7 @@ class opstheater::profile::gitlab {
   # For SMTP Stuff: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
   class { '::gitlab':
     external_url            => $gitlab_url,
-    mattermost_external_url => $mattermost_url,
-    
+    mattermost_external_url => $mattermost_url,    
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
       log_enable_file                       => true,
@@ -133,13 +135,11 @@ class opstheater::profile::gitlab {
       email_send_email_notifications        => true,
       service_use_ssl                       => $gitlab_use_ssl,
     },
-    
     mattermost_nginx        => {
       redirect_http_to_https => $gitlab_use_ssl,
       ssl_certificate        => "/etc/gitlab/ssl/${mattermost_fqdn}.crt",
       ssl_certificate_key    => "/etc/gitlab/ssl/${mattermost_fqdn}.key",
     },
-    
     gitlab_rails            => {
       smtp_enable               => true,
       smtp_address              => hiera('opstheater::smtp::fqdn'),
@@ -152,11 +152,9 @@ class opstheater::profile::gitlab {
       smtp_tls                  => $gitlab_enable_tls,
       smtp_openssl_verify_mode  => hiera('opstheater::smtp::openssl_verify_mode'),
     },
-    
     nginx                   => {
       redirect_http_to_https => $gitlab_use_ssl,
     },
-    
   } ->
 
   class { '::gitlab::cli':

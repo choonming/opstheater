@@ -7,10 +7,7 @@ class opstheater::profile::logstash {
   $input_beats_type          = hiera('opstheater::profile::logstash::input_beats_type')
   $output_elasicsearch_hosts = hiera_array('opstheater::profile::logstash::output_elasticsearch_hosts', undef)
   $output_codec              = hiera('opstheater::profile::logstash::output_codec')
-
-
-  $plugins = hiera_hash('opstheater::profile::logstash::plugins', undef)
-
+  $plugins                   = hiera_hash('opstheater::profile::logstash::plugins', undef)
 
   class { 'logstash':
     package_url  => $package_url,
@@ -19,17 +16,17 @@ class opstheater::profile::logstash {
 
   logstash::configfile { 'input_beats':
     content => template('opstheater/input_beats.erb'),
-    order   => 1
+    order   => 1,
   }
 
   logstash::configfile { 'filter':
     content => template('opstheater/filter.erb'),
-    order   => 2
+    order   => 2,
   }
 
   logstash::configfile { 'output_elasticsearch':
     content => template('opstheater/output_elasticsearch.erb'),
-    order   => 3
+    order   => 3,
   }
 
   if $plugins {
