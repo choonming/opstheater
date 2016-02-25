@@ -45,7 +45,7 @@ class opstheater::profile::gitlab {
 
   file { "/etc/gitlab/ssl/${gitlab_fqdn}.key" :
     ensure => file,
-    source => 'puppet:///modules/profile/ssl/gitlab.key',
+    source => 'puppet:///modules/opstheater/ssl/gitlab.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
 
@@ -59,19 +59,19 @@ class opstheater::profile::gitlab {
 
   concat::fragment{'gitlab_ssl_cert_data':
     target => $gitlab_ssl_cert,
-    source => 'puppet:///modules/profile/ssl/gitlab.crt',
+    source => 'puppet:///modules/opstheater/ssl/gitlab.crt',
     order  => 10,
   }
 
   concat::fragment{'gitlab_ssl_cacert_data':
     target => $gitlab_ssl_cert,
-    source => 'puppet:///modules/profile/ssl/gitlab-cabundle.crt',
+    source => 'puppet:///modules/opstheater/ssl/gitlab-cabundle.crt',
     order  => 20,
   }
 
   file { "/etc/gitlab/ssl/${mattermost_fqdn}.key" :
     ensure => file,
-    source => 'puppet:///modules/profile/ssl/mattermost.key',
+    source => 'puppet:///modules/opstheater/ssl/mattermost.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
  
@@ -85,13 +85,13 @@ class opstheater::profile::gitlab {
 
   concat::fragment{'mattermost_ssl_cert_data':
     target => $mattermost_ssl_cert,
-    source => 'puppet:///modules/profile/ssl/mattermost.crt',
+    source => 'puppet:///modules/opstheater/ssl/mattermost.crt',
     order  => 10,
   }
 
   concat::fragment{'mattermost_ssl_cacert_data':
     target => $mattermost_ssl_cert,
-    source => 'puppet:///modules/profile/ssl/mattermost-cabundle.crt',
+    source => 'puppet:///modules/opstheater/ssl/mattermost-cabundle.crt',
     order  => 20,
   }
 
