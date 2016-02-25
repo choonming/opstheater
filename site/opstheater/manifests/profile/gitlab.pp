@@ -1,24 +1,24 @@
 class opstheater::profile::gitlab {
   
   $gitlab_use_ssl             = ( if hiera('opstheater::http_mode') == 'https' { true } else { false } )
-  $gitlab_url                 = hiera('profile::gitlab::gitlab_url')
-  $gitlab_fqdn                = hiera('profile::gitlab::gitlab_fqdn')
-  $gitlab_ipaddress           = hiera('profile::gitlab::gitlab_ipaddress')
-  $gitlabci_url               = hiera('profile::gitlab::gitlab_url')
+  $gitlab_url                 = hiera('opstheater::profile::gitlab::gitlab_url')
+  $gitlab_fqdn                = hiera('opstheater::profile::gitlab::gitlab_fqdn')
+  $gitlab_ipaddress           = hiera('opstheater::profile::gitlab::gitlab_ipaddress')
+  $gitlabci_url               = hiera('opstheater::profile::gitlab::gitlab_url')
   $gitlab_smtp_authentication = ( if hiera('opstheater::smtp::auth_type') in (['none','login','plain']) { hiera('opstheater::smtp::auth_type') } else { 'none' } )
   $gitlab_enable_tls          = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) == true { true } else { false })
   $gitlab_starttls_auto       = ( if hiera('opstheater::smtp::ssl_type') == 'STARTTLS' { true } else { false } )
 
-  $mattermost_url                 = hiera('profile::gitlab::mattermost_url')
-  $mattermost_fqdn                = hiera('profile::gitlab::mattermost_fqdn')
+  $mattermost_url                 = hiera('opstheater::profile::gitlab::mattermost_url')
+  $mattermost_fqdn                = hiera('opstheater::profile::gitlab::mattermost_fqdn')
   $mattermost_connection_security = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) { hiera('opstheater::smtp::ssl_type') } else { '' } )
 
   $email_smtp_username = ( if hiera('opstheater::smtp::auth_type') != false { hiera('opstheater::smtp::username') } else {''} )
   $email_smtp_password = ( if hiera('opstheater::smtp::auth_type') != false { hiera('opstheater::smtp::password') } else {''} )
 
-  $gitlab_api_endpoint = hiera('profile::gitlab::api_endpoint')
-  $gitlab_api_user     = hiera('profile::gitlab::api_user')
-  $gitlab_api_password = hiera('profile::gitlab::api_password')
+  $gitlab_api_endpoint = hiera('opstheater::profile::gitlab::api_endpoint')
+  $gitlab_api_user     = hiera('opstheater::profile::gitlab::api_user')
+  $gitlab_api_password = hiera('opstheater::profile::gitlab::api_password')
 
   $gitlab_ssl_cert = "/etc/gitlab/ssl/${gitlab_fqdn}.crt";
   $mattermost_ssl_cert = "/etc/gitlab/ssl/${mattermost_fqdn}.crt";
