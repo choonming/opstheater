@@ -1,5 +1,5 @@
 ---
-profile::base::packages:
+opstheater::profile::base::packages:
   screen:
     ensure: present
   mtr:
