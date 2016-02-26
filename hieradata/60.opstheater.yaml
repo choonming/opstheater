@@ -7,6 +7,9 @@
 # The domain that everything in opstheater will become subdomains of...
 'opstheater::domain': 'olindata.vm'
 
+# an email address that different opstheater components will send admin emails
+'opstheater::admin_email': 'admin@opstheater.com'
+
 # Enable HTTPS Platform-wide (or not)
 # Default value (for development): 'http'
 # Default value (for production): 'https'
