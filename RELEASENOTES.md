@@ -2,7 +2,7 @@
 
 ## Release 1.4 (March 2nd 2016)
 
-In OpsTheater 1.4 we include
+In OpsTheater 1.4 we included
 
 - the foreman 1.10.2
 - open source puppet 4.3.2
@@ -11,3 +11,6 @@ In OpsTheater 1.4 we include
 - Icinga 2 2.4.3
 - Gitlab 8.5
 - Mattermost 2.0
+- ElasticSearch 2.2
+- Kibana 4.2.1
+
