@@ -5,13 +5,13 @@
 Since this is our first release, basically all functionality is new. However we have worked on the following features in the cycle since the first internal beta release. In OpsTheater 1.4 we have added the following new features:
 
 * automatically send the following logs to elasticsearch:
-** Gitlab
-** Puppetmaster / puppet agents
-** The foreman
-** Icinga master / Client
-** Elasticsearch / Kibana / Logstash
-** Mattermost
-** MySQL
+  * Gitlab
+  * Puppetmaster / puppet agents
+  * The foreman
+  * Icinga master / Client
+  * Elasticsearch / Kibana / Logstash
+  * Mattermost
+  * MySQL
 * HTTPS for all relevant services. This means for a full OpsTheater deployment you need a wildcard cert as a self-generated cert causes problems with several of the services we use
 * Added a reverse proxy for terminating SSL requests for the foreman
 * Split off the icinga database to the mysql server, allowing for better scaling and separation between app and database
