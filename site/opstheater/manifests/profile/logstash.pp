@@ -24,9 +24,19 @@ class opstheater::profile::logstash {
     order   => 2,
   }
 
+  logstash::configfile { 'output_header':
+    content => template('opstheater/output_header.erb'),
+    order   => 3,
+  }
+
   logstash::configfile { 'output_elasticsearch':
     content => template('opstheater/output_elasticsearch.erb'),
-    order   => 3,
+    order   => 4,
+  }
+
+  logstash::configfile { 'output_footer':
+    content => template('opstheater/output_footer.erb'),
+    order   => 99,
   }
 
   if $plugins {
