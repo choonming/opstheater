@@ -1,5 +1,7 @@
 Use like this:
 
+0. Make sure you have installed terraform locally (https://www.terraform.io/intro/getting-started/install.html)
+
 1. Create a token at Digital Ocean
 
 2. Create a passwordless ssh key and upload the public key to digital ocean, then note down the fingerprint
