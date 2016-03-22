@@ -1,4 +1,4 @@
-source :rubygems
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 if ENV.key?('PUPPET_VERSION')
   puppetversion = "= #{ENV['PUPPET_VERSION']}"
@@ -7,8 +7,9 @@ else
 end
 
 gem 'rake'
+gem 'puppet', puppetversion
+gem 'metadata-json-lint'
 gem 'puppet-lint'
 gem 'rspec-puppet'
-# gem 'puppet', puppetversion
 gem 'puppetlabs_spec_helper'
 gem 'r10k'
