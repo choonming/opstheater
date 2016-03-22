@@ -1,0 +1,72 @@
+---
+vms:
+## puppet enterprise master
+- name: master
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.10'} ]
+  hostname: master.olindata.vm
+  roles:
+  - pe-puppet-master
+
+## FOSS puppet master
+- name: foss-master
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.10'} ]
+  hostname: master.olindata.vm
+  roles:
+  - foss-puppet-master
+
+## icinga server
+- name: icinga2
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.20'} ]
+  hostname: icinga2.olindata.vm
+  roles:
+  - foss-puppet-agent
+
+## elasticsearch + kibana
+- name: elasticsearch
+  box: puppetlabs/centos-6.6-64-nocm
+  private_networks: [ {ip: '10.20.1.30'} ]
+  hostname: elasticsearch.olindata.vm
+  roles:
+  - foss-puppet-agent-el6
+
+## gitlab + gitlabci + matter most
+- name: gitlab
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.50'} ]
+  hostname: gitlab.olindata.vm
+  roles:
+  - foss-puppet-agent
+
+## mysql
+- name: mysql
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.60'} ]
+  hostname: mysql.olindata.vm
+  roles:
+  - foss-puppet-agent
+
+## Logstash
+- name: logstash
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.70'} ]
+  hostname: logstash.olindata.vm
+  roles:
+  - foss-puppet-agent
+
+- name: testclient
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.200'} ]
+  hostname: testclient.olindata.vm
+  roles:
+  - pe-puppet-agent
+
+- name: fossclient
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.201'} ]
+  hostname: fossclient.olindata.vm
+  roles:
+  - foss-puppet-agent
+

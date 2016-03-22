@@ -1,1 +1,4 @@
 modules
+deploy/vagrant-oscar/.pe_build
+deploy/vagrant-oscar/.vagrant
+terraform.tfstate

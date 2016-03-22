@@ -11,3 +11,8 @@ opstheater::profile::gitlab::mattermost_url: "%{hiera('opstheater::http_mode')}:
 opstheater::profile::gitlab::api_endpoint: "%{hiera('opstheater::http_mode')}://%{hiera('opstheater::gitlab::fqdn')}/api/v3"
 opstheater::profile::gitlab::api_user: 'root'
 opstheater::profile::gitlab::api_password: '5iveL!fe'
+
+opstheater::profile::gitlab::github_oauth_enabled: true
+opstheater::profile::gitlab::github_oauth_clientid: 'clientidgoeshere'
+opstheater::profile::gitlab::github_oauth_clientsecret: 'clientsecretgoeshere'
+opstheater::profile::gitlab::github_oauth_uri: 'https://github.com/'
