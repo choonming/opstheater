@@ -48,14 +48,6 @@ vms:
   roles:
   - foss-puppet-agent
 
-## Logstash
-- name: logstash
-  box: puppetlabs/centos-7.0-64-nocm
-  private_networks: [ {ip: '10.20.1.70'} ]
-  hostname: logstash.olindata.vm
-  roles:
-  - foss-puppet-agent
-
 - name: testclient
   box: puppetlabs/centos-7.0-64-nocm
   private_networks: [ {ip: '10.20.1.200'} ]
@@ -69,4 +61,3 @@ vms:
   hostname: fossclient.olindata.vm
   roles:
   - foss-puppet-agent
-
