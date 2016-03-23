@@ -6,3 +6,4 @@ before_script:
 test:
   script:
   - rake lint
+  - rake syntax
