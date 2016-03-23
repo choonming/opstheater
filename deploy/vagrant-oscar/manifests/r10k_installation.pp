@@ -5,11 +5,11 @@ exec { 'create-ssh-key':
 } ->
 
 #https://docs.puppetlabs.com/references/latest/type.html#sshkey
-sshkey { 'github.com':
+sshkey { 'gitlab.olindata.com':
   ensure => present,
-  type   => 'ssh-rsa',
+  type   => 'ecdsa-sha2-nistp256',
   target => '/root/.ssh/known_hosts',
-  key    => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+  key    => 'AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDw3fj8seCnMtJTnNSehf+Fl1xlCtgP3GOcwjSTZHHt7wHdip32C9PplZtNej+t1LWSmaW41JNyNxlSoYer1Kys='
 } ->
 
 # https://github.com/abrader/abrader-gms
@@ -17,10 +17,10 @@ git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
   name         => $::fqdn,
   path         => '/root/.ssh/id_dsa.pub',
-  token        => 'fe7e9ffa3b2fa04f19b3e293fe956f5071f9baa5',
-  project_name => 'olindata/opstheater-control',
-  server_url   => 'https://api.github.com',
-  provider     => 'github',
+  token        => 'N3gMsG-nsB-n_6UFkbL7',
+  project_name => 'opstheater/opstheater',
+  server_url   => 'https://gitlab.olindata.com',
+  provider     => 'gitlab',
 } ->
 
 class { 'r10k':
@@ -28,7 +28,7 @@ class { 'r10k':
   configfile => '/etc/puppetlabs/r10k/r10k.yaml',
   sources    => {
     'puppet' => {
-      'remote'  => 'git@github.com:olindata/opstheater-control.git',
+      'remote'  => 'git@gitlab.olindata.com:opstheater/opstheater.git',
       'basedir' => $::settings::environmentpath,
       'prefix'  => false,
     }
