@@ -27,7 +27,7 @@ class opstheater::profile::grafana {
     path    => '/bin:/usr/bin:/sbin:/usr/sbin',
     unless  => "[ `curl --silent 'http://${grafanauser}:${grafanapasswd}@${grafanaurl}:3000/api/datasources' -X GET | tr ',' '\\n' | grep '\"name\":\"OlinInflux\"'` == '\"name\":\"OlinInflux\"' ]",
     command => "sleep 10;curl 'http://${grafanauser}:${grafanapasswd}@${grafanaurl}:3000/api/datasources' -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary '{\"name\":\"OlinInflux\",\"type\":\"influxdb\",\"url\":\"http://${grafanaurl}:8086\",\"access\":\"proxy\",\"isDefault\":true,\"database\":\"olindb\",\"user\":\"${user}\",\"password\":\"${password}\"'}",
-    require => [ Class[ 'influxdb::server', Class['grafana'] ],
+    require => Class[ 'influxdb::server', 'grafana' ],
   }
 
 }
