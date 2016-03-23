@@ -17,6 +17,8 @@ mod 'logstash',
 
 # forge modules should be listed with a specific version and stay in
 # NOTE: alphabetical order
+mod 'abrader/gms', '1.0.2'
+mod 'ajcrowe/supervisord', '0.6.0'
 mod 'aptituz/ssh', '2.3.2'
 mod 'bfraser/grafana', '2.5.0'
 mod 'elasticsearch/elasticsearch', '0.9.9'
@@ -38,6 +40,4 @@ mod 'puppetlabs/stdlib', '4.9.0'
 mod 'puppetlabs/vcsrepo', '1.3.1'
 mod 'richardc/datacat', '0.6.2'
 mod 'stahnma/epel', '1.1.1'
-mod 'zack/r10k'
-mod 'abrader/gms'
-mod 'ajcrowe/supervisord'
+mod 'zack/r10k' '3.2.0'
