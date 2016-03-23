@@ -9,7 +9,7 @@ if not ENV['SPEC_OPTS']
 end
 
 PuppetLint.configuration.send('disable_documentation')
-#PuppetLint.configuration.send('disable_single_quote_string_with_variables')
+PuppetLint.configuration.send('disable_80chars')
 
 PuppetSyntax.exclude_paths = [ "vendor/**/*.*" ]
 PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp", "vendor/**/*.pp"]
@@ -18,6 +18,6 @@ PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp", "vendor/
 Rake::Task[:lint].clear
 PuppetLint::RakeTask.new :lint do |config|
   config.ignore_paths = PuppetLint.configuration.ignore_paths
-end 
+end
 
 task :all => [ :validate, :metadata, :lint, :spec ]

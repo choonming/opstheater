@@ -4,16 +4,16 @@ class opstheater::profile::base::filebeat{
 
   class { 'filebeat':
     outputs => {
-     'logstash' => {
-       'hosts'       => [
-         "${logstash_fqdn}:5044",
-       ],
-       'loadbalance' => true,
-       'enabled'     => true,
+      'logstash' => {
+        'hosts'       => [
+          "${logstash_fqdn}:5044",
+        ],
+        'loadbalance' => true,
+        'enabled'     => true,
       },
     },
   }
-   
+
   filebeat::prospector { 'syslogs':
     paths    => [
       '/var/log/auth.log',

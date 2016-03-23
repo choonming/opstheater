@@ -1,8 +1,8 @@
 class opstheater::profile::base {
-  
+
   # configure ntp
   class {'ntp':
-   package_ensure => 'latest',
+    package_ensure => 'latest',
   }
 
   # TODO: this needs to be enabled

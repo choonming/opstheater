@@ -1,5 +1,9 @@
+# opstheater::profile::gitlab
+
+# this class configures a gitlab instance for opstheater
+
 class opstheater::profile::gitlab {
-  
+
   $gitlab_use_ssl             = ( if hiera('opstheater::http_mode') == 'https' { true } else { false } )
   $gitlab_url                 = hiera('opstheater::profile::gitlab::gitlab_url')
   $gitlab_fqdn                = hiera('opstheater::profile::gitlab::gitlab_fqdn')
@@ -8,6 +12,11 @@ class opstheater::profile::gitlab {
   $gitlab_smtp_authentication = ( if hiera('opstheater::smtp::auth_type') in (['none','login','plain']) { hiera('opstheater::smtp::auth_type') } else { 'none' } )
   $gitlab_enable_tls          = ( if hiera('opstheater::smtp::ssl_type') in (['TLS','STARTTLS']) == true { true } else { false })
   $gitlab_starttls_auto       = ( if hiera('opstheater::smtp::ssl_type') == 'STARTTLS' { true } else { false } )
+
+  $github_oauth_enabled      = hiera('opstheater::profile::gitlab::github_oauth_enabled')
+  $github_oauth_clientid     = hiera('opstheater::profile::gitlab::github_oauth_clientid')
+  $github_oauth_clientsecret = hiera('opstheater::profile::gitlab::github_oauth_clientsecret')
+  $github_oauth_uri          = hiera('opstheater::profile::gitlab::github_oauth_uri')
 
   $mattermost_url                 = hiera('opstheater::profile::gitlab::mattermost_url')
   $mattermost_fqdn                = hiera('opstheater::profile::gitlab::mattermost_fqdn')
@@ -28,8 +37,8 @@ class opstheater::profile::gitlab {
     ip     => $gitlab_ipaddress,
   } ->
 
-  # NOTE: it shouldn't be needed to define the user and file resources here, this should be 
-  # fixed in the omnibus installer
+  # NOTE: it shouldn't be needed to define the user and file resources here,
+  # this should be fixed in the omnibus installer
   user { 'gitlab-ci':
     ensure  => present,
     comment => 'Gitlab CI user',
@@ -49,7 +58,8 @@ class opstheater::profile::gitlab {
     notify => Exec['gitlab_reconfigure'],
   } ->
 
-  # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert combined with the cert
+  # Create our SSL Cert for Gitlab Nginx specifically for Nginx with the CACert
+  # combined with the cert
   concat{ $gitlab_ssl_cert:
     owner  => 'root',
     group  => 'root',
@@ -74,8 +84,9 @@ class opstheater::profile::gitlab {
     source => 'puppet:///modules/opstheater/ssl/mattermost.key',
     notify => Exec['gitlab_reconfigure'],
   } ->
- 
-  # Create our SSL Cert for Mattermost Nginx specifically for Nginx with the CACert combined with the cert
+
+  # Create our SSL Cert for Mattermost Nginx specifically for Nginx with the
+  # CACert combined with the cert
   concat{ $mattermost_ssl_cert:
     owner  => 'root',
     group  => 'root',
@@ -113,7 +124,7 @@ class opstheater::profile::gitlab {
   # For SMTP Stuff: http://doc.gitlab.com/omnibus/settings/smtp.html#examples
   class { '::gitlab':
     external_url            => $gitlab_url,
-    mattermost_external_url => $mattermost_url,    
+    mattermost_external_url => $mattermost_url,
     mattermost              => {
       team_site_name                        => 'OpsTheater Mattermost by OlinData',
       log_enable_file                       => true,
@@ -151,12 +162,21 @@ class opstheater::profile::gitlab {
       smtp_enable_starttls_auto => $gitlab_starttls_auto,
       smtp_tls                  => $gitlab_enable_tls,
       smtp_openssl_verify_mode  => hiera('opstheater::smtp::openssl_verify_mode'),
+      omniauth_providers        => [ {
+        name       => 'github',
+        app_id     => $github_oauth_clientid,
+        app_secret => $github_oauth_clientsecret,
+        url        => $github_oauth_uri,
+        args       => {
+          'scope' => 'user:email'
+        }
+      } ],
     },
     nginx                   => {
       redirect_http_to_https => $gitlab_use_ssl,
     },
   }
-  
+
   include opstheater::profile::filebeat::gitlab
   include opstheater::profile::filebeat::mattermost
 
