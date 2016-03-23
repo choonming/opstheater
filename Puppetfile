@@ -17,7 +17,7 @@ mod 'logstash',
 
 # forge modules should be listed with a specific version and stay in
 # NOTE: alphabetical order
-mod 'abrader/gms', '1.0.2'
+mod 'abrader/gms', '1.0.1'
 mod 'ajcrowe/supervisord', '0.6.0'
 mod 'aptituz/ssh', '2.3.2'
 mod 'bfraser/grafana', '2.5.0'
