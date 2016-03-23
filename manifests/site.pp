@@ -1,9 +1,9 @@
-# runs puppet enterprise for now
+# runs puppet enterprise or puppet open source
 node 'master.olindata.vm' {
   include opstheater::role::puppet::master
 }
 
-# runs elasticsearch and kibana
+# runs elasticsearch, logstash, kibana and grafana
 node 'elasticsearch.olindata.vm' {
   include opstheater::role::elastic::server
 }
@@ -22,16 +22,6 @@ node 'mysql.olindata.vm' {
   include opstheater::role::database::standalone
 }
 
-# runs logstash server
-node 'logstash' {
-  include opstheater::role::logstash::server
-}
-
-node 'grafanatest.olindata.vm' {
-  include role::grafana
-}
-
 node default {
   include opstheater::role::testclient
 }
-

@@ -46,22 +46,22 @@
 ##########################
 
 # Variable: opstheater::icinga::fqdn
-# Description: 
+# Description:
 # Default value:
 'opstheater::icinga::fqdn': "icinga2.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::icinga::ipaddress
-# Description: 
+# Description:
 # Default value: '10.20.1.20'
 'opstheater::icinga::ipaddress': '10.20.1.20'
 
 # Variable: opstheater::icinga::mysql_fqdn
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::mysql::fqdn')}"
 'opstheater::icinga::mysql_fqdn': "%{hiera('opstheater::mysql::fqdn')}"
 
 # Variable: opstheater::icinga::mysql_ipaddress
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
 'opstheater::icinga::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
@@ -71,22 +71,22 @@
 'opstheater::icinga::ido_password': "password"
 
 # Variable: opstheater::icingaweb::fqdn
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::icinga::fqdn')}"
 'opstheater::icingaweb::fqdn': "%{hiera('opstheater::icinga::fqdn')}"
 
 # Variable: opstheater::icingaweb::ipaddress
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::icinga::ipaddress')}"
 'opstheater::icingaweb::ipaddress': "%{hiera('opstheater::icinga::ipaddress')}"
 
 # Variable: opstheater::icingaweb::mysql_fqdn
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::mysql::fqdn')}"
 'opstheater::icingaweb::mysql_fqdn': "%{hiera('opstheater::mysql::fqdn')}"
 
 # Variable: opstheater::icingaweb::mysql_ipaddress
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
 'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
 
@@ -100,12 +100,12 @@
 ##########################
 
 # Variable: opstheater::elasticsearch::fqdn
-# Description: 
+# Description:
 # Default value: "elasticsearch.%{hiera('opstheater::domain')}"
 'opstheater::elasticsearch::fqdn': "elasticsearch.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::elasticsearch::ipaddress
-# Description: 
+# Description:
 # Default value: '10.20.1.30'
 'opstheater::elasticsearch::ipaddress': '10.20.1.30'
 
@@ -114,12 +114,12 @@
 ##########################
 
 # Variable: opstheater::kibana::fqdn
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::elasticsearch::fqdn')}"
 'opstheater::kibana::fqdn': "%{hiera('opstheater::elasticsearch::fqdn')}"
 
 # Variable: opstheater::kibana::ipaddress
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::elasticsearch::ipaddress')}"
 'opstheater::kibana::ipaddress': "%{hiera('opstheater::elasticsearch::ipaddress')}"
 
@@ -128,12 +128,12 @@
 ##########################
 
 # Variable: opstheater::logstash::fqdn
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::elasticsearch::fqdn')}"
 'opstheater::logstash::fqdn': "logstash.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::logstash::ipaddress
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::elasticsearch::ipaddress')}"
 'opstheater::logstash::ipaddress': '10.20.1.70'
 
@@ -142,12 +142,12 @@
 ##########################
 
 # Variable: opstheater::gitlab::fqdn
-# Description: 
+# Description:
 # Default value: "gitlab.%{hiera('opstheater::domain')}"
 'opstheater::gitlab::fqdn': "gitlab.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::gitlab::ipaddress
-# Description: 
+# Description:
 # Default value: "10.20.1.50"
 'opstheater::gitlab::ipaddress': "10.20.1.50"
 
@@ -156,17 +156,17 @@
 ##########################
 
 # Variable: opstheater::mattermost::fqdn
-# Description: 
+# Description:
 # Default value: "chat.%{hiera('opstheater::domain')}"
 'opstheater::mattermost::fqdn': "chat.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::mattermost::url
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::http_mode')}://chat.%{hiera('opstheater::domain')}"
 'opstheater::mattermost::url': "%{hiera('opstheater::http_mode')}://chat.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::mattermost::ipaddress
-# Description: 
+# Description:
 # Default value: "%{hiera('opstheater::gitlab::ipaddress')}"
 'opstheater::mattermost::ipaddress': "%{hiera('opstheater::gitlab::ipaddress')}"
 
@@ -176,16 +176,45 @@
 
 ## MySQL related settings
 # Variable: opstheater::mysql::fqdn
-# Description: 
+# Description:
 # Default value: "mysql.%{hiera('opstheater::domain')}"
 'opstheater::mysql::fqdn': "mysql.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::mysql::ipaddress
-# Description: 
+# Description:
 # Default value: '10.20.1.60'
 'opstheater::mysql::ipaddress': '10.20.1.60'
 
 # Variable: opstheater::mysql::whitelist_range
-# Description: 
+# Description:
 # Default value: '10.20.1.%'
 'opstheater::mysql::whitelist_range': '10.20.1.%'
+
+##############################
+### Grafana Details
+###############################
+
+# Variable: opstheater::grafana::grafanauser
+# Description: The username for the grafana console
+# Default value: admin
+'opstheater::grafana::grafanauser': 'admin'
+
+# Variable: opstheater::grafana::grafanapasswd
+# Description: The password for the grafana console
+# Default value: admin
+'opstheater::grafana::grafanapasswd': 'admin'
+
+# Variable: opstheater::grafana::url
+# Description: the url at which grafana should be rechable
+# Default value: grafana.%{hiera('opstheater::domain')}
+'opstheater::grafana::url': "grafana.%{hiera('opstheater::domain')}"
+
+# Variable: opstheater::grafana::influxdb::user
+# Description: The username used for accessing influxdb
+# Default value: olinadmin
+'opstheater::grafana::influxdb::user': 'olinadmin'
+
+# Variable: opstheater::grafana::influxdb::password
+# Description: The password used for accessing influxdb
+# Default value: olinadmin
+'opstheater::grafana::influxdb::password': 'olinadmin'
