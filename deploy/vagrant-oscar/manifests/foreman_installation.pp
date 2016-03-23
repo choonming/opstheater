@@ -6,18 +6,18 @@ package { [ 'gcc-c++', 'git', 'ruby', 'ruby-devel', 'rubygems', 'libvirt-devel',
   ensure  => present,
 }
 
-vcsrepo { "/opt/foreman":
-  ensure => present,
+vcsrepo { '/opt/foreman':
+  ensure   => present,
   provider => git,
-  source => "https://github.com/theforeman/foreman.git",
-  revision => "1.10-stable"
+  source   => 'https://github.com/theforeman/foreman.git',
+  revision => '1.10-stable'
 }
 
-vcsrepo { "/opt/smart-proxy":
-  ensure => present,
+vcsrepo { '/opt/smart-proxy':
+  ensure   => present,
   provider => git,
-  source => "https://github.com/theforeman/smart-proxy.git",
-  revision => "1.10-stable",
+  source   => 'https://github.com/theforeman/smart-proxy.git',
+  revision => '1.10-stable',
 }
 
 postgresql::server::db { 'foreman':
@@ -77,19 +77,19 @@ file { '/opt/smart-proxy/config/settings.d/puppetca.yml':
 }
 
 file { '/etc/puppetlabs/puppet/foreman.yaml':
-  ensure  => file,
-  source  => '/vagrant/files/foreman/foreman.yaml',
+  ensure => file,
+  source => '/vagrant/files/foreman/foreman.yaml',
 }
 
 file { '/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/reports/foreman.rb':
-  ensure  => file,
-  source  => '/vagrant/files/foreman/foreman.rb',
+  ensure => file,
+  source => '/vagrant/files/foreman/foreman.rb',
 }
 
 file { '/etc/puppetlabs/puppet/node.rb':
-  ensure  => file,
-  mode    => '0755',
-  source  => '/vagrant/files/foreman/node.rb',
+  ensure => file,
+  mode   => '0755',
+  source => '/vagrant/files/foreman/node.rb',
 }
 
 ini_setting { 'set node_terminus':
@@ -107,4 +107,3 @@ ini_setting { 'set external_nodes':
   setting => 'external_nodes',
   value   => '/etc/puppetlabs/puppet/node.rb',
 }
-
