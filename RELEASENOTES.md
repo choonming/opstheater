@@ -9,8 +9,7 @@ We are ready to go with the second release of opstheater (release 1.5) with foll
   * PupptDB
   * Gitlab
   * Mattermost
-* GitLab CI for Continuous Integration
-* Added initial terraform deployment code for digitalocean
+* Used Puppet Lint to make sure that all our puppet code is following Puppetlabs style guide.
 
   
   
