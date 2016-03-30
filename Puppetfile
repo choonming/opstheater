@@ -8,6 +8,9 @@ mod 'icinga2',
 mod 'kibana4',
   :git => 'https://github.com/walterheck/puppet-kibana4.git'
 
+mod 'grafana',
+  :git => 'https://github.com/olindata/puppet-grafana.git'
+  
 mod 'gitlab',
   :git => 'https://github.com/walterheck/puppet-gitlab.git'
 
@@ -20,7 +23,6 @@ mod 'logstash',
 mod 'abrader/gms', '1.0.1'
 mod 'ajcrowe/supervisord', '0.6.0'
 mod 'aptituz/ssh', '2.3.2'
-mod 'bfraser/grafana', '2.5.0'
 mod 'elasticsearch/elasticsearch', '0.9.9'
 mod 'camptocamp/archive', '0.8.1'
 mod 'golja/influxdb', '3.0.1'
