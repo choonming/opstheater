@@ -207,7 +207,7 @@
 # Variable: opstheater::grafana::url
 # Description: the url at which grafana should be rechable
 # Default value: grafana.%{hiera('opstheater::domain')}
-'opstheater::grafana::url': "grafana.%{hiera('opstheater::domain')}"
+'opstheater::grafana::url': "elasticsearch.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::grafana::influxdb::user
 # Description: The username used for accessing influxdb
