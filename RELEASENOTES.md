@@ -27,4 +27,4 @@ In addition to this, we have updated the components in use by OpsTheater to the 
 | ElasticSearch | 2.3 | [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/release-notes-2.3.0.html) |
 | Logstash | 2.1.1 | [Release notes](https://github.com/elastic/logstash/blob/2.1/CHANGELOG.md) |
 | Kibana | 4.2.1 | [Release notes](https://www.elastic.co/guide/en/kibana/4.2/releasenotes.html) |
-| Filebeat | 1.1.2 | [Release notes](https://www.elastic.co/guide/en/beats/libbeat/current/release-notes-1.1.2.html) |
+| Filebeat | 1.2.0 | [Release notes](https://www.elastic.co/guide/en/beats/libbeat/current/release-notes-1.2.0.html) |
