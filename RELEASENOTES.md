@@ -18,13 +18,13 @@ In addition to this, we have updated the components in use by OpsTheater to the 
 | Tool | Version | Release notes |
 |--- | --- | --- | 
 | Foreman | 1.10.2 | [Release notes](http://theforeman.org/manuals/1.10/index.html#Releasenotesfor1.10.2) |
-| FOSS Puppet | 4.3.2 | [Release notes](https://docs.puppetlabs.com/puppet/4.3/reference/release_notes.html#puppet-432) |
-| Percona Server | 5.6.28 | [Release notes](https://www.percona.com/doc/percona-server/5.6/release-notes/Percona-Server-5.6.28-76.1.html#module-5.6.28-76.1) |
-| Icinga Web 2 | 2.1.2 | [Release notes](https://github.com/Icinga/icingaweb2/blob/master/ChangeLog) |
-| Icinga 2 | 2.4.3 | [Release notes](http://docs.icinga.org/icinga2/latest/doc/module/icinga2/chapter/about-icinga2#whats-new) |
+| FOSS Puppet | 4.4.0 | [Release notes](https://docs.puppetlabs.com/puppet/4.4/reference/release_notes.html) |
+| Percona Server | 5.6.29 | [Release notes](https://www.percona.com/doc/percona-server/5.6/release-notes/Percona-Server-5.6.29-76.2.html) |
+| Icinga Web 2 | 2.2.0 | [Release notes](https://github.com/Icinga/icingaweb2/blob/master/ChangeLog) |
+| Icinga 2 | 2.4.4 | [Release notes](https://www.icinga.org/2016/03/16/icinga-2-v2-4-4-bugfix-release/) |
 | Gitlab | 8.6 | [Release notes](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CHANGELOG) |
 | Mattermost | 2.1 | [Release notes](https://github.com/mattermost/platform/releases/tag/v2.1.0) |
-| ElasticSearch | 2.2 | [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/current/release-notes-2.2.0.html) |
+| ElasticSearch | 2.3 | [Release notes](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/release-notes-2.3.0.html) |
 | Logstash | 2.1.1 | [Release notes](https://github.com/elastic/logstash/blob/2.1/CHANGELOG.md) |
 | Kibana | 4.2.1 | [Release notes](https://www.elastic.co/guide/en/kibana/4.2/releasenotes.html) |
 | Filebeat | 1.1.2 | [Release notes](https://www.elastic.co/guide/en/beats/libbeat/current/release-notes-1.1.2.html) |
