@@ -33,3 +33,4 @@ profile::common::filebeat_prospector:
     paths:
       - '/var/log/messages'
     log_type: 'syslogs-beat'
+ssh::server::permit_root_login: 'without-password'
