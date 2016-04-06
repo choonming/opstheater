@@ -18,7 +18,7 @@ class opstheater::profile::icinga::web {
     owner  => 'apache',
     group  => 'apache',
   }
-  
+
   # Create our Icinga2 Apache SSL Key
   file { $icinga2_ssl_key :
     ensure  => file,
@@ -51,7 +51,7 @@ class opstheater::profile::icinga::web {
   if ! defined (Class['epel']) {
     class { 'epel': }
   }
-  
+
   class { '::mysql::client': }
 
   class { 'apache':
@@ -63,9 +63,9 @@ class opstheater::profile::icinga::web {
   ::apache::listen { '80':
     before => Class['icingaweb2::config'],
   }
-  
+
   if hiera('opstheater::http_mode') == 'https' {
-    
+
     ::apache::listen { '443':
       before => Class['icingaweb2::config'],
     }
@@ -126,7 +126,7 @@ class opstheater::profile::icinga::web {
 
   exec { 'populate-icinga2_web-mysql-db':
     path    => '/bin:/usr/bin:/sbin:/usr/sbin',
-    unless  => "[ `mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web -ABN -e 'select 1 from icingaweb_user'` -eq 1 ]",
+    unless  => "[ `mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web -ABN -e 'select 1 from icingaweb_user limit 1'` -eq 1 ]",
     command => "mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web < /usr/share/doc/icingaweb2/schema/mysql.schema.sql; mysql -h ${icinga2_db_ipaddress} -uicinga2_web -p${icinga2_webdb_password} icinga2_web -e \"INSERT INTO icingaweb_user (name, active, password_hash) VALUES (\'icingaadmin\', 1, \'\\\$1\\\$iQSrnmO9\\\$T3NVTu0zBkfuim4lWNRmH.\');\"",
     require => [ Class['::mysql::client'], Package['icingaweb2'] ],
   } ->
