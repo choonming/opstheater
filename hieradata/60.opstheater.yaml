@@ -8,7 +8,7 @@
 'opstheater::domain': 'olindata.vm'
 
 # an email address that different opstheater components will send admin emails
-'opstheater::admin_email': 'admin@opstheater.com'
+'opstheater::admin_email': "admin@%{hiera('opstheater::domain')}"
 
 # Enable HTTPS Platform-wide (or not)
 # Default value (for development): 'http'
@@ -83,12 +83,13 @@
 # Variable: opstheater::icingaweb::mysql_fqdn
 # Description:
 # Default value: "%{hiera('opstheater::mysql::fqdn')}"
-'opstheater::icingaweb::mysql_fqdn': "%{hiera('opstheater::mysql::fqdn')}"
+'opstheater::icingaweb::mysql_fqdn': "%{hiera('opstheater::icinga::mysql_fqdn')}"
+
 
 # Variable: opstheater::icingaweb::mysql_ipaddress
 # Description:
 # Default value: "%{hiera('opstheater::mysql::ipaddress')}"
-'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::mysql::ipaddress')}"
+'opstheater::icingaweb::mysql_ipaddress': "%{hiera('opstheater::icinga::mysql_ipaddress')}"
 
 # Variable: opstheater::icingaweb::webdb_password
 # Description:
@@ -102,7 +103,7 @@
 # Variable: opstheater::elasticsearch::fqdn
 # Description:
 # Default value: "elasticsearch.%{hiera('opstheater::domain')}"
-'opstheater::elasticsearch::fqdn': "elasticsearch.%{hiera('opstheater::domain')}"
+'opstheater::elasticsearch::fqdn': "elastic.%{hiera('opstheater::domain')}"
 
 # Variable: opstheater::elasticsearch::ipaddress
 # Description:
@@ -130,12 +131,12 @@
 # Variable: opstheater::logstash::fqdn
 # Description:
 # Default value: "%{hiera('opstheater::elasticsearch::fqdn')}"
-'opstheater::logstash::fqdn': "logstash.%{hiera('opstheater::domain')}"
+'opstheater::logstash::fqdn': "%{hiera('opstheater::elasticsearch::fqdn')}"
 
 # Variable: opstheater::logstash::ipaddress
 # Description:
 # Default value: "%{hiera('opstheater::elasticsearch::ipaddress')}"
-'opstheater::logstash::ipaddress': '10.20.1.70'
+'opstheater::logstash::ipaddress': "%{hiera('opstheater::elasticsearch::ipaddress')}"
 
 ##########################
 ## GitLab related settings
@@ -207,7 +208,7 @@
 # Variable: opstheater::grafana::url
 # Description: the url at which grafana should be rechable
 # Default value: grafana.%{hiera('opstheater::domain')}
-'opstheater::grafana::url': "elasticsearch.%{hiera('opstheater::domain')}"
+'opstheater::grafana::url': "%{hiera('opstheater::elasticsearch::fqdn')}"
 
 # Variable: opstheater::grafana::influxdb::user
 # Description: The username used for accessing influxdb
