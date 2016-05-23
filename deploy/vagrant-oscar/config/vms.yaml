@@ -10,7 +10,7 @@ vms:
 
 ## FOSS puppet master
 - name: foss-master
-  box: puppetlabs/centos-7.0-64-nocm
+  box: foss-master-1-7
   private_networks: [ {ip: '10.20.1.10'} ]
   hostname: master.opstheater.vm
   roles:
@@ -61,3 +61,10 @@ vms:
   hostname: fossclient.opstheater.vm
   roles:
   - foss-puppet-agent
+
+- name: fossclient-rhel7
+  box: puppetlabs/centos-7.0-64-nocm
+  private_networks: [ {ip: '10.20.1.202'} ]
+  hostname: fossclientrhel7.opstheater.vm
+  roles:
+  - foss-puppet-agent-rhel7
