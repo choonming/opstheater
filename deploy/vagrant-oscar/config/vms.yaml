@@ -10,7 +10,7 @@ vms:
 
 ## FOSS puppet master
 - name: foss-master
-  box: foss-master-1-7
+  box: puppetlabs/centos-7.0-64-nocm
   private_networks: [ {ip: '10.20.1.10'} ]
   hostname: master.opstheater.vm
   roles:
@@ -22,7 +22,7 @@ vms:
   private_networks: [ {ip: '10.20.1.20'} ]
   hostname: icinga2.opstheater.vm
   roles:
-  - foss-puppet-agent
+  - foss-puppet-agent-rhel7
 
 ## elasticsearch + kibana
 - name: elasticsearch
@@ -30,7 +30,7 @@ vms:
   private_networks: [ {ip: '10.20.1.30'} ]
   hostname: elasticsearch.opstheater.vm
   roles:
-  - foss-puppet-agent-el6
+  - foss-puppet-agent-rhel6
 
 ## gitlab + gitlabci + matter most
 - name: gitlab
@@ -38,7 +38,7 @@ vms:
   private_networks: [ {ip: '10.20.1.50'} ]
   hostname: gitlab.opstheater.vm
   roles:
-  - foss-puppet-agent
+  - foss-puppet-agent-rhel7
 
 ## mysql
 - name: mysql
@@ -46,7 +46,7 @@ vms:
   private_networks: [ {ip: '10.20.1.60'} ]
   hostname: mysql.opstheater.vm
   roles:
-  - foss-puppet-agent
+  - foss-puppet-agent-rhel7
 
 - name: peclient
   box: puppetlabs/centos-7.0-64-nocm
@@ -55,16 +55,16 @@ vms:
   roles:
   - pe-puppet-agent
 
-- name: fossclient
-  box: puppetlabs/centos-7.0-64-nocm
-  private_networks: [ {ip: '10.20.1.201'} ]
-  hostname: fossclient.opstheater.vm
-  roles:
-  - foss-puppet-agent
-
 - name: fossclient-rhel7
   box: puppetlabs/centos-7.0-64-nocm
-  private_networks: [ {ip: '10.20.1.202'} ]
-  hostname: fossclientrhel7.opstheater.vm
+  private_networks: [ {ip: '10.20.1.201'} ]
+  hostname: fossrhel7.opstheater.vm
   roles:
   - foss-puppet-agent-rhel7
+
+- name: fossclient-ubuntutrusty
+  box: puppetlabs/ubuntu-14.04-64-nocm
+  private_networks: [ {ip: '10.20.1.202'} ]
+  hostname: fosstrusty.opstheater.vm
+  roles:
+  - foss-puppet-agent-trusty
