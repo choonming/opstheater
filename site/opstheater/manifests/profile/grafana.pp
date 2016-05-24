@@ -1,12 +1,31 @@
 class opstheater::profile::grafana {
-  $grafanauser      = hiera('opstheater::grafana::grafanauser')
-  $grafanapasswd    = hiera('opstheater::grafana::grafanapasswd')
-  $grafanaurl       = hiera('opstheater::grafana::url')
-  $elasticsearchurl = hiera('opstheater::elasticsearch::fqdn')
-  $install_method   = hiera('opstheater::profile::grafana::install_method')
+  $grafanauser              = hiera('opstheater::grafana::grafanauser')
+  $grafanapasswd            = hiera('opstheater::grafana::grafanapasswd')
+  $grafanaurl               = hiera('opstheater::grafana::url')
+  $elasticsearchurl         = hiera('opstheater::elasticsearch::fqdn')
+  $install_method           = hiera('opstheater::profile::grafana::install_method')
+  $domain                   = hiera('opstheater::domain')
+  $smtp_address             = hiera('opstheater::smtp::fqdn'),
+  $smtp_port                = hiera('opstheater::smtp::port'),
+  $smtp_user_name           = hiera('opstheater::smtp::username'),
+  $smtp_password            = hiera('opstheater::smtp::password'),
+  $smtp_openssl_verify_mode = hiera('opstheater::smtp::openssl_verify_mode'),
 
   class { '::grafana':
     install_method => $install_method,
+    cfg => {
+      server => {
+        http_port => 80,
+      },
+      smtp => {
+        enabled      => true,
+        from_address => "grafana@${domain}",
+        host         => "${smtp_address}:${smtp_port}",
+        user         => $smtp_user_name,
+        password     => $smtp_password,
+        skip_verify  => $smtp_openssl_verify_mode,
+      }
+    }
   }
 
   # curl http://admin:admin@localhost:3000/api/datasources -X POST -H 'Content-Type: application/json;charset=UTF-8' \
