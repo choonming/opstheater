@@ -1,6 +1,7 @@
 class opstheater::profile::client::trusty {
-  include opstheater::profile::base::filebeat
 
+  include opstheater::profile::base::filebeat
+  include opstheater::profile::base::apt
   include opstheater::profile::base::icinga
   include opstheater::profile::icinga::client
 
