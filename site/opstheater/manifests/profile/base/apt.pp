@@ -1,12 +1,12 @@
 class opstheater::profile::base::apt {
   # include base aptitude class
   include ::apt
-  
-  package { 'software-properties-common':
-    ensure => 'present',
-  }
 
-  Class[apt::update] -> Package['software-properties-common']
+  package { 'software-properties-common':
+    ensure => 'installed',
+  } ->
+
+  Class[apt::update] -> Package['icinga2']
 
   # get keys from hiera and create them
   $keys = hiera_hash('opstheater::profile::base::apt::keys', undef)

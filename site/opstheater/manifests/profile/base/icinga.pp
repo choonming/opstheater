@@ -1,7 +1,5 @@
 class opstheater::profile::base::icinga {
   
-  Class[apt::update] -> Package['icinga2']
-  
   Icinga2::Object::Host {
     display_name    => $::fqdn,
     check_command   => 'cluster-zone',
