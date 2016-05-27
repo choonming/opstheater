@@ -1,4 +1,4 @@
-class opstheater::profile::client::rhel7 {
+class opstheater::profile::client::rhel6 {
 
   include opstheater::profile::base::filebeat
   include opstheater::profile::base::yum
@@ -13,6 +13,5 @@ class opstheater::profile::client::rhel7 {
     user    => 'root',
     minute  => [ $rand1, $rand2],
   }
-
 
 }

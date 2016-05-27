@@ -31,6 +31,10 @@ node 'fossrhel7.opstheater.vm' {
   include opstheater::role::client::fossrhel7
 }
 
+node 'fossrhel6.opstheater.vm' {
+  include opstheater::role::client::fossrhel6
+}
+
 node default {
   fail ('node $::fqdn unknown to site.pp')
 }
