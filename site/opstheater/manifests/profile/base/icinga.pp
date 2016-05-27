@@ -1,5 +1,5 @@
 class opstheater::profile::base::icinga {
-
+  
   Icinga2::Object::Host {
     display_name    => $::fqdn,
     check_command   => 'cluster-zone',

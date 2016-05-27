@@ -22,6 +22,19 @@ node 'mysql.opstheater.vm' {
   include opstheater::role::database::standalone
 }
 
+
+node 'fosstrusty.opstheater.vm' {
+  include opstheater::role::client::fosstrusty
+}
+
+node 'fossrhel7.opstheater.vm' {
+  include opstheater::role::client::fossrhel7
+}
+
+node 'fossrhel6.opstheater.vm' {
+  include opstheater::role::client::fossrhel6
+}
+
 node default {
-  include opstheater::role::testclient
+  fail ('node $::fqdn unknown to site.pp')
 }

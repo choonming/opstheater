@@ -139,7 +139,7 @@ roles:
         inline: |-
           /sbin/service puppet stop
 
-  foss-puppet-agent:
+  foss-puppet-agent-rhel7:
     provisioners:
       -
         type: hosts
@@ -153,7 +153,7 @@ roles:
           /opt/puppetlabs/bin/puppet config set --section main server master.opstheater.vm
           /sbin/service puppet stop
 
-  foss-puppet-agent-el6:
+  foss-puppet-agent-rhel6:
     provisioners:
       -
         type: hosts
@@ -166,3 +166,19 @@ roles:
           /usr/bin/yum install -y puppet-agent
           /opt/puppetlabs/bin/puppet config set --section main server master.opstheater.vm
           /sbin/service puppet stop
+
+  foss-puppet-agent-trusty:
+    provisioners:
+      -
+        type: hosts
+        add_localhost_hostnames: false
+        sync_hosts: true
+      -
+        type: shell
+        inline: |-
+          /usr/bin/wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+          /usr/bin/dpkg -i puppetlabs-release-pc1-trusty.deb
+          /usr/bin/apt-get update
+          /usr/bin/apt-get install puppet-agent
+          /opt/puppetlabs/bin/puppet config set --section main server master.opstheater.vm
+          /usr/sbin/service puppet stop
