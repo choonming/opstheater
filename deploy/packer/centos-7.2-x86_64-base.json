@@ -12,7 +12,7 @@
       "memory_size": "512",
       "cpu_count": "1",
 
-      "provisioner": "ovf",
+      "provisioner": "virtualbox",
       "required_modules": "puppetlabs-stdlib saz-ssh",
       "puppet_repo": "http://yum.puppetlabs.com/el/7/PC1/x86_64/puppetlabs-release-pc1-1.0.0-2.el7.noarch.rpm"
     },
