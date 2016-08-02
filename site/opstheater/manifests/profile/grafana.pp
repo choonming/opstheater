@@ -13,11 +13,11 @@ class opstheater::profile::grafana {
 
   class { '::grafana':
     install_method => $install_method,
-    cfg => {
+    cfg            => {
       server => {
         http_port => 80,
       },
-      smtp => {
+      smtp   => {
         enabled      => true,
         from_address => "grafana@${domain}",
         host         => "${smtp_address}:${smtp_port}",
