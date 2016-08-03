@@ -1,6 +1,7 @@
-modules
 deploy/vagrant-oscar/.pe_build
 deploy/vagrant-oscar/.vagrant
 vendor/bundle
 terraform.tfstate
 Gemfile.lock
+modules/
+!deploy/packer/manifests/modules

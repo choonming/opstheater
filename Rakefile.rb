@@ -11,8 +11,18 @@ end
 PuppetLint.configuration.send('disable_documentation')
 PuppetLint.configuration.send('disable_80chars')
 
-PuppetSyntax.exclude_paths = [ "vendor/**/*.*" ]
-PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp", "vendor/**/*.pp"]
+PuppetSyntax.exclude_paths = [
+  "vendor/**/*.*",
+  "modules/**/*.pp",
+  "deploy/packer/manifests/modules/**/**/*.pp"
+]
+PuppetLint.configuration.ignore_paths = [
+  "spec/**/*.pp",
+  "pkg/**/*.pp",
+  "vendor/**/*.pp",
+  "modules/**/*.pp",
+  "deploy/packer/manifests/modules/**/**/*.pp"
+]
 
 # Alternative configuration until https://github.com/rodjek/puppet-lint/pull/397 gets merged
 Rake::Task[:lint].clear
