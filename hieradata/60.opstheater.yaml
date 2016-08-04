@@ -15,6 +15,23 @@
 # Default value (for production): 'https'
 'opstheater::http_mode': 'https'
 
+
+#########################
+## Firewall settings
+########################
+
+# Enable firewall rules
+# Default value: false
+'opstheater::manage_firewall': false
+
+# Purge unmanaged firewall rules
+# Default value: true
+'opstheater::purge_firewalls': true
+
+# Purge unmanaged firewall chains
+# Default value: true
+'opstheater::purge_firewallchains': true
+
 # SMTP Settings
 # FQDN of SMTP server (eg: smtp.gmail.com)
 'opstheater::smtp::fqdn': 'localhost'

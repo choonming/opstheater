@@ -14,6 +14,12 @@ class opstheater::profile::base {
   include ::ssh::client
   include ::ssh::server
 
+  # manage iptables rules
+  $manage_firewall = hiera('opstheater::manage_firewall', undef)
+  if $manage_firewall {
+    include opstheater::profile::firewall
+  }
+
   # configure filebeat
   include opstheater::profile::base::filebeat
 
