@@ -11,8 +11,7 @@ class opstheater::profile::base {
   }
 
   # configure ssh
-  include ::ssh::client
-  include ::ssh::server
+  include opstheater::profile::ssh
 
   # manage iptables rules
   $manage_firewall = hiera('opstheater::manage_firewall', undef)
