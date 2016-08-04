@@ -32,6 +32,10 @@
 # Default value: true
 'opstheater::purge_firewallchains': true
 
+# IP address for VPN or internal network to access opstheater dashboards
+# Default value: 0.0.0.0
+'opstheater::vpn_ip': '0.0.0.0'
+
 # SMTP Settings
 # FQDN of SMTP server (eg: smtp.gmail.com)
 'opstheater::smtp::fqdn': 'localhost'
