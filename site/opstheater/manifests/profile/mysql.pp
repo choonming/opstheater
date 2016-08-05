@@ -30,5 +30,13 @@ class opstheater::profile::mysql {
 
   include opstheater::profile::filebeat::mysql
 
+  @firewall { '210 allow access to mysql':
+    chain => 'INPUT',
+    jump  => 'OPSTHEATER',
+    proto => 'tcp',
+    dport => '3306',
+    tag   => 'opstheater',
+  }
+
 }
 

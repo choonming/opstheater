@@ -38,4 +38,12 @@ class opstheater::profile::icinga::client {
 
   Icinga2::Object::Zone <<| |>>
 
+  @firewall { '201 allow access to icinga client':
+    chain => 'INPUT',
+    jump  => 'OPSTHEATER',
+    proto => 'tcp',
+    dport => '5665',
+    tag   => 'opstheater',
+  }
+
 }

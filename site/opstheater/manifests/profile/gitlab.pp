@@ -180,4 +180,22 @@ class opstheater::profile::gitlab {
   include opstheater::profile::filebeat::gitlab
   include opstheater::profile::filebeat::mattermost
 
+  @firewall { '205 allow HTTP access to gitlab':
+    chain   => 'INPUT',
+    action  => 'accept',
+    proto   => 'tcp',
+    dport   => '80',
+    source  => hiera('opstheater::vpn_ip', '0.0.0.0')
+    tag     => 'opstheater',
+  }
+
+  @firewall { '206 allow HTTPS access to gitlab':
+    chain   => 'INPUT',
+    jump    => 'OPSTHEATER',
+    proto   => 'tcp',
+    dport   => '443',
+    source  => hiera('opstheater::vpn_ip', '0.0.0.0')
+    tag     => 'opstheater',
+  } 
+
 }

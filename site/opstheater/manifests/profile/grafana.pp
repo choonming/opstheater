@@ -47,4 +47,13 @@ class opstheater::profile::grafana {
     },
   }
 
+  @firewall { '207 allow HTTP access to grafana':
+    chain   => 'INPUT',
+    action  => 'accept',
+    proto   => 'tcp',
+    dport   => '3000',
+    source  => hiera('opstheater::vpn_ip', '0.0.0.0'),
+    tag     => 'opstheater',
+  }
+
 }

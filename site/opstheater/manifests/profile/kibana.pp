@@ -9,4 +9,12 @@ class opstheater::profile::kibana {
 
   include opstheater::profile::filebeat::kibana
 
+  @firewall { '208 allow HTTP access to kibana':
+    chain   => 'INPUT',
+    action  => 'accept',
+    proto   => 'tcp',
+    dport   => '5601',
+    source  => hiera('opstheater::vpn_ip', '0.0.0.0'),
+    tag     => 'opstheater',
+  }
 }

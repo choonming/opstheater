@@ -16,5 +16,21 @@ class opstheater::profile::elasticsearch{
   } else {
     fail("No elasticsearch instances found in hiera for class opstheater::profile::elasticsearch on ${::fqdn}.")
   }
-    
+
+  @firewall { '200 allow elasticsearch 9200 access':
+    chain   => 'INPUT',
+    jump    => 'OPSTHEATER',
+    proto   => 'tcp',
+    dport   => '9200',
+    tag     => 'opstheater',
+  }
+ 
+  @firewall { '200 allow elasticsearch 9300 access':
+    chain   => 'INPUT',
+    jump    => 'OPSTHEATER',
+    proto   => 'tcp',
+    dport   => '9300',
+    tag     => 'opstheater',
+  }
+ 
 }

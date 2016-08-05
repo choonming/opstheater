@@ -43,4 +43,11 @@ class opstheater::profile::logstash {
     create_resources('logstash::plugin', $plugins)
   }
 
+  @firewall { '209 allow access to logstash':
+    chain => 'INPUT',
+    jump  => 'OPSTHEATER',
+    proto => 'tcp',
+    dport => hiera('opstheater::profile::logstash::input_beats_port'),
+  }
+
 }
