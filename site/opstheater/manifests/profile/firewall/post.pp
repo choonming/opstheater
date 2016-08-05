@@ -1,4 +1,4 @@
-class opstheather::profile::firewall::post {
+class opstheater::profile::firewall::post {
 
   firewall { '999 drop all':
     proto  => 'all',
