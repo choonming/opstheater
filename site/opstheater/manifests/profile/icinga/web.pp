@@ -184,21 +184,21 @@ class opstheater::profile::icinga::web {
   }
 
   @firewall { '202 allow HTTP access to icinga web':
-    chain   => 'INPUT',
-    action  => 'accept',
-    proto   => 'http',
-    dport   => '80',
-    source  => hiera('opstheater::vpn_ip', '0.0.0.0'),
-    tag     => 'opstheater',
+    chain  => 'INPUT',
+    action => 'accept',
+    proto  => 'http',
+    dport  => '80',
+    source => hiera('opstheater::vpn_ip', '0.0.0.0'),
+    tag    => 'opstheater',
   }
 
   @firewall { '203 allow HTTPS access to icinga web':
-    chain   => 'INPUT',
-    action  => 'accept',
-    proto   => 'http',
-    dport   => '443',
-    source  => hiera('opstheater::vpn_ip', '0.0.0.0'),
-    tag     => 'opstheater',
+    chain  => 'INPUT',
+    action => 'accept',
+    proto  => 'http',
+    dport  => '443',
+    source => hiera('opstheater::vpn_ip', '0.0.0.0'),
+    tag    => 'opstheater',
   }
 
 }

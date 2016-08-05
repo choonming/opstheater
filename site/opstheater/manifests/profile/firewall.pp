@@ -17,16 +17,16 @@ class opstheater::profile::firewall {
   }
 
   firewallchain { 'OPSTHEATER:filter:IPv4':
-    ensure  => present,
-    purge   => true,
+    ensure => present,
+    purge  => true,
   }
 
   $ip_whitelist.each | String $ip | {
     firewall { "100 accept connections for ${ip}":
-      chain   => 'OPSTHEATER',
-      action  => 'accept'
-      proto   => 'all',
-      source  => $ip,
+      chain  => 'OPSTHEATER',
+      action => 'accept'
+      proto  => 'all',
+      source => $ip,
     }
   }
 

@@ -18,19 +18,19 @@ class opstheater::profile::elasticsearch{
   }
 
   @firewall { '200 allow elasticsearch 9200 access':
-    chain   => 'INPUT',
-    jump    => 'OPSTHEATER',
-    proto   => 'tcp',
-    dport   => '9200',
-    tag     => 'opstheater',
+    chain => 'INPUT',
+    jump  => 'OPSTHEATER',
+    proto => 'tcp',
+    dport => '9200',
+    tag   => 'opstheater',
   }
  
   @firewall { '200 allow elasticsearch 9300 access':
-    chain   => 'INPUT',
-    jump    => 'OPSTHEATER',
-    proto   => 'tcp',
-    dport   => '9300',
-    tag     => 'opstheater',
+    chain => 'INPUT',
+    jump  => 'OPSTHEATER',
+    proto => 'tcp',
+    dport => '9300',
+    tag   => 'opstheater',
   }
  
 }

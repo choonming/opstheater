@@ -83,21 +83,21 @@ class opstheater::profile::foremanproxy {
   }
 
   @firewall { '203 allow HTTP access to foreman':
-    chain   => 'INPUT',
-    action  => 'accept',
-    proto   => 'tcp',
-    dport   => '80',
-    source  => hiera('opstheater::vpn_ip', '0.0.0.0'),
-    tag     => 'opstheater',
+    chain  => 'INPUT',
+    action => 'accept',
+    proto  => 'tcp',
+    dport  => '80',
+    source => hiera('opstheater::vpn_ip', '0.0.0.0'),
+    tag    => 'opstheater',
   }
 
   @firewall { '204 allow HTTPS access to foreman':
-    chain   => 'INPUT',
-    action  => 'accept',
-    proto   => 'tcp',
-    dport   => '443',
-    source  => hiera('opstheater::vpn_ip', '0.0.0.0'),
-    tag     => 'opstheater',
+    chain  => 'INPUT',
+    action => 'accept',
+    proto  => 'tcp',
+    dport  => '443',
+    source => hiera('opstheater::vpn_ip', '0.0.0.0'),
+    tag    => 'opstheater',
   }
 
 }
