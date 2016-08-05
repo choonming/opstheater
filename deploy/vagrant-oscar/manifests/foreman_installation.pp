@@ -39,7 +39,7 @@ file { '/opt/foreman/config/database.yml':
 
 file { '/opt/foreman/bundler.d/Gemfile.local.rb':
   ensure  => file,
-  content => 'gem "foreman_default_hostgroup", :git => "https://github.com/theforeman/foreman_default_hostgroup.git", :branch => "develop"',
+  content => 'gem "foreman_default_hostgroup", :git => "https://github.com/theforeman/foreman_default_hostgroup.git", :tag => "3.0.0"',
   require => [ Vcsrepo['/opt/foreman'], Postgresql::Server::Db['foreman'] ],
 }
 
