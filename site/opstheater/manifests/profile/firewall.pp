@@ -2,7 +2,7 @@ class opstheater::profile::firewall {
 
   $purge_firewalls = hiera('opstheater::purge_firewalls', true)
   $purge_firewallchains = hiera('opstheater::purge_firewallchains', true)
-  $ip_whitelist = hiera('opstheater::ip_whiteliste', undef)
+  $ip_whitelist = hiera('opstheater::ip_whitelist', undef)
 
   include ::firewall
   include ::opstheater::profile::firewall::pre

@@ -32,6 +32,16 @@
 # Default value: true
 'opstheater::purge_firewallchains': true
 
+# IPs to be whitelisted in the opstheater chain in an array.
+# Append all the new IPs in this array. Do not remove existing ones
+# Default value: [ ]
+'opstheater::ip_whitelist':
+  - "%{hiera('opstheater::icinga::ipaddress')}"
+  - "%{hiera('opstheater::mysql::ipaddress')}"
+  - "%{hiera('opstheater::elasticsearch::ipaddress')}"
+  - "%{hiera('opstheater::gitlab::ipaddress')}"
+  - "%{hiera('opstheater::foreman::ipaddress')}"
+
 # IP address for VPN or internal network to access opstheater dashboards
 # Default value: 0.0.0.0
 'opstheater::vpn_ip': '0.0.0.0'
@@ -60,6 +70,7 @@
 ##########################
 'opstheater::foreman::fqdn': "master.%{hiera('opstheater::domain')}"
 'opstheater::foreman::url': "%{hiera('opstheater::http_mode')}://%{hiera('opstheater::foreman::fqdn')}"
+'opstheater::foreman::ipaddress': '10.20.1.10'
 
 
 ##########################
