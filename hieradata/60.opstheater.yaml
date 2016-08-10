@@ -22,7 +22,7 @@
 
 # Enable firewall rules
 # Default value: false
-'opstheater::manage_firewall': false
+'opstheater::manage_firewall': true
 
 # Purge unmanaged firewall rules
 # Default value: true
@@ -41,6 +41,9 @@
   - "%{hiera('opstheater::elasticsearch::ipaddress')}"
   - "%{hiera('opstheater::gitlab::ipaddress')}"
   - "%{hiera('opstheater::foreman::ipaddress')}"
+  - "%{hiera('opstheater::mattermost::ipaddress')}"
+  - "%{hiera('opstheater::kibana::ipaddress')}"
+  - "%{hiera('opstheater::puppet::ipaddress')}"
 
 # IP address for VPN or internal network to access opstheater dashboards
 # Default value: 0.0.0.0
@@ -70,7 +73,8 @@
 ##########################
 'opstheater::foreman::fqdn': "master.%{hiera('opstheater::domain')}"
 'opstheater::foreman::url': "%{hiera('opstheater::http_mode')}://%{hiera('opstheater::foreman::fqdn')}"
-'opstheater::foreman::ipaddress': '10.20.1.10'
+'opstheater::foreman::ipaddress': "%{hiera('opstheater::puppet::ipaddress')}"
+'opstheater::puppet::ipaddress': '10.20.1.10'
 
 
 ##########################
