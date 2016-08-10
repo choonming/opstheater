@@ -21,7 +21,8 @@ class opstheater::profile::firewall {
     purge  => true,
   }
 
-  $ip_whitelist.each | String $ip | {
+  $ip_list = unique($ip_whitelist)
+  $ip_list.each | String $ip | {
     firewall { "100 accept connections for ${ip}":
       chain  => 'OPSTHEATER',
       action => 'accept'
